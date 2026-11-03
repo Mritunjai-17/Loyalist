@@ -3,6 +3,8 @@ import type { ReactNode } from "react";
 import { fraunces, inter } from "./fonts";
 import { siteName, siteUrl } from "@/lib/seo";
 import { palette } from "@/lib/tokens";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,7 +28,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );

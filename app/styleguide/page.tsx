@@ -39,7 +39,7 @@ const swatches: { name: string; token: string; hex: string; role: string }[] = [
   { name: "Error", token: "--error", hex: palette.error, role: "Form errors only" },
 ];
 
-const contrastPairs: { label: string; fg: string; bg: string; large?: boolean }[] = [
+const contrastPairs: { label: string; fg: string; bg: string; ruleOnly?: boolean }[] = [
   { label: "Ivory on carbon", fg: palette.ivory, bg: palette.carbon },
   { label: "Ivory 80% on carbon (body)", fg: blend(palette.ivory, 0.8, palette.carbon), bg: palette.carbon },
   { label: "Ivory 85% on carbon (eyebrow)", fg: blend(palette.ivory, 0.85, palette.carbon), bg: palette.carbon },
@@ -55,7 +55,7 @@ const contrastPairs: { label: string; fg: string; bg: string; large?: boolean }[
   { label: "Ink soft on paper", fg: palette.inkSoft, bg: palette.paper },
   { label: "Gold ink on paper", fg: palette.goldInk, bg: palette.paper },
   { label: "Ivory on ink (paper button)", fg: palette.ivory, bg: palette.ink },
-  { label: "Gold on paper (rules only, not text)", fg: palette.gold, bg: palette.paper },
+  { label: "Gold on paper (rules only, not text)", fg: palette.gold, bg: palette.paper, ruleOnly: true },
 ];
 
 const typeScale = [
@@ -131,18 +131,24 @@ export default function StyleguidePage() {
               {
                 key: "sample",
                 header: "Sample",
-                render: (p) => (
-                  <span className="inline-block rounded-control px-3 py-1" style={{ background: p.bg, color: p.fg }}>
-                    Timmins 48.48° N
-                  </span>
-                ),
+                render: (p) =>
+                  p.ruleOnly ? (
+                    <span className="flex h-7 w-40 items-center rounded-control px-3" style={{ background: p.bg }}>
+                      <span className="block h-0.5 w-10" style={{ background: p.fg }} />
+                    </span>
+                  ) : (
+                    <span className="inline-block rounded-control px-3 py-1" style={{ background: p.bg, color: p.fg }}>
+                      Timmins 48.48° N
+                    </span>
+                  ),
               },
               { key: "ratio", header: "Ratio", numeric: true, render: (p) => `${contrastRatio(p.fg, p.bg).toFixed(2)}:1` },
               {
                 key: "result",
                 header: "AA body",
                 numeric: true,
-                render: (p) => (contrastRatio(p.fg, p.bg) >= 4.5 ? "Pass" : "Fail"),
+                render: (p) =>
+                  p.ruleOnly ? "Not for text" : contrastRatio(p.fg, p.bg) >= 4.5 ? "Pass" : "Fail",
               },
             ]}
           />
