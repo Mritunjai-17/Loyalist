@@ -12,7 +12,9 @@ export const tullyResource: ResourceEstimate = {
     { category: "Indicated", tonnesMt: 1.62, gradeGpt: 3.16, containedOz: 164_000 },
     { category: "Inferred", tonnesMt: 0.95, gradeGpt: 2.03, containedOz: 62_000 },
   ],
+  cutOffValue: 1.1,
   notes: ["Open along strike and at depth.", "About 73% of ounces are in the Indicated category."],
-  // TODO(content): link to the Aug 21, 2026 news release PDF once press-releases.ts is populated from Source A.
-  newsReleaseHref: null,
+  // The Aug 21, 2026 filing release returns 404 on Source A, so this links the July 7, 2026 release
+  // that announced the same estimate. TODO(content): restore the Aug 21 PDF.
+  newsRelease: { date: "2026-07-07", href: "https://loyalistexploration.com/api/pdf/view/6a4cfbb4a79e5a6c69fefc67" },
 };

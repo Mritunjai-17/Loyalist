@@ -31,6 +31,81 @@ export type HomeHero = {
   focalPoint: string;
 };
 
+export type Metal = "Au" | "Ag" | "Cu" | "Ni";
+
+export type Project = {
+  slug: "tully" | "loveland" | "gold-rush" | "desantis";
+  number: string;
+  name: string;
+  tagline: string;
+  location: string;
+  areaHa: number;
+  claims: string;
+  metals: Metal[];
+  metalsLabel: string;
+  stage: string;
+  ownership: string;
+  summary: string;
+  overview: string[];
+  status: string[];
+  geology: string[];
+  highlights: { value: string; label: string }[];
+  hasResource: boolean;
+  qualifiedPerson: string;
+  historicalNote?: string;
+  /** Schematic position on the ProjectMap viewBox (0 0 320 320). */
+  map: { x: number; y: number; direction: string; distanceKm: number; labelSide: "left" | "right" };
+};
+
+export type TeamGroup = "management" | "directors" | "advisors";
+
+export type TeamMember = {
+  id: string;
+  name: string;
+  credentials?: string;
+  title: string;
+  group: TeamGroup;
+  summary: string;
+  bio: string[];
+  portrait?: Photo;
+};
+
+export type PressRelease = {
+  date: string;
+  title: string;
+  href: string;
+  sizeBytes: number | null;
+  tag: "News Release";
+  available: boolean;
+};
+
+export type DocumentCategory = "financials" | "technical" | "annual-meeting" | "presentation";
+
+export type DocumentItem = {
+  category: DocumentCategory;
+  type: string;
+  title: string;
+  date: string;
+  href: string;
+  sizeBytes: number | null;
+  available: boolean;
+  description?: string;
+  project?: Project["slug"];
+  meetingYear?: number;
+};
+
+export type ShareData = {
+  asOf: string;
+  capital: { label: string; value: string }[];
+  ownership: { holder: string; percentage: string }[];
+};
+
+export type StrategyStep = { numeral: string; title: string; body: string; link: NavLink };
+
+export type Quote = { text: string; name: string; title: string; source: string };
+
+export type GlossaryTerm = { term: string; definition: string };
+
 export type SocialNetwork = "LinkedIn" | "X" | "Facebook" | "YouTube" | "Instagram";
 
 export type Company = {
@@ -65,5 +140,6 @@ export type ResourceEstimate = {
   cutOff: string;
   rows: ResourceRow[];
   notes: string[];
-  newsReleaseHref: string | null;
+  cutOffValue: number;
+  newsRelease: { date: string; href: string };
 };
