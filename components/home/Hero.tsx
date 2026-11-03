@@ -18,7 +18,6 @@ export function Hero() {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="hero-photo" aria-hidden>
-        {/* TODO(hero-photo): interim image, see content/company.ts */}
         <Image
           src={hero.photo.src}
           alt={hero.photo.alt}

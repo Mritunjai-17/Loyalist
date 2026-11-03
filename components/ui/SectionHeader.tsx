@@ -9,6 +9,8 @@ type SectionHeaderProps = {
   title: string;
   /** Final phrase of the title, set in italic gold. */
   accent?: string;
+  /** Put the body and the accent phrase on separate lines. */
+  stacked?: boolean;
   lead?: string;
   /** Text link or button at the right end of the heading row (desktop). */
   action?: ReactNode;
@@ -18,13 +20,13 @@ type SectionHeaderProps = {
 };
 
 /** Eyebrow, 20px, h2, 20px, optional lead, 56px, content. No variants. */
-export function SectionHeader({ number, label, title, accent, lead, action, id, className }: SectionHeaderProps) {
+export function SectionHeader({ number, label, title, accent, stacked, lead, action, id, className }: SectionHeaderProps) {
   return (
     <header data-section-header className={cn("mb-14", className)}>
       <div className="lg:flex lg:items-end lg:justify-between lg:gap-12">
         <div>
           <Eyebrow number={number}>{label}</Eyebrow>
-          <Heading level={2} id={id} accent={accent} className="mt-5">
+          <Heading level={2} id={id} accent={accent} stacked={stacked} className="mt-5">
             {title}
           </Heading>
         </div>

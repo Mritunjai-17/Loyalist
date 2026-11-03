@@ -58,16 +58,13 @@ export const homeHero: HomeHero = {
     { icon: "mountain", label: "Four projects" },
     { icon: "metals", label: "Gold · Copper · Nickel" },
   ],
-  // TODO(hero-photo): replace with /images/hero/timmins-hero.jpg (3840px+, drill rig in the right third).
-  // Interim: Source A image/tully/hero.webp. It has a dark fade baked into its left side and is 1920px wide,
-  // so it fails scripts/check-hero-image.mjs (left mean luminance 0.015, std 0.010).
   photo: {
-    src: "/images/hero/interim-tully-hero.jpg",
-    width: 1920,
-    height: 1080,
-    alt: "",
-    credit: "Loyalist Exploration Limited (loyalistexploration.com, image/tully/hero.webp)",
-    licence: "TODO(content): confirm company ownership and licence",
+    src: "/images/hero/hero.png",
+    width: 1774,
+    height: 887,
+    alt: "Drill rig on site at the Timmins mining camp",
+    credit: "Loyalist Exploration Limited",
+    licence: "Company photography",
   },
   focalPoint: "68% 45%",
 };

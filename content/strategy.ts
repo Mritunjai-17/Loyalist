@@ -37,7 +37,7 @@ export const ceoStatement: Quote = {
 // current portfolio (Source B); Source A names only Gold Rush and Loveland.
 // VERIFY against filed news release
 export const whoWeAre: string[] = [
-  "Loyalist Exploration Limited is a mineral exploration company concentrating on acquiring, exploring, and developing quality mineral properties in the Timmins Mining District. The Company's portfolio is the Tully, DeSantis, Loveland and Gold Rush projects, about 8,300 ha in all.",
+  "Loyalist Exploration Limited is a mineral exploration company concentrating on acquiring, exploring, and developing quality mineral properties in the Timmins Mining District. The Company's portfolio is the Tully, DeSantis, Loveland and Gold Rush projects, about 3,900 ha in all.",
   "We are committed to developing quality mining projects, delivering consistent value to our shareholders through fair mining practices and strong, collaborative relationships.",
 ];
 
