@@ -1,0 +1,296 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Design tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Core palette */
+  --carbon: #171918;
+  --black: #101211;
+  --ivory: #f4f2ed;
+  --stone: #aaa9a3;
+  --gold: #c9a45c;
+  --graphite: #303330;
+
+  /* Derived */
+  --gold-hover: #d8b877;
+  --gold-press: #b38f47;
+  --on-gold: #101211;
+  --ivory-80: rgba(244, 242, 237, 0.8);
+  --paper: #f4f2ed;
+  --ink: #171918;
+  --ink-soft: #5c5b56;
+  --gold-ink: #7c5f22;
+  --error: #e08a7a;
+
+  /* Layout */
+  --header-h: clamp(68px, 9.4vh, 88px);
+  --container-max: 1440px;
+  --gutter: clamp(20px, 4.5vw, 72px);
+  --section-pad: clamp(72px, 9vw, 128px);
+
+  /* Type scale */
+  --fs-display: clamp(2.75rem, min(5.4vw, 9.5vh), 5.75rem);
+  --fs-h1: clamp(2.25rem, 3.8vw, 3.75rem);
+  --fs-h2: clamp(1.875rem, 3vw, 2.875rem);
+  --fs-h3: clamp(1.375rem, 1.9vw, 1.75rem);
+  --fs-h4: 1.125rem;
+  --fs-lead: clamp(1.0625rem, 1.25vw, 1.25rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.8125rem;
+
+  /* Radii */
+  --radius-control: 6px;
+  --radius-panel: 10px;
+}
+
+/* Tone-aware aliases. Dark tones are the default. */
+:root,
+[data-tone="carbon"],
+[data-tone="black"] {
+  --fg: var(--ivory);
+  --fg-body: var(--ivory-80);
+  --fg-muted: var(--stone);
+  --accent-text: var(--gold);
+  --accent-rule: var(--gold);
+  --border: var(--graphite);
+  --eyebrow-fg: color-mix(in srgb, var(--ivory) 85%, transparent);
+  --focus: var(--gold-hover);
+  --btn-primary-bg: var(--gold);
+  --btn-primary-fg: var(--on-gold);
+  --btn-primary-hover: var(--gold-hover);
+  --btn-primary-press: var(--gold-press);
+  --btn-secondary-border: rgba(244, 242, 237, 0.8);
+  --btn-secondary-fg: var(--ivory);
+  --btn-secondary-hover: rgba(244, 242, 237, 0.08);
+  --field-bg: var(--black);
+  --field-border: var(--graphite);
+}
+[data-tone="carbon"] { --surface: var(--carbon); }
+[data-tone="black"] { --surface: var(--black); }
+
+/* Light "paper" sections: champagne gold fails contrast on ivory, so text
+   accents switch to --gold-ink and buttons to ink. */
+[data-tone="paper"] {
+  --surface: var(--paper);
+  --fg: var(--ink);
+  --fg-body: var(--ink);
+  --fg-muted: var(--ink-soft);
+  --accent-text: var(--gold-ink);
+  --accent-rule: var(--gold-ink);
+  --border: rgba(23, 25, 24, 0.16);
+  --eyebrow-fg: color-mix(in srgb, var(--ink) 75%, transparent);
+  --focus: var(--ink);
+  --btn-primary-bg: var(--ink);
+  --btn-primary-fg: var(--ivory);
+  --btn-primary-hover: var(--graphite);
+  --btn-primary-press: var(--black);
+  --btn-secondary-border: rgba(23, 25, 24, 0.8);
+  --btn-secondary-fg: var(--ink);
+  --btn-secondary-hover: rgba(23, 25, 24, 0.06);
+  --field-bg: var(--paper);
+  --field-border: rgba(23, 25, 24, 0.16);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: calc(var(--header-h) + 16px);
+  }
+  body {
+    background: var(--carbon);
+    color: var(--fg-body);
+    font-family: var(--font-body), system-ui, sans-serif;
+    font-size: var(--fs-body);
+    line-height: 1.65;
+    font-variant-numeric: tabular-nums;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* The only place heading typography is defined. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), serif;
+    font-weight: 500;
+    font-optical-sizing: auto;
+    font-variation-settings: "SOFT" 0, "WONK" 0;
+    color: var(--fg);
+    text-wrap: balance;
+  }
+  h1 { font-size: var(--fs-h1); line-height: 1.08; letter-spacing: -0.015em; }
+  h1[data-variant="display"] { font-size: var(--fs-display); line-height: 1.04; letter-spacing: -0.02em; text-wrap: nowrap; }
+  h2 { font-size: var(--fs-h2); line-height: 1.12; letter-spacing: -0.012em; }
+  h3 { font-size: var(--fs-h3); line-height: 1.2; letter-spacing: -0.005em; }
+  h4, h5, h6 { font-size: var(--fs-h4); line-height: 1.3; letter-spacing: 0; font-weight: 600; }
+
+  .heading-accent { font-style: italic; color: var(--accent-text); }
+
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  ::selection { background: var(--gold); color: var(--on-gold); }
+}
+
+/* ─── Shared patterns ───────────────────────────────────────────────────── */
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .section-pad { padding-block: var(--section-pad); }
+
+  .text-lead {
+    font-size: var(--fs-lead);
+    line-height: 1.6;
+    color: var(--fg-muted);
+    max-width: 60ch;
+  }
+  .text-small { font-size: var(--fs-small); line-height: 1.5; color: var(--fg-muted); }
+
+  /* Eyebrow: one definition, used through <Eyebrow>. */
+  .eyebrow {
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    gap: 16px;
+    font-size: var(--fs-eyebrow, var(--fs-small));
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--eyebrow-fg);
+  }
+  .eyebrow::before {
+    content: "";
+    flex: none;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-rule);
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border-radius: var(--radius-control);
+    border: 1px solid transparent;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    white-space: nowrap;
+    transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .btn svg { width: 20px; height: 20px; stroke-width: 1.75; flex: none; }
+  .btn-md { height: 48px; padding-inline: 28px; font-size: 0.8125rem; }
+  .btn-lg {
+    height: clamp(48px, 6.4vh, 60px);
+    padding-inline: clamp(24px, 2.2vw, 40px);
+    font-size: clamp(0.875rem, min(1.05vw, 2.2vh), 1.05rem);
+  }
+  .btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-fg); }
+  .btn-primary:hover { background: var(--btn-primary-hover); }
+  .btn-primary:active { background: var(--btn-primary-press); }
+  .btn-secondary { background: transparent; border-color: var(--btn-secondary-border); color: var(--btn-secondary-fg); }
+  .btn-secondary:hover { background: var(--btn-secondary-hover); }
+
+  /* Text link */
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-weight: 500;
+    color: var(--accent-text);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+  }
+  .text-link svg { width: 16px; height: 16px; stroke-width: 1.75; transition: transform 150ms ease; }
+  .text-link:hover svg { transform: translateX(2px); }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding-inline: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-control);
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+
+  /* Form fields */
+  .field-label { display: block; margin-bottom: 8px; font-size: 0.875rem; font-weight: 500; color: var(--fg); }
+  .field {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    border: 1px solid var(--field-border);
+    border-radius: var(--radius-control);
+    background: var(--field-bg);
+    color: var(--fg);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .field::placeholder { color: var(--fg-muted); }
+  .field[aria-invalid="true"] { border-color: var(--error); }
+  .field-error { margin-top: 8px; font-size: 0.875rem; color: var(--error); }
+
+  /* Tables: hairlines only, numbers right-aligned. */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .data-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .data-table thead th {
+    position: sticky;
+    top: 0;
+    background: var(--surface, var(--carbon));
+    padding: 0 16px 14px 0;
+    border-bottom: 1px solid var(--fg);
+    text-align: left;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: var(--eyebrow-fg);
+    white-space: nowrap;
+  }
+  .data-table td,
+  .data-table tbody th {
+    padding: 16px 16px 16px 0;
+    text-align: left;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border);
+    color: var(--fg);
+    vertical-align: top;
+  }
+  .data-table th:last-child, .data-table td:last-child { padding-right: 0; }
+  .data-table [data-numeric] { text-align: right; }
+  .data-table caption { caption-side: bottom; padding-top: 14px; text-align: left; font-size: var(--fs-small); color: var(--fg-muted); }
+
+  /* Long-form reading */
+  .prose-site { max-width: 64ch; }
+  .prose-site > * + * { margin-top: 1.1em; }
+  .prose-site h2, .prose-site h3 { margin-top: 2em; }
+  .prose-site a { color: var(--accent-text); text-decoration: underline; text-underline-offset: 4px; }
+  .prose-site ul { list-style: disc; padding-left: 1.25em; }
+  .prose-site ol { list-style: decimal; padding-left: 1.25em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
