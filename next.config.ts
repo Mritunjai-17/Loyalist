@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 import path from "node:path";
 
 const nextConfig: NextConfig = {
+  // Lets a production build run beside a dev server: NEXT_DIST_DIR=.next-prod npx next build
+  distDir: process.env.NEXT_DIST_DIR ?? ".next",
   reactStrictMode: true,
   poweredByHeader: false,
   // A package-lock.json in the parent folder would otherwise be taken as the workspace root.

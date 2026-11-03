@@ -26,3 +26,34 @@ export function pageMetadata({ title, description, path, noindex }: PageMeta): M
     robots: noindex ? { index: false, follow: false } : undefined,
   };
 }
+
+/** schema.org Organization for the JSON-LD block in the root layout. */
+export function organizationJsonLd(company: {
+  legalName: string;
+  email: string;
+  phone: { href: string };
+  exchange: string;
+  ticker: string;
+  headOffice: { street: string; city: string; region: string; postalCode: string; country: string };
+  social: { href: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: company.legalName,
+    url: siteUrl,
+    logo: new URL("/images/logo.png", siteUrl).toString(),
+    email: company.email,
+    telephone: company.phone.href.replace("tel:", ""),
+    tickerSymbol: `${company.exchange}: ${company.ticker}`,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: company.headOffice.street,
+      addressLocality: company.headOffice.city,
+      addressRegion: company.headOffice.region,
+      postalCode: company.headOffice.postalCode,
+      addressCountry: company.headOffice.country,
+    },
+    sameAs: company.social.map((s) => s.href),
+  };
+}

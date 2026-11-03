@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { fraunces, inter } from "./fonts";
-import { siteName, siteUrl } from "@/lib/seo";
+import { company } from "@/content/company";
+import { organizationJsonLd, siteName, siteUrl } from "@/lib/seo";
 import { palette } from "@/lib/tokens";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -12,6 +13,13 @@ export const metadata: Metadata = {
   title: { default: siteName, template: `%s | ${siteName}` },
   description:
     "Loyalist Exploration Limited (CSE: PNGC) is building a portfolio of gold and strategic metals projects in the Timmins district of Ontario.",
+  alternates: { canonical: "/" },
+  openGraph: {
+    siteName,
+    type: "website",
+    url: "/",
+    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: siteName }],
+  },
 };
 
 export const viewport: Viewport = {
@@ -31,6 +39,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <Header />
         {children}
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd(company)) }}
+        />
       </body>
     </html>
   );
