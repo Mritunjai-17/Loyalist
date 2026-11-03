@@ -143,3 +143,25 @@ export type ResourceEstimate = {
   cutOffValue: number;
   newsRelease: { date: string; href: string };
 };
+
+export type Breadcrumb = { label: string; href?: string };
+
+export type PageIntro = {
+  path: string;
+  /** Short label for metadata and breadcrumbs. */
+  title: string;
+  eyebrow: string;
+  heading: string;
+  /** Final phrase of the h1, set in italic gold. */
+  accent?: string;
+  lead: string;
+  description: string;
+  breadcrumbs: Breadcrumb[];
+  photo?: Photo & { focalPoint: string };
+};
+
+export type DisclaimerSection = {
+  heading: string;
+  paragraphs: string[];
+  list?: string[];
+};
