@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
+import { Reveal } from "@/components/shared/Reveal";
 import { homeHero as hero } from "@/content/company";
 import type { HeroFeatureIcon } from "@/types";
 import { HeroStrip } from "./HeroStrip";
@@ -24,7 +25,7 @@ export function Hero() {
           fill
           priority
           sizes="100vw"
-          quality={85}
+          quality={92}
           placeholder="empty"
           className="object-cover"
           style={{ objectPosition: hero.focalPoint }}
@@ -35,37 +36,39 @@ export function Hero() {
       <div className="hero-overlay hero-overlay-bottom" aria-hidden />
       <div className="hero-overlay hero-overlay-uniform" aria-hidden />
 
-      <Container className="hero-content">
-        <Eyebrow>{hero.eyebrow}</Eyebrow>
-        <Heading level={1} variant="display" stacked accent={hero.accent} id="hero-title" className="hero-title">
-          {hero.title}
-        </Heading>
-        <p className="hero-lead">{hero.lead}</p>
-        <div className="hero-actions">
-          <Button size="lg" href={hero.primaryCta.href} icon={<ArrowRight aria-hidden />}>
-            {hero.primaryCta.label}
-          </Button>
-          <Button size="lg" variant="secondary" href={hero.secondaryCta.href} external icon={<Download aria-hidden />}>
-            {hero.secondaryCta.label}
-            <span className="sr-only"> (PDF, opens in a new tab)</span>
-          </Button>
-        </div>
-        <ul className="hero-features">
-          {hero.features.map(({ icon, lines }) => {
-            const Icon = featureIcons[icon];
-            return (
-              <li key={icon} className="hero-feature">
-                <Icon aria-hidden />
-                <span>
-                  {lines[0]}
-                  <br />
-                  {lines[1]}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
-      </Container>
+      <Reveal duration={0.6} y={20}>
+        <Container className="hero-content">
+          <Eyebrow>{hero.eyebrow}</Eyebrow>
+          <Heading level={1} variant="display" stacked accent={hero.accent} id="hero-title" className="hero-title">
+            {hero.title}
+          </Heading>
+          <p className="hero-lead">{hero.lead}</p>
+          <div className="hero-actions">
+            <Button size="lg" href={hero.primaryCta.href} icon={<ArrowRight aria-hidden />}>
+              {hero.primaryCta.label}
+            </Button>
+            <Button size="lg" variant="secondary" href={hero.secondaryCta.href} external icon={<Download aria-hidden />}>
+              {hero.secondaryCta.label}
+              <span className="sr-only"> (PDF, opens in a new tab)</span>
+            </Button>
+          </div>
+          <ul className="hero-features">
+            {hero.features.map(({ icon, lines }) => {
+              const Icon = featureIcons[icon];
+              return (
+                <li key={icon} className="hero-feature">
+                  <Icon aria-hidden />
+                  <span>
+                    {lines[0]}
+                    <br />
+                    {lines[1]}
+                  </span>
+                </li>
+              );
+            })}
+          </ul>
+        </Container>
+      </Reveal>
 
       <HeroStrip items={hero.strip} />
     </section>

@@ -54,7 +54,7 @@ const contrastPairs: { label: string; fg: string; bg: string; ruleOnly?: boolean
   { label: "Ink 75% on paper (eyebrow)", fg: blend(palette.ink, 0.75, palette.paper), bg: palette.paper },
   { label: "Ink soft on paper", fg: palette.inkSoft, bg: palette.paper },
   { label: "Gold ink on paper", fg: palette.goldInk, bg: palette.paper },
-  { label: "Ivory on ink (paper button)", fg: palette.ivory, bg: palette.ink },
+  { label: "Ink on paper (secondary button)", fg: palette.ink, bg: palette.paper },
   { label: "Gold on paper (rules only, not text)", fg: palette.gold, bg: palette.paper, ruleOnly: true },
 ];
 
@@ -262,7 +262,7 @@ export default function StyleguidePage() {
           id="sg-paper-h"
           title="Tables and long reading"
           accent="on paper."
-          lead="At most two paper sections per page. Gold becomes gold ink for text; buttons become ink."
+          lead="At most two paper sections per page. Gold becomes gold ink for text; buttons use the unified button tokens."
         />
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="min-w-0 lg:col-span-7">

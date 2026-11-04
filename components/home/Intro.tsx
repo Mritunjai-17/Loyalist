@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { ArrowRight, Leaf, Pickaxe, Users } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/shared/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Button } from "@/components/ui/Button";
 import { commitments, companyProfileLink, whoWeAre } from "@/content/strategy";
 
 function BullionIcon({ className }: { className?: string }) {
@@ -94,46 +95,49 @@ export function Intro() {
             stacked
             className="relative z-10 mb-0"
           />
-          <div className="about-bleed-photo relative z-0 -mt-3 h-[320px] overflow-hidden border-b border-r border-graphite/40 shadow-2xl sm:h-[360px] lg:-mt-6 lg:h-[400px]">
-            <Image
-              src="/images/about/landscape.jpg"
-              alt="Panoramic view over the Timmins mining camp and boreal forest at sunset"
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover object-left-bottom transition-transform duration-700 hover:scale-105"
-              priority
-            />
-            <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-carbon via-carbon/60 to-transparent" />
-          </div>
+          <Reveal delay={0.1}>
+            <div className="about-bleed-photo relative z-0 -mt-3 h-[320px] overflow-hidden border-b border-r border-graphite/40 shadow-2xl sm:h-[360px] lg:-mt-6 lg:h-[400px]">
+              <Image
+                src="/images/about/landscape.jpg"
+                alt="Panoramic view over the Timmins mining camp and boreal forest at sunset"
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover object-left-bottom transition-transform duration-700 hover:scale-105"
+                priority
+              />
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-carbon via-carbon/60 to-transparent" />
+            </div>
+          </Reveal>
         </div>
 
         <div className="flex min-w-0 flex-col justify-start lg:col-span-7 lg:pt-6">
-          <div className="space-y-4 text-[0.9375rem] leading-relaxed text-fg-body">
-            {whoWeAre.map((p) => (
-              <p key={p.slice(0, 24)}>{p}</p>
-            ))}
-          </div>
+          <Reveal delay={0.1}>
+            <div className="space-y-4 text-[0.9375rem] leading-relaxed text-fg-body">
+              {whoWeAre.map((p) => (
+                <p key={p.slice(0, 24)}>{p}</p>
+              ))}
+            </div>
 
-          <ul className="mt-6 divide-y divide-graphite/40 border-b border-graphite/40" aria-label="Our commitments">
-            {commitmentItems.map(({ icon: Icon, label }) => (
-              <li key={label} className="flex items-center gap-4 py-3">
-                <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-gold/40 bg-black/50 text-gold shadow-sm">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <span className="text-[0.9375rem] text-ivory">{label}</span>
-              </li>
-            ))}
-          </ul>
+            <ul className="mt-6 divide-y divide-graphite/40 border-b border-graphite/40" aria-label="Our commitments">
+              {commitmentItems.map(({ icon: Icon, label }) => (
+                <li key={label} className="flex items-center gap-4 py-3">
+                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-gold/40 bg-black/50 text-gold shadow-sm">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <span className="text-[0.9375rem] text-ivory">{label}</span>
+                </li>
+              ))}
+            </ul>
 
-          <div className="mt-7">
-            <Button
-              href={companyProfileLink.href}
-              icon={<ArrowRight aria-hidden className="h-4 w-4" />}
-              className="!normal-case font-medium !tracking-normal"
-            >
-              {companyProfileLink.label}
-            </Button>
-          </div>
+            <div className="mt-7">
+              <Button
+                href={companyProfileLink.href}
+                icon={<ArrowRight aria-hidden className="h-4 w-4" />}
+              >
+                {companyProfileLink.label}
+              </Button>
+            </div>
+          </Reveal>
         </div>
       </div>
     </Section>

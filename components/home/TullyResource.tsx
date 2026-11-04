@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { ArrowRight, Download, Layers, MapPin, Pickaxe } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { Counter } from "@/components/ui/Counter";
+import { Reveal } from "@/components/shared/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { type Column } from "@/components/ui/Table";
@@ -31,6 +33,8 @@ export function TullyResource() {
           src="/images/resource/tully-gold-rock.jpg"
           alt="Tully project mineralized gold rock"
           fill
+          sizes="260px"
+          quality={90}
           className="object-cover object-left"
           priority
         />
@@ -54,7 +58,8 @@ export function TullyResource() {
 
         <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
           {/* Main Floating Resource Card */}
-          <div className="min-w-0 rounded-2xl border border-black/5 bg-white p-6 shadow-[0_12px_40px_rgba(0,0,0,0.06)] sm:p-8 lg:col-span-7 xl:col-span-8">
+          <Reveal className="min-w-0 lg:col-span-7 xl:col-span-8">
+            <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-[0_12px_40px_rgba(0,0,0,0.06)] sm:p-8">
             {/* Top KPI Box Row */}
             <div className="grid gap-4 sm:grid-cols-2">
               {/* Indicated KPI Card */}
@@ -64,7 +69,7 @@ export function TullyResource() {
                     INDICATED
                   </span>
                   <span className="mt-1 block text-[1.4rem] font-bold text-gold sm:text-[1.65rem]">
-                    164,000 oz Au
+                    <Counter value={164000} suffix=" oz Au" />
                   </span>
                 </div>
                 <Image
@@ -82,7 +87,7 @@ export function TullyResource() {
                   INFERRED
                 </span>
                 <span className="mt-1 block text-[1.4rem] font-bold text-ink sm:text-[1.65rem]">
-                  62,000 oz Au
+                  <Counter value={62000} suffix=" oz Au" />
                 </span>
               </div>
             </div>
@@ -127,26 +132,25 @@ export function TullyResource() {
               <Button
                 href="/projects/tully#resource"
                 icon={<ArrowRight aria-hidden className="h-4 w-4" />}
-                className="!bg-gold font-semibold !text-onGold shadow-sm hover:!bg-goldHover text-xs tracking-wider uppercase px-5 py-3"
               >
-                VIEW FULL RESOURCE TABLE
+                View Full Resource Table
               </Button>
               <Button
                 href={mre.newsRelease.href}
                 external
                 variant="secondary"
                 icon={<Download aria-hidden className="h-4 w-4" />}
-                className="!border-black/20 !bg-white font-semibold !text-ink shadow-sm hover:!bg-paper text-xs tracking-wider uppercase px-5 py-3"
               >
-                READ THE NEWS RELEASE
+                Read the News Release
                 <span className="sr-only"> (PDF, opens in a new tab)</span>
               </Button>
             </div>
           </div>
+        </Reveal>
 
-          {/* Right Column Facts & Caution Note */}
-          <div className="space-y-6 lg:col-span-5 xl:col-span-4 lg:pt-1">
-            <div className="space-y-4">
+        {/* Right Column Facts & Caution Note */}
+        <Reveal delay={0.15} className="space-y-6 lg:col-span-5 xl:col-span-4 lg:pt-1">
+          <div className="space-y-4">
               {/* Card 1: Ownership */}
               <div className="flex items-center gap-4 py-1">
                 <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-black/10 bg-white text-gold shadow-sm">
@@ -205,7 +209,7 @@ export function TullyResource() {
                 .
               </p>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </Section>

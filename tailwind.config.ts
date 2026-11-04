@@ -38,11 +38,20 @@ const config: Config = {
     },
     borderRadius: {
       none: "0",
-      control: "6px",
-      panel: "10px",
+      control: "10px",
+      panel: "20px",
+      lg: "12px",
+      xl: "16px",
+      "2xl": "20px",
+      "3xl": "24px",
+      full: "9999px",
     },
     boxShadow: {
       none: "none",
+      sm: "0 2px 8px rgba(0, 0, 0, 0.04)",
+      md: "0 6px 20px rgba(0, 0, 0, 0.05)",
+      lg: "0 12px 32px rgba(0, 0, 0, 0.07)",
+      xl: "0 20px 40px rgba(0, 0, 0, 0.09)",
     },
     extend: {
       maxWidth: {

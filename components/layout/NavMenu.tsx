@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { isGroup, primaryNav } from "@/content/navigation";
 import type { NavGroup } from "@/types";
@@ -10,11 +9,20 @@ import { cn } from "@/lib/cn";
 
 const CLOSE_DELAY_MS = 140;
 
-function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
+function isLinkActive(pathname: string, href: string) {
+  if (href === "/") {
+    return pathname === "/";
+  }
+  return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function Dropdown({ group, open, onOpen, onClose, pathname }: {
+function Dropdown({
+  group,
+  open,
+  onOpen,
+  onClose,
+  pathname,
+}: {
   group: NavGroup;
   open: boolean;
   onOpen: () => void;
@@ -26,7 +34,7 @@ function Dropdown({ group, open, onOpen, onClose, pathname }: {
   const closeTimer = useRef<number | undefined>(undefined);
   const panelId = `nav-${group.label.toLowerCase()}`;
   const links = [...group.items, ...(group.overview ? [group.overview] : [])];
-  const groupActive = links.some((l) => isActive(pathname, l.href));
+  const groupActive = links.some((l) => isLinkActive(pathname, l.href));
 
   const cancelClose = () => window.clearTimeout(closeTimer.current);
   const scheduleClose = () => {
@@ -43,13 +51,34 @@ function Dropdown({ group, open, onOpen, onClose, pathname }: {
   const onPanelKeyDown = (event: React.KeyboardEvent) => {
     const items = [...(panelRef.current?.querySelectorAll<HTMLAnchorElement>("a") ?? [])];
     const current = items.indexOf(document.activeElement as HTMLAnchorElement);
-    if (event.key === "ArrowDown") { event.preventDefault(); focusItem(current + 1); }
-    if (event.key === "ArrowUp") { event.preventDefault(); focusItem(current - 1); }
-    if (event.key === "Escape") { event.preventDefault(); onClose(); buttonRef.current?.focus(); }
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      focusItem(current + 1);
+    }
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      focusItem(current - 1);
+    }
+    if (event.key === "Escape") {
+      event.preventDefault();
+      onClose();
+      buttonRef.current?.focus();
+    }
   };
 
   return (
-    <li className="relative" onPointerEnter={(e) => { if (e.pointerType === "mouse") { cancelClose(); onOpen(); } }} onPointerLeave={(e) => { if (e.pointerType === "mouse") scheduleClose(); }}>
+    <li
+      className="relative"
+      onPointerEnter={(e) => {
+        if (e.pointerType === "mouse") {
+          cancelClose();
+          onOpen();
+        }
+      }}
+      onPointerLeave={(e) => {
+        if (e.pointerType === "mouse") scheduleClose();
+      }}
+    >
       <button
         ref={buttonRef}
         type="button"
@@ -58,11 +87,14 @@ function Dropdown({ group, open, onOpen, onClose, pathname }: {
         aria-controls={panelId}
         onClick={() => (open ? onClose() : onOpen())}
         onKeyDown={(e) => {
-          if (e.key === "ArrowDown") { e.preventDefault(); onOpen(); requestAnimationFrame(() => focusItem(0)); }
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            onOpen();
+            requestAnimationFrame(() => focusItem(0));
+          }
         }}
       >
         {group.label}
-        <ChevronDown aria-hidden className={cn("nav-chevron", open && "rotate-180")} />
       </button>
       <div
         ref={panelRef}
@@ -78,7 +110,12 @@ function Dropdown({ group, open, onOpen, onClose, pathname }: {
         <ul>
           {group.items.map((item) => (
             <li key={item.href}>
-              <Link href={item.href} className="nav-item" aria-current={isActive(pathname, item.href) ? "page" : undefined} onClick={() => onClose()}>
+              <Link
+                href={item.href}
+                className="nav-item"
+                aria-current={isLinkActive(pathname, item.href) ? "page" : undefined}
+                onClick={() => onClose()}
+              >
                 <span className="nav-item-title">{item.label}</span>
                 {item.description ? <span className="nav-item-desc">{item.description}</span> : null}
               </Link>
@@ -86,7 +123,12 @@ function Dropdown({ group, open, onOpen, onClose, pathname }: {
           ))}
         </ul>
         {group.overview ? (
-          <Link href={group.overview.href} className="nav-overview" aria-current={pathname === group.overview.href ? "page" : undefined} onClick={() => onClose()}>
+          <Link
+            href={group.overview.href}
+            className="nav-overview"
+            aria-current={isLinkActive(pathname, group.overview.href) ? "page" : undefined}
+            onClick={() => onClose()}
+          >
             {group.overview.label}
           </Link>
         ) : null}
@@ -108,7 +150,9 @@ export function NavMenu() {
     const onDocPointer = (event: PointerEvent) => {
       if (!navRef.current?.contains(event.target as Node)) close();
     };
-    const onKey = (event: KeyboardEvent) => { if (event.key === "Escape") close(); };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") close();
+    };
     document.addEventListener("pointerdown", onDocPointer);
     document.addEventListener("keydown", onKey);
     return () => {
@@ -120,24 +164,33 @@ export function NavMenu() {
   return (
     <nav ref={navRef} aria-label="Primary" className="hidden lg:block">
       <ul className="nav-list">
-        {primaryNav.map((entry) =>
-          isGroup(entry) ? (
-            <Dropdown
-              key={entry.label}
-              group={entry}
-              pathname={pathname}
-              open={openGroup === entry.label}
-              onOpen={() => setOpenGroup(entry.label)}
-              onClose={() => setOpenGroup((current) => (current === entry.label ? null : current))}
-            />
-          ) : (
+        {primaryNav.map((entry) => {
+          if (isGroup(entry)) {
+            return (
+              <Dropdown
+                key={entry.label}
+                group={entry}
+                pathname={pathname}
+                open={openGroup === entry.label}
+                onOpen={() => setOpenGroup(entry.label)}
+                onClose={() => setOpenGroup((current) => (current === entry.label ? null : current))}
+              />
+            );
+          }
+          const isItemActive = isLinkActive(pathname, entry.href);
+
+          return (
             <li key={entry.href}>
-              <Link href={entry.href} className={cn("nav-link", isActive(pathname, entry.href) && "nav-link-active")} aria-current={isActive(pathname, entry.href) ? "page" : undefined}>
+              <Link
+                href={entry.href}
+                className={cn("nav-link", isItemActive && "nav-link-active")}
+                aria-current={isItemActive ? "page" : undefined}
+              >
                 {entry.label}
               </Link>
             </li>
-          ),
-        )}
+          );
+        })}
       </ul>
     </nav>
   );

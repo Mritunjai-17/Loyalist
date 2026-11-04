@@ -45,8 +45,8 @@ export const homeHero: HomeHero = {
   title: "Buy Timmins.",
   accent: "Mine Timmins.",
   lead: "Building a portfolio of gold and strategic metals projects in the Timmins district, with a focus on advancing the Tully project.",
-  primaryCta: { label: "Explore projects", href: "/projects" },
-  secondaryCta: { label: "Investor presentation", href: company.presentation.href },
+  primaryCta: { label: "Explore Projects", href: "/projects" },
+  secondaryCta: { label: "Investor Presentation", href: company.presentation.href },
   features: [
     { icon: "layers", lines: ["Four Timmins-area", "projects"] },
     { icon: "pickaxe", lines: ["Gold, copper", "& nickel"] },
