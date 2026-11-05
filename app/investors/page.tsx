@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Download, ExternalLink, FileBadge, FileText, Layers, TrendingUp, Users } from "lucide-react";
+import { ArrowRight, ExternalLink, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
@@ -47,13 +47,6 @@ const subPages = primaryNav
   .filter(isGroup)
   .find((g) => g.label === "Investors")!
   .items.filter((item) => item.href !== "/investors");
-
-const subpageIcons: Record<string, any> = {
-  "/investors/technical-reports": FileBadge,
-  "/investors/financial-statements": FileText,
-  "/investors/corporate-structure": Layers,
-  "/investors/annual-meeting": Users,
-};
 
 export default function InvestorsPage() {
   const shareMetrics = keyShareData();

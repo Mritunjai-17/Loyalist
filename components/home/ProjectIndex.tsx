@@ -53,7 +53,7 @@ const projectVisuals: Record<string, ProjectVisual> = {
 };
 
 /** Interactive Satellite map on the left, modern horizontal cards on the right; each highlights the other. */
-export function ProjectIndex({ figureNumber }: { figureNumber?: string }) {
+export function ProjectIndex({ figureNumber: _figureNumber }: { figureNumber?: string } = {}) {
   const [active, setActive] = useState<Project["slug"] | null>(null);
 
   return (

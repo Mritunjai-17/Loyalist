@@ -1,11 +1,9 @@
 import Link from "next/link";
-import { ArrowRight, ExternalLink } from "lucide-react";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { FilteredDocuments } from "@/components/shared/FilteredDocuments";
 import { Reveal } from "@/components/shared/Reveal";
-import { company } from "@/content/company";
 import { documents } from "@/content/documents";
 import { pages } from "@/content/pages";
 import { pageMetadata } from "@/lib/seo";

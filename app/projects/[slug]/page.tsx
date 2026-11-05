@@ -9,7 +9,6 @@ import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Table } from "@/components/ui/Table";
 import { TextLink } from "@/components/ui/TextLink";
-import { Badge } from "@/components/ui/Badge";
 import { resourceCaption, resourceColumns } from "@/components/home/TullyResource";
 import { ProjectDocuments } from "@/components/projects/ProjectDocuments";
 import { ProjectFacts } from "@/components/projects/ProjectFacts";

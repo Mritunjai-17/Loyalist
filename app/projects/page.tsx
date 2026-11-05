@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Layers, MapPin, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { ProjectIndex } from "@/components/home/ProjectIndex";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Table, type Column } from "@/components/ui/Table";
 import { Heading } from "@/components/ui/Heading";
-import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/shared/Reveal";
 import { locationMap, pages } from "@/content/pages";
 import { portfolioAreaLabel, projects } from "@/content/projects";

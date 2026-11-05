@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowRight, ChartColumnIncreasing, Layers, Pickaxe, Quote } from "lucide-react";
+import { ChartColumnIncreasing, Layers, Pickaxe, Quote } from "lucide-react";
 import { Heading } from "@/components/ui/Heading";
 import { Reveal } from "@/components/shared/Reveal";
 import { Section } from "@/components/ui/Section";

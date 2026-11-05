@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { CtaBand } from "@/components/home/CtaBand";
 import { Hero } from "@/components/home/Hero";

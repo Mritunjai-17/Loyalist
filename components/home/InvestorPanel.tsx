@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, Download, FileBadge, FileText, Info, Layers, PieChart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Counter } from "@/components/ui/Counter";
