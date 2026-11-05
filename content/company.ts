@@ -48,14 +48,14 @@ export const homeHero: HomeHero = {
   primaryCta: { label: "Explore Projects", href: "/projects" },
   secondaryCta: { label: "Investor Presentation", href: company.presentation.href },
   features: [
-    { icon: "layers", lines: ["Four Timmins-area", "projects"] },
-    { icon: "pickaxe", lines: ["Gold, copper", "& nickel"] },
+    { icon: "mountain", lines: ["District-focused", "strategy"] },
+    { icon: "metals", lines: ["Gold and", "strategic metals"] },
     { icon: "crosshair", lines: ["Tully development", "focus"] },
   ],
   strip: [
     { icon: "chart", label: `${company.exchange}: ${company.ticker}`, emphasis: true },
     { icon: "pin", label: "Timmins, Ontario" },
-    { icon: "mountain", label: "Four projects" },
+    { icon: "layers", label: "Four Projects" },
     { icon: "metals", label: "Gold · Copper · Nickel" },
   ],
   photo: {
@@ -66,5 +66,5 @@ export const homeHero: HomeHero = {
     credit: "Loyalist Exploration Limited",
     licence: "Company photography",
   },
-  focalPoint: "68% 45%",
+  focalPoint: "92% 45%",
 };

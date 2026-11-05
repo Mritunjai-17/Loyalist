@@ -1,12 +1,13 @@
-import { ChartLine, Coins, MapPin, Mountain, type LucideIcon } from "lucide-react";
+import { Coins, Layers, MapPin, Mountain, TrendingUp, type LucideIcon } from "lucide-react";
 import type { HeroStripIcon, HomeHero } from "@/types";
 import { cn } from "@/lib/cn";
 
-// Lucide has no gold-bar glyph; Coins stands in for the metals cell.
+// Lucide icons representing market ticker, location, project claims, and mined commodities
 const icons: Record<HeroStripIcon, LucideIcon> = {
-  chart: ChartLine,
+  chart: TrendingUp,
   pin: MapPin,
   mountain: Mountain,
+  layers: Layers,
   metals: Coins,
 };
 

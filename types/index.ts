@@ -13,8 +13,8 @@ export type Photo = {
   licence: string;
 };
 
-export type HeroFeatureIcon = "layers" | "pickaxe" | "crosshair";
-export type HeroStripIcon = "chart" | "pin" | "mountain" | "metals";
+export type HeroFeatureIcon = "layers" | "pickaxe" | "crosshair" | "mountain" | "metals";
+export type HeroStripIcon = "chart" | "pin" | "mountain" | "metals" | "layers";
 
 export type HomeHero = {
   eyebrow: string;
