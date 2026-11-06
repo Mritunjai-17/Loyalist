@@ -10,6 +10,15 @@ const config: Config = {
       transparent: "transparent",
       current: "currentColor",
       inherit: "inherit",
+      // Exact design system tokens
+      "primary-gold": "var(--primary-gold)",
+      "soft-gold": "var(--soft-gold)",
+      "warm-white": "var(--warm-white)",
+      champagne: "var(--champagne)",
+      "pure-white": "var(--pure-white)",
+      charcoal: "var(--charcoal)",
+      "muted-grey": "var(--muted-grey)",
+      // Core palette & derived aliases
       carbon: "var(--carbon)",
       black: "var(--black)",
       ivory: "var(--ivory)",

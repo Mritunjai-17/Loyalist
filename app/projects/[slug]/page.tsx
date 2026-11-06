@@ -151,7 +151,7 @@ export default async function ProjectPage({ params }: Params) {
       </header>
 
       {/* 01 Overview, Status & Geology (Architectural Ruled Layout - No Chunky AI Boxes) */}
-      <Section tone="carbon" labelledBy="overview-title">
+      <Section tone="paper" labelledBy="overview-title">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-12 items-start">
           {/* Left Column: Natural Sticky Project Facts (No floating border box) */}
           <div className="lg:col-span-4 xl:col-span-3">
@@ -225,7 +225,7 @@ export default async function ProjectPage({ params }: Params) {
 
       {/* 02 Mineral Resource Estimate (Tully specific) */}
       {project.hasResource ? (
-        <Section tone="paper" id="resource" labelledBy="resource-title">
+        <Section tone="warm" id="resource" labelledBy="resource-title">
           <Reveal>
             <SectionHeader
               number={n(++section)}
@@ -269,7 +269,7 @@ export default async function ProjectPage({ params }: Params) {
       ) : null}
 
       {/* 03 Maps & Figures */}
-      <Section tone="carbon" labelledBy="figures-title">
+      <Section tone="warm" labelledBy="figures-title">
         <Reveal>
           <SectionHeader
             number={n(++section)}

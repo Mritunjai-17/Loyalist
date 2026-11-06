@@ -26,7 +26,7 @@ export function TullyResource() {
   const tully = projects.find((p) => p.slug === "tully")!;
 
   return (
-    <Section tone="paper" id="resource" labelledBy="resource-title" className="relative overflow-hidden">
+    <Section tone="warm" id="resource" labelledBy="resource-title" className="relative overflow-hidden">
       {/* Decorative left-edge mineral rock photography with angled cut and gold accent rule */}
       <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-0 hidden w-[220px] overflow-hidden lg:block xl:w-[260px]">
         <Image
@@ -39,7 +39,7 @@ export function TullyResource() {
           priority
         />
         <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100" aria-hidden>
-          <polygon points="84,0 100,0 100,100 58,100" fill="var(--paper)" />
+          <polygon points="84,0 100,0 100,100 58,100" fill="var(--warm-white)" />
           <line x1="84" y1="0" x2="58" y2="100" stroke="var(--gold)" strokeWidth="0.8" />
         </svg>
       </div>
@@ -63,7 +63,7 @@ export function TullyResource() {
             {/* Top KPI Box Row */}
             <div className="grid gap-4 sm:grid-cols-2">
               {/* Indicated KPI Card */}
-              <div className="flex items-center justify-between rounded-xl bg-black p-4 sm:p-5 text-white shadow-sm">
+              <div className="flex items-center justify-between rounded-xl bg-white border border-gold/40 p-4 sm:p-5 text-ink shadow-sm">
                 <div>
                   <span className="block text-[0.7rem] font-semibold uppercase tracking-wider text-stone sm:text-[0.75rem]">
                     INDICATED
@@ -82,8 +82,8 @@ export function TullyResource() {
               </div>
 
               {/* Inferred KPI Card */}
-              <div className="rounded-xl bg-[rgba(237,231,221,0.9)] p-4 sm:p-5 text-ink shadow-sm">
-                <span className="block text-[0.7rem] font-semibold uppercase tracking-wider text-inkSoft sm:text-[0.75rem]">
+              <div className="rounded-xl bg-white border border-black/10 p-4 sm:p-5 text-ink shadow-sm">
+                <span className="block text-[0.7rem] font-semibold uppercase tracking-wider text-ink-soft sm:text-[0.75rem]">
                   INFERRED
                 </span>
                 <span className="mt-1 block text-[1.4rem] font-bold text-ink sm:text-[1.65rem]">
@@ -96,7 +96,7 @@ export function TullyResource() {
             <div className="mt-7 overflow-x-auto">
               <table className="w-full text-left">
                 <thead>
-                  <tr className="border-b border-black/10 text-[0.72rem] font-semibold uppercase tracking-wider text-inkSoft sm:text-[0.75rem]">
+                  <tr className="border-b border-black/10 text-[0.72rem] font-semibold uppercase tracking-wider text-ink-soft sm:text-[0.75rem]">
                     <th className="pb-3 pr-4 font-semibold">CATEGORY</th>
                     <th className="px-4 pb-3 text-right font-semibold">TONNES</th>
                     <th className="px-4 pb-3 text-right font-semibold">GRADE</th>
@@ -105,7 +105,7 @@ export function TullyResource() {
                 </thead>
                 <tbody className="text-[0.9rem] sm:text-[0.9375rem]">
                   {/* Indicated Row - Highlighted warm gold/cream pill */}
-                  <tr className="bg-[rgba(201,164,92,0.18)] font-bold text-ink">
+                  <tr className="bg-gold/15 font-bold text-ink border-y border-gold/25">
                     <td className="py-3 pl-4 pr-4 rounded-l-lg sm:py-3.5">Indicated</td>
                     <td className="px-4 py-3 text-right sm:py-3.5">1.62 Mt</td>
                     <td className="px-4 py-3 text-right sm:py-3.5">3.16 g/t Au</td>
@@ -123,7 +123,7 @@ export function TullyResource() {
             </div>
 
             {/* Footnote */}
-            <p className="mt-4 text-[0.8rem] text-inkSoft">
+            <p className="mt-4 text-[0.8rem] text-ink-soft">
               Cut-off: 1.1 g/t Au. Effective June 15, 2026. NI 43-101, P&E Mining Consultants Inc.
             </p>
 

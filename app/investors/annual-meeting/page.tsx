@@ -85,7 +85,7 @@ export default function AnnualMeetingPage() {
       </header>
 
       {/* 01 Meeting Materials Archive */}
-      <Section tone="carbon" id="materials" labelledBy="meeting-title">
+      <Section tone="paper" id="materials" labelledBy="meeting-title">
         <Reveal>
           <SectionHeader
             number="01"
@@ -103,7 +103,7 @@ export default function AnnualMeetingPage() {
       </Section>
 
       {/* 02 Voting & Transfer Agent Note */}
-      <Section tone="paper" id="voting-information" labelledBy="voting-title">
+      <Section tone="warm" id="voting-information" labelledBy="voting-title">
         <Reveal>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t border-black/10 pt-8">
             <div className="max-w-2xl">

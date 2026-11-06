@@ -35,7 +35,7 @@ function TopographicPatternTopRight() {
 export function CtaBand() {
   return (
     <Section
-      tone="carbon"
+      tone="champagne"
       id="contact"
       labelledBy="contact-title"
       className="relative overflow-hidden pb-28 sm:pb-36 lg:pb-40"
@@ -60,7 +60,7 @@ export function CtaBand() {
               <li>
                 <a
                   href={`mailto:${company.email}`}
-                  className="inline-flex items-center gap-3 text-sm sm:text-base text-ivory hover:text-gold transition-colors"
+                  className="inline-flex items-center gap-3 text-sm sm:text-base text-ink hover:text-gold transition-colors font-medium"
                 >
                   <Mail className="w-5 h-5 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
                   <span>{company.email}</span>
@@ -69,7 +69,7 @@ export function CtaBand() {
               <li>
                 <a
                   href={company.phone.href}
-                  className="inline-flex items-center gap-3 text-sm sm:text-base text-ivory hover:text-gold transition-colors"
+                  className="inline-flex items-center gap-3 text-sm sm:text-base text-ink hover:text-gold transition-colors font-medium"
                 >
                   <Phone className="w-5 h-5 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
                   <span>{company.phone.display}</span>
@@ -90,7 +90,7 @@ export function CtaBand() {
 
         {/* Center Vertical Divider (Desktop) */}
         <div className="hidden lg:block lg:col-span-1 flex justify-center">
-          <div className="w-[1px] h-64 bg-white/10" aria-hidden="true" />
+          <div className="w-[1px] h-64 bg-black/10" aria-hidden="true" />
         </div>
 
         {/* Right Column: Newsletter Subscription Card */}

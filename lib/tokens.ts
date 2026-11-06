@@ -2,20 +2,28 @@
 // reach (viewport metadata, contrast checks). scripts/check-typography.mjs
 // fails the build if the two drift apart.
 export const palette = {
-  carbon: "#171918",
-  black: "#101211",
-  ivory: "#F4F2ED",
-  stone: "#AAA9A3",
-  gold: "#C9A45C",
-  graphite: "#303330",
+  primaryGold: "#C49A43",
+  softGold: "#E1C27A",
+  warmWhite: "#F7F5EF",
+  champagne: "#F2EBDD",
+  pureWhite: "#FFFFFF",
+  charcoal: "#20201D",
+  mutedGrey: "#77736B",
+
+  carbon: "#20201D",
+  black: "#171816",
+  ivory: "#F7F5EF",
+  stone: "#77736B",
+  gold: "#C49A43",
+  graphite: "#383733",
   goldHover: "#D8B877",
   goldPress: "#B38F47",
-  onGold: "#101211",
-  paper: "#F4F2ED",
-  ink: "#171918",
-  inkSoft: "#5C5B56",
-  goldInk: "#7C5F22",
-  error: "#E08A7A",
+  onGold: "#20201D",
+  paper: "#FFFFFF",
+  ink: "#20201D",
+  inkSoft: "#77736B",
+  goldInk: "#C49A43",
+  error: "#D9534F",
 } as const;
 
 export type PaletteKey = keyof typeof palette;

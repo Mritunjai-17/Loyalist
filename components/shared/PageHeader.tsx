@@ -18,7 +18,7 @@ type PageHeaderProps = {
 export function PageHeader({ intro, number, meta }: PageHeaderProps) {
   const { breadcrumbs, eyebrow, heading, accent, lead, photo } = intro;
   return (
-    <header data-tone="carbon" className="page-header bg-surface">
+    <header data-tone="paper" className="page-header bg-surface">
       <Container>
         <nav aria-label="Breadcrumb">
           <ol className="breadcrumb">

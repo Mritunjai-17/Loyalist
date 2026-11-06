@@ -37,7 +37,7 @@ export function NewsletterForm() {
       {/* Card Header: Icon + Title & Description */}
       <div className="flex items-start gap-4">
         <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center border border-gold/40 bg-black/60 text-gold"
+          className="flex h-11 w-11 shrink-0 items-center justify-center border border-gold/40 bg-white text-gold shadow-sm"
           style={{ borderRadius: "10px" }}
           aria-hidden="true"
         >
@@ -45,11 +45,11 @@ export function NewsletterForm() {
         </div>
         <div>
           <Heading level={3}>
-            <span className="text-ivory font-bold block">
+            <span className="text-ink font-bold block">
               Newsletter subscription
             </span>
           </Heading>
-          <p id="newsletter-note" className="mt-1 text-xs sm:text-sm text-stone leading-relaxed">
+          <p id="newsletter-note" className="mt-1 text-xs sm:text-sm text-ink-soft leading-relaxed">
             Stay updated with our latest press releases, project milestones and company news.
           </p>
         </div>
@@ -57,7 +57,7 @@ export function NewsletterForm() {
 
       {/* Subscription Form */}
       <form onSubmit={onSubmit} noValidate aria-describedby="newsletter-note" className="mt-6">
-        <label htmlFor="newsletter-email" className="block text-xs font-semibold text-stone mb-1.5">
+        <label htmlFor="newsletter-email" className="block text-xs font-semibold text-ink-soft mb-1.5">
           Email <span className="text-gold">*</span>
         </label>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -68,7 +68,7 @@ export function NewsletterForm() {
             autoComplete="email"
             required
             placeholder="Enter your email address"
-            className="flex-1 min-w-0 h-11 bg-black/70 border border-white/15 px-4 text-sm text-ivory placeholder:text-stone/60 focus:border-gold focus:outline-none transition-colors"
+            className="flex-1 min-w-0 h-11 bg-white border border-black/15 px-4 text-sm text-ink placeholder:text-stone/70 focus:border-gold focus:outline-none transition-colors"
             style={{ borderRadius: "10px" }}
           />
           <button

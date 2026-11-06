@@ -172,7 +172,7 @@ export default function InvestorsPage() {
       </Section>
 
       {/* 03 Continuous Disclosure Navigation */}
-      <Section tone="carbon" labelledBy="filings-title">
+      <Section tone="warm" labelledBy="filings-title">
         <Reveal>
           <SectionHeader
             number="03"
@@ -186,20 +186,20 @@ export default function InvestorsPage() {
               </Button>
             }
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8 border-t border-white/10 pt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 border-t border-black/10 pt-8">
             {subPages.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="group block border-l-2 border-white/15 pl-5 py-1 transition-colors hover:border-gold"
+                className="group block bg-white rounded-xl border border-black/[0.04] border-t-2 border-t-gold p-6 sm:p-7 shadow-[0_1px_3px_rgba(0,0,0,0.02),0_6px_20px_rgba(32,32,29,0.025)] hover:shadow-[0_10px_28px_rgba(196,154,67,0.1)] hover:-translate-y-0.5 transition-all duration-300"
               >
                 <div className="flex items-center justify-between">
-                  <div className="text-base sm:text-lg font-bold text-ivory font-serif group-hover:text-gold transition-colors">
+                  <div className="text-base sm:text-lg font-bold text-ink font-serif group-hover:text-gold transition-colors">
                     {item.label}
                   </div>
                   <ArrowRight className="h-4 w-4 text-gold transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                 </div>
-                <p className="text-xs sm:text-sm text-stone mt-1.5 leading-relaxed">
+                <p className="text-xs sm:text-sm text-ink-soft mt-2 leading-relaxed">
                   {item.description}
                 </p>
               </Link>

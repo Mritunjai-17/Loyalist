@@ -81,7 +81,7 @@ export default function ContactPage() {
       </header>
 
       {/* 01 Direct Contact & Inquiry Form */}
-      <Section tone="carbon" id="inquiries" labelledBy="message-title">
+      <Section tone="champagne" id="inquiries" labelledBy="message-title">
         <Reveal>
           <div className="grid gap-y-12 lg:grid-cols-12 lg:gap-x-12 items-start">
             {/* Left Column: Office Details */}
@@ -97,7 +97,7 @@ export default function ContactPage() {
               <div className="border-l-2 border-gold/40 pl-5 space-y-6">
                 <div>
                   <div className="text-xs text-stone uppercase tracking-wider">Corporate Head Office</div>
-                  <address className="not-italic text-sm text-ivory mt-1 leading-relaxed">
+                  <address className="not-italic text-sm text-ink mt-1 leading-relaxed">
                     {company.legalName}
                     <br />
                     {office.street}
@@ -122,7 +122,7 @@ export default function ContactPage() {
                   <div className="text-xs text-stone uppercase tracking-wider">Telephone</div>
                   <a
                     href={company.phone.href}
-                    className="text-sm font-medium text-ivory hover:text-gold mt-1 inline-block transition-colors"
+                    className="text-sm font-medium text-ink hover:text-gold mt-1 inline-block transition-colors"
                   >
                     {company.phone.display}
                   </a>
@@ -144,19 +144,19 @@ export default function ContactPage() {
                 </div>
 
                 <div className="pt-2 text-xs text-stone leading-relaxed">
-                  <span className="text-white/60 font-medium">Property Submittals:</span> Geoscientists and prospectors
+                  <span className="text-ink font-medium">Property Submittals:</span> Geoscientists and prospectors
                   submitting project data for the Abitibi Greenstone Belt should include claim tenure and available historical reports.
                 </div>
               </div>
             </div>
 
             {/* Right Column: Contact Form */}
-            <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-white/10 pt-8 lg:pt-0 lg:pl-10">
-              <div className="mb-6 pb-4 border-b border-white/10">
-                <Heading level={2} className="text-ivory">
+            <div className="lg:col-span-7 border-t lg:border-t-0 lg:border-l border-black/10 pt-8 lg:pt-0 lg:pl-10">
+              <div className="mb-6 pb-4 border-b border-black/10">
+                <Heading level={2} className="text-ink">
                   Send an Inquiry
                 </Heading>
-                <p className="mt-2 text-xs sm:text-sm text-stone leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-ink-soft leading-relaxed">
                   Inquiries are received directly by corporate communications and investor relations.
                 </p>
               </div>

@@ -85,27 +85,27 @@ export default function FinancialStatementsPage() {
       </header>
 
       {/* 01 Financial Filings Archive */}
-      <Section tone="carbon" id="filings" labelledBy="filings-title">
+      <Section tone="paper" id="filings" labelledBy="filings-title">
         <Reveal>
           {/* Institutional Metadata Bar */}
-          <div className="mb-10 pb-6 border-b border-white/10 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-stone">
+          <div className="mb-10 pb-6 border-b border-black/10 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs text-stone">
             <div>
-              <span className="text-white/40 uppercase tracking-wider block">Reporting Currency</span>
-              <span className="text-ivory font-medium mt-0.5 block">Canadian Dollars (CAD)</span>
+              <span className="text-stone uppercase tracking-wider block">Reporting Currency</span>
+              <span className="text-ink font-medium mt-0.5 block">Canadian Dollars (CAD)</span>
             </div>
-            <div className="hidden sm:block h-7 w-[1px] bg-white/10" aria-hidden="true" />
+            <div className="hidden sm:block h-7 w-[1px] bg-black/10" aria-hidden="true" />
             <div>
-              <span className="text-white/40 uppercase tracking-wider block">Fiscal Year End</span>
-              <span className="text-ivory font-medium mt-0.5 block">December 31</span>
+              <span className="text-stone uppercase tracking-wider block">Fiscal Year End</span>
+              <span className="text-ink font-medium mt-0.5 block">December 31</span>
             </div>
-            <div className="hidden sm:block h-7 w-[1px] bg-white/10" aria-hidden="true" />
+            <div className="hidden sm:block h-7 w-[1px] bg-black/10" aria-hidden="true" />
             <div>
-              <span className="text-white/40 uppercase tracking-wider block">Accounting Standards</span>
-              <span className="text-ivory font-medium mt-0.5 block">IFRS Compliant</span>
+              <span className="text-stone uppercase tracking-wider block">Accounting Standards</span>
+              <span className="text-ink font-medium mt-0.5 block">IFRS Compliant</span>
             </div>
-            <div className="hidden sm:block h-7 w-[1px] bg-white/10" aria-hidden="true" />
+            <div className="hidden sm:block h-7 w-[1px] bg-black/10" aria-hidden="true" />
             <div>
-              <span className="text-white/40 uppercase tracking-wider block">Exchange Listing</span>
+              <span className="text-stone uppercase tracking-wider block">Exchange Listing</span>
               <span className="text-gold font-bold mt-0.5 block">CSE: PNGC</span>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function FinancialStatementsPage() {
       </Section>
 
       {/* 02 SEDAR+ Regulatory Notice */}
-      <Section tone="paper" id="sedar-notice" labelledBy="sedar-title">
+      <Section tone="warm" id="sedar-notice" labelledBy="sedar-title">
         <Reveal>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t border-black/10 pt-8">
             <div className="max-w-2xl">

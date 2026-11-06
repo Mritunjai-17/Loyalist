@@ -65,7 +65,7 @@ const columns: Column<Project>[] = [
     key: "stage",
     header: "Stage",
     render: (p) => (
-      <span className="inline-flex items-center rounded-md bg-white/10 px-2 py-0.5 text-xs font-semibold text-ivory">
+      <span className="inline-flex items-center rounded px-2.5 py-0.5 text-xs font-semibold bg-champagne text-gold border border-gold/30 uppercase tracking-wider">
         {p.stage}
       </span>
     ),
@@ -149,7 +149,7 @@ export default function ProjectsPage() {
       </Section>
 
       {/* 02 Comparison Table */}
-      <Section tone="carbon" labelledBy="comparison-title">
+      <Section tone="warm" labelledBy="comparison-title">
         <Reveal>
           <SectionHeader
             number="02"

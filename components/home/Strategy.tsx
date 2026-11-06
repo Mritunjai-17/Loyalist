@@ -79,7 +79,7 @@ const stepVisuals: readonly StepVisual[] = [
 
 export function Strategy() {
   return (
-    <Section tone="black" id="strategy" labelledBy="strategy-title" className="relative overflow-hidden">
+    <Section tone="champagne" id="strategy" labelledBy="strategy-title" className="relative overflow-hidden">
       <TopographicPattern />
       <SectionHeader
         number="03"
@@ -105,7 +105,7 @@ export function Strategy() {
                 >
                   {/* Card Photo Header */}
                   <div
-                    className="relative h-40 sm:h-44 w-full overflow-hidden bg-black/60"
+                    className="relative h-40 sm:h-44 w-full overflow-hidden bg-black/10"
                     style={{ borderTopLeftRadius: "20px", borderTopRightRadius: "20px" }}
                   >
                     <Image
@@ -116,11 +116,11 @@ export function Strategy() {
                       quality={90}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
                     {/* Top-Left Category Icon Badge */}
                     <div
-                      className="absolute top-3.5 left-3.5 z-10 flex h-8 w-8 items-center justify-center border border-gold/40 bg-black/65 text-gold shadow-md backdrop-blur-sm"
+                      className="absolute top-3.5 left-3.5 z-10 flex h-8 w-8 items-center justify-center border border-gold/40 bg-white/95 text-gold shadow-md backdrop-blur-sm"
                       style={{ borderRadius: "8px" }}
                     >
                       <Icon className="h-4 w-4 stroke-[1.75]" />
@@ -132,13 +132,13 @@ export function Strategy() {
                     <Heading level={3}>
                       <span className="flex items-center gap-3">
                         <span className="font-semibold text-gold">{step.numeral}</span>
-                        <span className="text-stone/30 select-none" aria-hidden="true">
+                        <span className="text-black/20 select-none" aria-hidden="true">
                           |
                         </span>
-                        <span className="text-ivory">{step.title}</span>
+                        <span className="text-ink">{step.title}</span>
                       </span>
                     </Heading>
-                    <p className="mt-4 flex-1 text-sm sm:text-base leading-relaxed text-stone">{step.body}</p>
+                    <p className="mt-4 flex-1 text-sm sm:text-base leading-relaxed text-ink-soft">{step.body}</p>
                     <div className="mt-6 pt-2">
                       <TextLink href={step.link.href}>{step.link.label}</TextLink>
                     </div>
@@ -161,22 +161,22 @@ export function Strategy() {
             <div className="hidden sm:block w-[2px] self-stretch bg-gold shrink-0" aria-hidden="true" />
             <div className="flex-1 min-w-0">
               <blockquote>
-                <p className="text-base sm:text-lg text-ivory italic leading-relaxed">
+                <p className="text-base sm:text-lg text-ink italic leading-relaxed">
                   &ldquo;{ceoStatement.text}&rdquo;
                 </p>
               </blockquote>
             </div>
-            <div className="hidden lg:block w-[1px] self-stretch bg-white/15 shrink-0 mx-4" aria-hidden="true" />
+            <div className="hidden lg:block w-[1px] self-stretch bg-black/10 shrink-0 mx-4" aria-hidden="true" />
             <figcaption className="shrink-0 hidden sm:block">
-              <div className="font-medium text-ivory text-base whitespace-nowrap">{ceoStatement.name}</div>
-              <div className="text-sm text-stone mt-0.5 whitespace-nowrap">{ceoStatement.title}</div>
+              <div className="font-medium text-ink text-base whitespace-nowrap">{ceoStatement.name}</div>
+              <div className="text-sm text-ink-soft mt-0.5 whitespace-nowrap">{ceoStatement.title}</div>
             </figcaption>
           </div>
 
           {/* Mobile-only figcaption when sm is hidden */}
-          <figcaption className="sm:hidden px-6 pb-6 pt-0 border-t border-white/10">
-            <div className="font-medium text-ivory text-base">{ceoStatement.name}</div>
-            <div className="text-sm text-stone mt-0.5">{ceoStatement.title}</div>
+          <figcaption className="sm:hidden px-6 pb-6 pt-0 border-t border-black/10">
+            <div className="font-medium text-ink text-base">{ceoStatement.name}</div>
+            <div className="text-sm text-ink-soft mt-0.5">{ceoStatement.title}</div>
           </figcaption>
 
           {/* Angled Mineral Rock Photo on Right */}

@@ -99,14 +99,14 @@ export default function CorporateStructurePage() {
       </header>
 
       {/* 01 Share Capitalization */}
-      <Section tone="carbon" id="share-capital" labelledBy="capital-title">
+      <Section tone="paper" id="share-capital" labelledBy="capital-title">
         <Reveal>
           {/* Subtle Key Metrics Strip */}
-          <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-b border-white/10 pb-8">
+          <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-6 border-b border-black/10 pb-8">
             {shareData.capital.map((c) => (
               <div key={c.label} className="border-l-2 border-gold/40 pl-4">
                 <div className="text-xs text-stone uppercase tracking-wider">{c.label}</div>
-                <div className="mt-1 font-serif text-3xl font-bold text-ivory">{c.value}</div>
+                <div className="mt-1 font-serif text-3xl font-bold text-ink">{c.value}</div>
                 <div className="mt-0.5 text-[11px] text-stone">{asOf}</div>
               </div>
             ))}
@@ -137,7 +137,7 @@ export default function CorporateStructurePage() {
       </Section>
 
       {/* 02 Ownership Distribution */}
-      <Section tone="paper" id="ownership" labelledBy="ownership-title">
+      <Section tone="warm" id="ownership" labelledBy="ownership-title">
         <Reveal>
           <SectionHeader
             number="02"
@@ -187,32 +187,32 @@ export default function CorporateStructurePage() {
       </Section>
 
       {/* 03 Trading & Registrar Identifiers */}
-      <Section tone="carbon" id="trading-identifiers" labelledBy="trading-title">
+      <Section tone="paper" id="trading-identifiers" labelledBy="trading-title">
         <Reveal>
-          <div className="border-t border-white/10 pt-8">
+          <div className="border-t border-black/10 pt-8">
             <div className="text-xs font-semibold text-gold tracking-wider uppercase mb-6">
               Listing & Transfer Agent
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 text-xs">
               <div>
-                <span className="text-white/40 uppercase tracking-wider block">Listing Exchange</span>
-                <span className="text-ivory font-medium mt-1 block">Canadian Securities Exchange</span>
+                <span className="text-stone uppercase tracking-wider block">Listing Exchange</span>
+                <span className="text-ink font-medium mt-1 block">Canadian Securities Exchange</span>
                 <span className="text-gold font-semibold mt-0.5 block">CSE: PNGC</span>
               </div>
               <div>
-                <span className="text-white/40 uppercase tracking-wider block">Security Class</span>
-                <span className="text-ivory font-medium mt-1 block">Common Shares</span>
+                <span className="text-stone uppercase tracking-wider block">Security Class</span>
+                <span className="text-ink font-medium mt-1 block">Common Shares</span>
                 <span className="text-stone mt-0.5 block">No Par Value</span>
               </div>
               <div>
-                <span className="text-white/40 uppercase tracking-wider block">Transfer Agent</span>
-                <span className="text-ivory font-medium mt-1 block">TSX Trust Company</span>
+                <span className="text-stone uppercase tracking-wider block">Transfer Agent</span>
+                <span className="text-ink font-medium mt-1 block">TSX Trust Company</span>
                 <span className="text-stone mt-0.5 block">Toronto, Ontario</span>
               </div>
               <div>
-                <span className="text-white/40 uppercase tracking-wider block">Regulatory Filings</span>
-                <span className="text-ivory font-medium mt-1 block">SEDAR+ Database</span>
+                <span className="text-stone uppercase tracking-wider block">Regulatory Filings</span>
+                <span className="text-ink font-medium mt-1 block">SEDAR+ Database</span>
                 <a
                   href={company.sedarUrl}
                   target="_blank"

@@ -19,7 +19,7 @@ export default function NotFound() {
           breadcrumbs: [{ label: "Home", href: "/" }, { label: "Page not found" }],
         }}
       />
-      <Section tone="black" labelledBy="pages-title">
+      <Section tone="paper" labelledBy="pages-title">
         <SectionHeader number="01" label="Pages" id="pages-title" title="Where to go next." />
         <ul className="link-rows">
           {[{ label: "Home", href: "/" }, ...footerNav].map((link) => (

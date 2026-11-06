@@ -4,24 +4,33 @@
 
 /* ─── Design tokens ─────────────────────────────────────────────────────── */
 :root {
+  /* Exact User-specified Colour System */
+  --primary-gold: #c49a43;
+  --soft-gold: #e1c27a;
+  --warm-white: #f7f5ef;
+  --champagne: #f2ebdd;
+  --pure-white: #ffffff;
+  --charcoal: #20201d;
+  --muted-grey: #77736b;
+
   /* Core palette */
-  --carbon: #171918;
-  --black: #101211;
-  --ivory: #f4f2ed;
-  --stone: #aaa9a3;
-  --gold: #c9a45c;
-  --graphite: #303330;
+  --carbon: #20201d;
+  --black: #171816;
+  --ivory: #f7f5ef;
+  --stone: #77736b;
+  --gold: #c49a43;
+  --graphite: #383733;
 
   /* Derived */
   --gold-hover: #d8b877;
   --gold-press: #b38f47;
-  --on-gold: #101211;
-  --ivory-80: rgba(244, 242, 237, 0.8);
-  --paper: #f4f2ed;
-  --ink: #171918;
-  --ink-soft: #5c5b56;
-  --gold-ink: #7c5f22;
-  --error: #e08a7a;
+  --on-gold: #20201d;
+  --ivory-80: rgba(247, 245, 239, 0.88);
+  --paper: #ffffff;
+  --ink: #20201d;
+  --ink-soft: #77736b;
+  --gold-ink: #c49a43;
+  --error: #d9534f;
 
   /* Layout */
   --header-h: 70px;
@@ -46,12 +55,12 @@
   --radius-panel: 20px;
 }
 
-/* Tone-aware aliases. Dark tones are the default. */
+/* Tone-aware aliases. Dark tones for selective contrast (Footer & selective Investor areas). */
 :root,
 [data-tone="carbon"],
 [data-tone="black"] {
-  --fg: var(--ivory);
-  --fg-body: var(--ivory-80);
+  --fg: #ffffff;
+  --fg-body: rgba(247, 245, 239, 0.88);
   --fg-muted: var(--stone);
   --accent-text: var(--gold);
   --accent-rule: var(--gold);
@@ -65,7 +74,7 @@
   --btn-secondary-bg: rgba(0, 0, 0, 0.4);
   --btn-secondary-border: rgba(255, 255, 255, 0.25);
   --btn-secondary-border-hover: rgba(255, 255, 255, 0.45);
-  --btn-secondary-fg: var(--ivory);
+  --btn-secondary-fg: #ffffff;
   --btn-secondary-hover: rgba(255, 255, 255, 0.08);
   --field-bg: var(--black);
   --field-border: var(--graphite);
@@ -75,15 +84,15 @@
 [data-tone="carbon"] { --surface: var(--carbon); }
 [data-tone="black"] { --surface: var(--black); }
 
-/* Light "paper" sections: warm ivory background with crisp contrast. */
+/* Pure White sections: Crisp pure white background (#FFFFFF) with charcoal headings and body. */
 [data-tone="paper"] {
-  --surface: var(--paper);
+  --surface: #ffffff;
   --fg: var(--ink);
   --fg-body: var(--ink);
   --fg-muted: var(--ink-soft);
-  --accent-text: var(--gold-ink);
-  --accent-rule: var(--gold-ink);
-  --border: rgba(23, 25, 24, 0.16);
+  --accent-text: var(--gold);
+  --accent-rule: var(--gold);
+  --border: rgba(32, 32, 29, 0.12);
   --eyebrow-fg: color-mix(in srgb, var(--ink) 75%, transparent);
   --focus: var(--ink);
   --btn-primary-bg: var(--gold);
@@ -91,12 +100,61 @@
   --btn-primary-hover: var(--gold-hover);
   --btn-primary-press: var(--gold-press);
   --btn-secondary-bg: #ffffff;
-  --btn-secondary-border: rgba(23, 25, 24, 0.2);
+  --btn-secondary-border: rgba(32, 32, 29, 0.2);
+  --btn-secondary-border-hover: var(--gold);
+  --btn-secondary-fg: var(--ink);
+  --btn-secondary-hover: var(--warm-white);
+  --field-bg: #ffffff;
+  --field-border: rgba(32, 32, 29, 0.16);
+}
+
+/* Warm-White sections: Warm ivory background (#F7F5EF). */
+[data-tone="warm"],
+[data-tone="warm-white"] {
+  --surface: var(--warm-white);
+  --fg: var(--ink);
+  --fg-body: var(--ink);
+  --fg-muted: var(--ink-soft);
+  --accent-text: var(--gold);
+  --accent-rule: var(--gold);
+  --border: rgba(32, 32, 29, 0.12);
+  --eyebrow-fg: color-mix(in srgb, var(--ink) 75%, transparent);
+  --focus: var(--ink);
+  --btn-primary-bg: var(--gold);
+  --btn-primary-fg: var(--on-gold);
+  --btn-primary-hover: var(--gold-hover);
+  --btn-primary-press: var(--gold-press);
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: rgba(32, 32, 29, 0.2);
   --btn-secondary-border-hover: var(--gold);
   --btn-secondary-fg: var(--ink);
   --btn-secondary-hover: #ffffff;
-  --field-bg: var(--paper);
-  --field-border: rgba(23, 25, 24, 0.16);
+  --field-bg: #ffffff;
+  --field-border: rgba(32, 32, 29, 0.16);
+}
+
+/* Light Champagne sections: Champagne background (#F2EBDD). */
+[data-tone="champagne"] {
+  --surface: var(--champagne);
+  --fg: var(--ink);
+  --fg-body: var(--ink);
+  --fg-muted: var(--ink-soft);
+  --accent-text: var(--gold);
+  --accent-rule: var(--gold);
+  --border: rgba(32, 32, 29, 0.14);
+  --eyebrow-fg: color-mix(in srgb, var(--ink) 75%, transparent);
+  --focus: var(--ink);
+  --btn-primary-bg: var(--gold);
+  --btn-primary-fg: var(--on-gold);
+  --btn-primary-hover: var(--gold-hover);
+  --btn-primary-press: var(--gold-press);
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: rgba(32, 32, 29, 0.2);
+  --btn-secondary-border-hover: var(--gold);
+  --btn-secondary-fg: var(--ink);
+  --btn-secondary-hover: #ffffff;
+  --field-bg: #ffffff;
+  --field-border: rgba(32, 32, 29, 0.16);
 }
 
 /* ─── Base ──────────────────────────────────────────────────────────────── */
@@ -1090,32 +1148,35 @@
 
 /* ─── Leadership Section (Aimed Design) ─────────────────────────────────── */
 .leadership-photo-card {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   overflow: hidden !important;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(32, 32, 29, 0.05);
   background: var(--carbon);
   position: relative;
 }
 
 .leadership-bio-card {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(32, 32, 29, 0.04);
+  border-top: 2px solid var(--primary-gold);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(32, 32, 29, 0.03);
 }
 
 .leadership-team-card {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition: all 200ms ease;
+  border: 1px solid rgba(32, 32, 29, 0.04);
+  border-top: 2px solid var(--primary-gold);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 6px 20px rgba(32, 32, 29, 0.025);
+  transition: all 250ms ease;
 }
 
 .leadership-team-card:hover {
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
-  border-color: rgba(201, 164, 92, 0.5);
+  box-shadow: 0 12px 32px rgba(196, 154, 67, 0.12);
+  border-color: rgba(196, 154, 67, 0.4);
+  border-top-color: var(--primary-gold);
   transform: translateY(-2px);
 }
 
@@ -1192,26 +1253,27 @@
 
 /* ─── Strategy Section (Aimed Design) ───────────────────────────────────── */
 .strategy-step-card {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   overflow: hidden !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--carbon);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(32, 32, 29, 0.04);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(32, 32, 29, 0.03);
   transition: all 250ms ease;
 }
 
 .strategy-step-card:hover {
-  border-color: rgba(201, 164, 92, 0.4);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  border-color: rgba(196, 154, 67, 0.4);
+  box-shadow: 0 12px 32px rgba(196, 154, 67, 0.12), 0 4px 16px rgba(0, 0, 0, 0.03);
   transform: translateY(-2px);
 }
 
 .strategy-quote-card {
-  border-radius: 20px !important;
+  border-radius: 16px !important;
   overflow: hidden !important;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: var(--carbon);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(32, 32, 29, 0.04);
+  border-top: 2px solid var(--primary-gold);
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02), 0 8px 24px rgba(32, 32, 29, 0.03);
 }
 
 /* ─── Investor Section (Aimed Design) ───────────────────────────────────── */
@@ -1265,9 +1327,9 @@
 .contact-newsletter-card {
   border-radius: 20px !important;
   overflow: hidden !important;
-  background: rgba(23, 25, 24, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: #ffffff;
+  border: 1px solid rgba(32, 32, 29, 0.08);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
 }
 
 @media (prefers-reduced-motion: reduce) {

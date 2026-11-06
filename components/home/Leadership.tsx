@@ -59,7 +59,7 @@ export function Leadership() {
 
   return (
     <Section
-      tone="paper"
+      tone="warm"
       id="leadership"
       labelledBy="leadership-title"
       className="relative overflow-hidden pb-28 sm:pb-36 lg:pb-40"

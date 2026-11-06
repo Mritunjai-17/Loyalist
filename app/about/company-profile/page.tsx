@@ -26,7 +26,7 @@ export default function CompanyProfilePage() {
       <CompanyProfileHero />
 
       {/* 01 Who We Are */}
-      <Section tone="carbon" labelledBy="who-title">
+      <Section tone="paper" labelledBy="who-title">
         <Reveal>
           <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
             <SectionHeader
@@ -65,7 +65,7 @@ export default function CompanyProfilePage() {
       </Section>
 
       {/* 02 Strategy */}
-      <Section tone="paper" labelledBy="strategy-title">
+      <Section tone="champagne" labelledBy="strategy-title">
         <Reveal>
           <SectionHeader
             number="02"
@@ -115,7 +115,7 @@ export default function CompanyProfilePage() {
       </Section>
 
       {/* 03 The Camp */}
-      <Section tone="carbon" labelledBy="camp-title">
+      <Section tone="warm" labelledBy="camp-title">
         <Reveal>
           <SectionHeader
             number="03"
@@ -186,7 +186,7 @@ export default function CompanyProfilePage() {
       </Section>
 
       {/* 05 Presentation */}
-      <Section tone="carbon" labelledBy="presentation-title">
+      <Section tone="paper" labelledBy="presentation-title">
         <Reveal>
           <SectionHeader
             number="05"

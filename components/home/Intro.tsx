@@ -82,7 +82,7 @@ const commitmentItems = [
 
 export function Intro() {
   return (
-    <Section tone="carbon" id="about" labelledBy="about-title" className="relative overflow-hidden">
+    <Section tone="paper" id="about" labelledBy="about-title" className="relative overflow-hidden">
       <TopographicPattern />
       <div className="relative z-10 grid gap-y-10 lg:grid-cols-12 lg:gap-x-12">
         <div className="relative flex flex-col lg:col-span-5">
@@ -96,7 +96,7 @@ export function Intro() {
             className="relative z-10 mb-0"
           />
           <Reveal delay={0.1}>
-            <div className="about-bleed-photo relative z-0 -mt-3 h-[320px] overflow-hidden border-b border-r border-graphite/40 shadow-2xl sm:h-[360px] lg:-mt-6 lg:h-[400px]">
+            <div className="about-bleed-photo relative z-0 -mt-3 h-[320px] overflow-hidden border-b border-r border-black/10 shadow-xl sm:h-[360px] lg:-mt-6 lg:h-[400px]">
               <Image
                 src="/images/about/landscape.jpg"
                 alt="Panoramic view over the Timmins mining camp and boreal forest at sunset"
@@ -105,7 +105,7 @@ export function Intro() {
                 className="object-cover object-left-bottom transition-transform duration-700 hover:scale-105"
                 priority
               />
-              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-carbon via-carbon/60 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-28 bg-gradient-to-b from-white via-white/60 to-transparent" />
             </div>
           </Reveal>
         </div>
@@ -118,13 +118,13 @@ export function Intro() {
               ))}
             </div>
 
-            <ul className="mt-6 divide-y divide-graphite/40 border-b border-graphite/40" aria-label="Our commitments">
+            <ul className="mt-6 divide-y divide-black/10 border-b border-black/10" aria-label="Our commitments">
               {commitmentItems.map(({ icon: Icon, label }) => (
-                <li key={label} className="flex items-center gap-4 py-3">
-                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-gold/40 bg-black/50 text-gold shadow-sm">
-                    <Icon className="h-5 w-5" />
+                <li key={label} className="flex items-center gap-4 py-3.5 group">
+                  <div className="flex h-9 w-9 flex-none items-center justify-center rounded-full bg-champagne text-gold border border-gold/30 shadow-xs transition-colors duration-200 group-hover:border-gold">
+                    <Icon className="h-4.5 w-4.5 stroke-[1.75]" />
                   </div>
-                  <span className="text-[0.9375rem] text-ivory">{label}</span>
+                  <span className="text-[0.9375rem] text-ink font-medium leading-relaxed">{label}</span>
                 </li>
               ))}
             </ul>

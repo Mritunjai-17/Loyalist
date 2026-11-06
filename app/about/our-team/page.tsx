@@ -37,66 +37,57 @@ function TopographicPatternTopRight() {
   );
 }
 
-function getInitials(name: string): string {
-  const parts = name.split(" ");
-  if (parts.length >= 2 && parts[0] && parts[parts.length - 1]) {
-    return `${parts[0][0]}${parts[parts.length - 1]![0]}`.toUpperCase();
-  }
-  return name.slice(0, 2).toUpperCase();
+function getGovernanceBadge(member: TeamMember): string {
+  if (member.credentials) return member.credentials;
+  if (member.title.toLowerCase().includes("chair")) return "Board Chair";
+  if (member.group === "directors") return "Director";
+  if (member.group === "advisors") return "Senior Advisor";
+  return "Executive";
 }
 
-/** Human-crafted, editorial team row with architectural hairlines (no AI-style border boxes). */
-function EditorialMemberRow({ member, isDark }: { member: TeamMember; isDark: boolean }) {
-  const initials = getInitials(member.name);
+/** Refined, human-crafted executive dossier card: architectural gold top accent, refined hairlines, and authoritative typography. */
+function TeamMemberCard({ member }: { member: TeamMember }) {
+  const badge = getGovernanceBadge(member);
 
   return (
-    <li
-      id={member.id}
-      className={`py-8 sm:py-10 grid gap-6 lg:grid-cols-12 lg:gap-10 items-start border-b ${
-        isDark ? "border-white/10" : "border-black/10"
-      }`}
-    >
-      {/* Column 1: Portrait or Understated Monogram */}
-      <div className="lg:col-span-2 flex items-start">
-        {member.portrait ? (
-          <div className="relative h-20 w-20 sm:h-24 sm:w-24 overflow-hidden rounded-xl shadow-sm">
-            <Image
-              src={member.portrait.src}
-              alt={member.portrait.alt}
-              fill
-              sizes="96px"
-              className="object-cover object-top"
-            />
-          </div>
-        ) : (
-          <div
-            className={`flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full font-serif text-base sm:text-lg font-bold select-none ${
-              isDark ? "bg-white/5 text-gold" : "bg-gold/10 text-gold"
-            }`}
-            aria-hidden="true"
-          >
-            {initials}
-          </div>
-        )}
-      </div>
+    <li id={member.id} className="h-full">
+      <article className="h-full p-7 sm:p-8 rounded-xl bg-white border border-black/[0.04] border-t-2 border-t-gold shadow-[0_1px_3px_rgba(0,0,0,0.02),0_8px_24px_rgba(32,32,29,0.03)] hover:shadow-[0_12px_36px_rgba(196,154,67,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between">
+        <div>
+          <div className="flex items-start justify-between gap-4">
+            <div className="min-w-0 flex-1">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded text-[10px] font-bold tracking-wider bg-champagne text-gold border border-gold/30 uppercase mb-2.5">
+                {badge}
+              </span>
+              <Heading level={3} className="text-ink">
+                {member.name}
+              </Heading>
+              <div className="text-[11px] font-bold text-gold tracking-wider uppercase mt-1 leading-snug">
+                {member.title}
+              </div>
+            </div>
 
-      {/* Column 2: Name & Role */}
-      <div className="lg:col-span-4 min-w-0">
-        <Heading level={3} className={isDark ? "text-ivory" : "text-ink"}>
-          {member.name}
-        </Heading>
-        <div className="text-xs font-semibold text-gold tracking-widest uppercase mt-1 leading-snug">
-          {member.title}
-          {member.credentials ? ` · ${member.credentials}` : null}
+            {member.portrait ? (
+              <div className="relative h-16 w-16 sm:h-18 sm:w-18 overflow-hidden rounded-xl shrink-0 shadow-xs border border-gold/30 ring-1 ring-black/5">
+                <Image
+                  src={member.portrait.src}
+                  alt={member.portrait.alt}
+                  fill
+                  sizes="72px"
+                  className="object-cover object-top"
+                />
+              </div>
+            ) : null}
+          </div>
+
+          <div className="w-8 h-[1.5px] bg-gold/50 my-4" aria-hidden="true" />
+
+          <div className="space-y-3 text-xs sm:text-[13px] text-ink-soft leading-relaxed">
+            {member.bio.map((p, idx) => (
+              <p key={idx}>{p}</p>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* Column 3: Biography */}
-      <div className={`lg:col-span-6 space-y-3 text-sm leading-relaxed ${isDark ? "text-stone" : "text-ink-soft"}`}>
-        {member.bio.map((p, idx) => (
-          <p key={idx}>{p}</p>
-        ))}
-      </div>
+      </article>
     </li>
   );
 }
@@ -150,7 +141,7 @@ export default function OurTeamPage() {
       </header>
 
       {/* 01 Executive Management */}
-      <Section tone="paper" id="management" labelledBy="management-title">
+      <Section tone="warm" id="management" labelledBy="management-title">
         <Reveal>
           <SectionHeader
             number="01"
@@ -159,16 +150,16 @@ export default function OurTeamPage() {
             title="Executive Management."
             lead="Guiding day-to-day operations, project execution, and strategic acquisitions in the Timmins District."
           />
-          <ul className="border-t border-black/10" aria-label="Executive management">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label="Executive management">
             {management.map((m) => (
-              <EditorialMemberRow key={m.id} member={m} isDark={false} />
+              <TeamMemberCard key={m.id} member={m} />
             ))}
           </ul>
         </Reveal>
       </Section>
 
       {/* 02 Board of Directors */}
-      <Section tone="carbon" id="directors" labelledBy="directors-title">
+      <Section tone="warm" id="directors" labelledBy="directors-title">
         <Reveal>
           <SectionHeader
             number="02"
@@ -177,16 +168,16 @@ export default function OurTeamPage() {
             title="Board of Directors."
             lead="Independent governance, audit oversight, and corporate strategy representing shareholder value."
           />
-          <ul className="border-t border-white/10" aria-label="Board of directors">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" aria-label="Board of directors">
             {directors.map((m) => (
-              <EditorialMemberRow key={m.id} member={m} isDark={true} />
+              <TeamMemberCard key={m.id} member={m} />
             ))}
           </ul>
         </Reveal>
       </Section>
 
       {/* 03 Strategic Advisors */}
-      <Section tone="paper" id="advisors" labelledBy="advisors-title">
+      <Section tone="warm" id="advisors" labelledBy="advisors-title">
         <Reveal>
           <SectionHeader
             number="03"
@@ -195,9 +186,9 @@ export default function OurTeamPage() {
             title="Technical & Strategic Advisors."
             lead="Deep geological, geophysical, and corporate development counsel from tier-one mining leaders."
           />
-          <ul className="border-t border-black/10" aria-label="Strategic advisors">
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-6" aria-label="Strategic advisors">
             {advisors.map((m) => (
-              <EditorialMemberRow key={m.id} member={m} isDark={false} />
+              <TeamMemberCard key={m.id} member={m} />
             ))}
           </ul>
         </Reveal>

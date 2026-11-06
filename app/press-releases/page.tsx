@@ -86,7 +86,7 @@ export default function PressReleasesPage() {
           {/* Featured Latest Release Spotlight */}
           {latest ? (
             <Reveal delay={0.15}>
-              <article className="mt-10 sm:mt-12 overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
+              <article className="mt-10 sm:mt-12 overflow-hidden rounded-xl border border-black/[0.04] border-t-2 border-t-gold bg-white shadow-[0_1px_3px_rgba(0,0,0,0.02),0_8px_24px_rgba(32,32,29,0.03)]">
                 <div className="grid gap-0 lg:grid-cols-12 items-stretch">
                   <div className="relative aspect-[16/10] lg:aspect-auto lg:col-span-5 min-h-[260px] overflow-hidden">
                     <Image
@@ -150,7 +150,7 @@ export default function PressReleasesPage() {
       </header>
 
       {/* 01 News Release Archive */}
-      <Section tone="carbon" id="archive" labelledBy="releases-title">
+      <Section tone="paper" id="archive" labelledBy="releases-title">
         <Reveal>
           <SectionHeader
             number="01"
@@ -164,7 +164,7 @@ export default function PressReleasesPage() {
       </Section>
 
       {/* 02 Regulatory Disclosure & Contact */}
-      <Section tone="paper" id="regulatory-contact" labelledBy="regulatory-title">
+      <Section tone="warm" id="regulatory-contact" labelledBy="regulatory-title">
         <Reveal>
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 border-t border-black/10 pt-8">
             <div className="max-w-xl">

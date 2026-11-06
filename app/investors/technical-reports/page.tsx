@@ -85,23 +85,23 @@ export default function TechnicalReportsPage() {
       </header>
 
       {/* 01 Flagship Technical Summary */}
-      <Section tone="carbon" id="flagship-report" labelledBy="flagship-title">
+      <Section tone="warm" id="flagship-report" labelledBy="flagship-title">
         <Reveal>
-          <div className="border-t border-b border-white/10 py-10">
+          <div className="border-t border-b border-black/10 py-10">
             <div className="grid gap-8 lg:grid-cols-12 items-start">
               <div className="lg:col-span-7">
                 <div className="text-xs font-semibold text-gold tracking-wider uppercase">
                   Flagship Resource Disclosure
                 </div>
-                <Heading level={2} className="mt-2 text-ivory">
+                <Heading level={2} className="mt-2 text-ink">
                   Tully Gold Project: 2026 Mineral Resource Estimate
                 </Heading>
-                <p className="mt-3 text-sm text-stone leading-relaxed max-w-xl">
+                <p className="mt-3 text-sm text-ink-soft leading-relaxed max-w-xl">
                   Prepared in accordance with CIM Definition Standards by P&E Mining Consultants Inc. Effective date:
                   June 15, 2026. The deposit remains open along strike and at depth.
                 </p>
 
-                <div className="mt-6 grid grid-cols-2 gap-6 border-t border-white/10 pt-6 max-w-lg">
+                <div className="mt-6 grid grid-cols-2 gap-6 border-t border-black/10 pt-6 max-w-lg">
                   <div>
                     <div className="text-xs text-stone uppercase tracking-wider">Indicated Mineral Resource</div>
                     <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-gold">164,000 oz Au</div>
@@ -109,16 +109,16 @@ export default function TechnicalReportsPage() {
                   </div>
                   <div>
                     <div className="text-xs text-stone uppercase tracking-wider">Inferred Mineral Resource</div>
-                    <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-ivory">62,000 oz Au</div>
+                    <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-ink">62,000 oz Au</div>
                     <div className="text-xs text-stone mt-0.5">0.95 Mt @ 2.03 g/t Au (1.1 g/t cut-off)</div>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-5 flex flex-col justify-between self-stretch border-t lg:border-t-0 lg:border-l border-white/10 pt-6 lg:pt-0 lg:pl-8">
+              <div className="lg:col-span-5 flex flex-col justify-between self-stretch border-t lg:border-t-0 lg:border-l border-black/10 pt-6 lg:pt-0 lg:pl-8">
                 <div>
                   <div className="text-xs font-semibold text-stone uppercase tracking-wider">Resource Documentation</div>
-                  <p className="mt-2 text-xs sm:text-[13px] text-stone leading-relaxed">
+                  <p className="mt-2 text-xs sm:text-[13px] text-ink-soft leading-relaxed">
                     View the full grade-tonnage sensitivity distribution, geological cross-sections, and interactive
                     project locator on the Tully Gold Project profile.
                   </p>
@@ -163,13 +163,13 @@ export default function TechnicalReportsPage() {
       </Section>
 
       {/* 03 Qualified Person Statement */}
-      <Section tone="carbon" id="qp-statement" labelledBy="qp-title">
+      <Section tone="warm" id="qp-statement" labelledBy="qp-title">
         <Reveal>
           <div className="border-l-2 border-gold pl-5 sm:pl-6 max-w-4xl">
             <div className="text-xs font-semibold text-gold tracking-wider uppercase">
               Qualified Persons Disclosure
             </div>
-            <p className="mt-2 text-xs sm:text-sm text-stone leading-relaxed">
+            <p className="mt-2 text-xs sm:text-sm text-ink-soft leading-relaxed">
               Scientific and technical disclosures have been reviewed by Qualified Persons in accordance with National
               Instrument 43-101. Mineral Resources that are not Mineral Reserves do not have demonstrated economic
               viability. Inferred Mineral Resources are considered too geologically speculative to apply economic
