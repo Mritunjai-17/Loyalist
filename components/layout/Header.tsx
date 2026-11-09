@@ -15,17 +15,11 @@ export function Header() {
           <Logo />
         </div>
 
-        {/* Vertical divider between Logo and Navigation */}
-        <span aria-hidden className="navbar-divider hidden lg:block" />
-
         {/* Center: Navigation Links */}
         <NavMenu />
 
-        {/* Vertical divider between Navigation and Utilities */}
-        <span aria-hidden className="navbar-divider hidden xl:block" />
-
         {/* Right utility items: Search, CSE Ticker, Presentation Button, Mobile Toggle */}
-        <div className="flex items-center gap-2 xl:gap-3 ml-auto lg:ml-0 flex-none">
+        <div className="flex items-center gap-1 sm:gap-5 xl:gap-7 ml-auto lg:ml-0 flex-none">
           <SiteSearch />
           <a
             href={company.quoteUrl}

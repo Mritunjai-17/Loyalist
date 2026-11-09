@@ -82,7 +82,7 @@ test("typography is identical on every route", async ({ page }, info) => {
     expect(data.strayFraunces, `${where}: Fraunces outside headings`).toEqual([]);
 
     for (const e of data.eyebrows) {
-      expect(e, `${where}: eyebrow`).toEqual({ size: 13, transform: "uppercase", tracking: 0.18, rule: "40x2" });
+      expect(e, `${where}: eyebrow`).toEqual({ size: 13, transform: "uppercase", tracking: 0.14, rule: "28x2" });
     }
     for (const s of data.headers) {
       expect(s.order, `${where}: header order`).toBe(true);

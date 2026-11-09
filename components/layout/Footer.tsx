@@ -44,7 +44,7 @@ function InstagramIcon({ className }: { className?: string }) {
 }
 
 const siteLinks = [
-  { label: "Company Profile", href: "/about" },
+  { label: "Company Profile", href: "/about/company-profile" },
   { label: "Our Team", href: "/about/our-team" },
   { label: "Projects", href: "/projects" },
   { label: "Investors", href: "/investors" },
@@ -57,17 +57,17 @@ export function Footer() {
   const { headOffice: office } = company;
 
   return (
-    <footer data-tone="black" className="bg-black text-stone pt-16 pb-10 border-t border-white/10">
+    <footer data-tone="black" className="bg-black text-fg-muted pt-20 pb-10">
       <div className="container-site">
-        <div className="grid gap-10 sm:gap-12 lg:grid-cols-12 pb-12">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10 pb-16">
           {/* Column 1: Brand & Description (4 cols) */}
           <div className="lg:col-span-4">
             <Logo />
-            <p className="mt-5 text-xs sm:text-[13px] leading-relaxed text-stone max-w-sm">
+            <p className="mt-5 text-xs sm:text-[13px] leading-relaxed text-fg-muted max-w-sm">
               Loyalist Exploration Limited is a mineral exploration company focused on acquiring,
               exploring and advancing quality mineral properties in the Timmins Mining District.
             </p>
-            <div className="mt-5 flex items-center gap-2 text-xs sm:text-[13px] text-stone">
+            <div className="mt-5 flex items-center gap-2 text-xs sm:text-[13px] text-fg-muted">
               <MapPin className="w-4 h-4 text-gold shrink-0" aria-hidden="true" />
               <span>Timmins, Ontario – 48.48° N 81.33° W</span>
             </div>
@@ -75,14 +75,13 @@ export function Footer() {
 
           {/* Column 2: SITE Links (2.5 cols) */}
           <div className="lg:col-span-3 lg:col-start-5">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-4 h-[2px] bg-gold" aria-hidden="true" />
-              <span className="text-xs font-bold text-gold tracking-widest uppercase">SITE</span>
+            <div className="mb-5">
+              <span className="text-[11px] font-semibold text-accent tracking-[0.14em] uppercase">SITE</span>
             </div>
             <ul className="space-y-2 text-xs sm:text-[13px]">
               {siteLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="hover:text-ivory transition-colors">
+                  <Link href={link.href} className="hover:text-accent transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -92,15 +91,14 @@ export function Footer() {
 
           {/* Column 3: CONTACT Info (3 cols) */}
           <div className="lg:col-span-3">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-4 h-[2px] bg-gold" aria-hidden="true" />
-              <span className="text-xs font-bold text-gold tracking-widest uppercase">CONTACT</span>
+            <div className="mb-5">
+              <span className="text-[11px] font-semibold text-accent tracking-[0.14em] uppercase">CONTACT</span>
             </div>
             <ul className="space-y-3.5 text-xs sm:text-[13px]">
               <li>
                 <a
                   href={`mailto:${company.email}`}
-                  className="inline-flex items-center gap-2.5 hover:text-ivory transition-colors"
+                  className="inline-flex items-center gap-2.5 hover:text-accent transition-colors"
                 >
                   <Mail className="w-4 h-4 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
                   <span>{company.email}</span>
@@ -109,7 +107,7 @@ export function Footer() {
               <li>
                 <a
                   href={company.phone.href}
-                  className="inline-flex items-center gap-2.5 hover:text-ivory transition-colors"
+                  className="inline-flex items-center gap-2.5 hover:text-accent transition-colors"
                 >
                   <Phone className="w-4 h-4 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
                   <span>{company.phone.display}</span>
@@ -128,9 +126,8 @@ export function Footer() {
 
           {/* Column 4: FOLLOW Social Links (2 cols) */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="w-4 h-[2px] bg-gold" aria-hidden="true" />
-              <span className="text-xs font-bold text-gold tracking-widest uppercase">FOLLOW</span>
+            <div className="mb-5">
+              <span className="text-[11px] font-semibold text-accent tracking-[0.14em] uppercase">FOLLOW</span>
             </div>
             <ul className="space-y-2.5 text-xs sm:text-[13px]">
               <li>
@@ -138,7 +135,7 @@ export function Footer() {
                   href="https://www.linkedin.com/company/loyalist-exploration-limited/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-ivory transition-colors py-0.5"
+                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
                 >
                   <LinkedinIcon className="w-4 h-4 text-ivory/80 shrink-0" />
                   <span>LinkedIn</span>
@@ -149,7 +146,7 @@ export function Footer() {
                   href="https://x.com/LoyalistExp"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-ivory transition-colors py-0.5"
+                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
                 >
                   <XIcon className="w-4 h-4 text-ivory/80 shrink-0" />
                   <span>X</span>
@@ -160,7 +157,7 @@ export function Footer() {
                   href="https://www.facebook.com/people/Loyalist-Exploration/61575711082978/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-ivory transition-colors py-0.5"
+                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
                 >
                   <FacebookIcon className="w-4 h-4 text-ivory/80 shrink-0" />
                   <span>Facebook</span>
@@ -171,7 +168,7 @@ export function Footer() {
                   href="https://www.youtube.com/@LoyalistExploration"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-ivory transition-colors py-0.5"
+                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
                 >
                   <YoutubeIcon className="w-4 h-4 text-ivory/80 shrink-0" />
                   <span>YouTube</span>
@@ -182,7 +179,7 @@ export function Footer() {
                   href="https://www.instagram.com/loyalistexploration/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-ivory transition-colors py-0.5"
+                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
                 >
                   <InstagramIcon className="w-4 h-4 text-ivory/80 shrink-0" />
                   <span>Instagram</span>
@@ -193,14 +190,14 @@ export function Footer() {
         </div>
 
         {/* Sub-footer Bottom Bar */}
-        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-fg-muted/80">
           <div>© 2026 Loyalist Exploration Limited. All rights reserved.</div>
           <div className="flex items-center gap-4">
-            <Link href="/disclaimer" className="hover:text-ivory transition-colors">
+            <Link href="/disclaimer" className="hover:text-accent transition-colors">
               Privacy Policy
             </Link>
             <span className="text-white/20 select-none">|</span>
-            <Link href="/disclaimer" className="hover:text-ivory transition-colors">
+            <Link href="/disclaimer" className="hover:text-accent transition-colors">
               Terms of Use
             </Link>
           </div>

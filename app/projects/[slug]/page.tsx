@@ -216,7 +216,7 @@ export default async function ProjectPage({ params }: Params) {
                 Grades are given in <Term term="gpt" /> (grams per tonne).
               </p>
               {project.historicalNote ? (
-                <p className="text-small mt-4 max-w-prose text-stone/80 italic">{project.historicalNote}</p>
+                <p className="text-small mt-4 max-w-prose text-stone italic">{project.historicalNote}</p>
               ) : null}
             </Reveal>
           </div>

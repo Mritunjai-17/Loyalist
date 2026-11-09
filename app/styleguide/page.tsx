@@ -26,36 +26,38 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const swatches: { name: string; token: string; hex: string; role: string }[] = [
-  { name: "Carbon", token: "--carbon", hex: palette.carbon, role: "Main page background" },
-  { name: "Black", token: "--black", hex: palette.black, role: "Header, footer, dark panels, hero strip" },
-  { name: "Ivory", token: "--ivory", hex: palette.ivory, role: "Headings and primary text" },
-  { name: "Stone", token: "--stone", hex: palette.stone, role: "Supporting text, captions" },
-  { name: "Gold", token: "--gold", hex: palette.gold, role: "Logo, CTAs, accents, rules, icons" },
-  { name: "Graphite", token: "--graphite", hex: palette.graphite, role: "Borders and dividers" },
-  { name: "Gold hover", token: "--gold-hover", hex: palette.goldHover, role: "Primary button hover, focus ring" },
-  { name: "Gold press", token: "--gold-press", hex: palette.goldPress, role: "Primary button active" },
-  { name: "Ink soft", token: "--ink-soft", hex: palette.inkSoft, role: "Secondary text on paper" },
-  { name: "Gold ink", token: "--gold-ink", hex: palette.goldInk, role: "Links and small gold text on paper" },
+  { name: "Forest Green", token: "--forest", hex: palette.forest, role: "Headings, primary buttons, investor band" },
+  { name: "Deep Forest", token: "--deep-forest", hex: palette.deepForest, role: "Header, footer, hero strip, dark panels" },
+  { name: "Warm Cream", token: "--cream", hex: palette.cream, role: "Primary light background" },
+  { name: "Soft Ivory", token: "--soft-ivory", hex: palette.softIvory, role: "Alternate light background" },
+  { name: "Muted Bronze", token: "--bronze", hex: palette.bronze, role: "Icons, rules, borders, highlights" },
+  { name: "Stone Beige", token: "--stone-beige", hex: palette.stoneBeige, role: "Dividers, card and field borders" },
+  { name: "Earth Grey", token: "--earth-grey", hex: palette.earthGrey, role: "Decorative neutrals" },
+  { name: "Charcoal", token: "--charcoal", hex: palette.charcoal, role: "Body text on light surfaces" },
+  { name: "Ink soft", token: "--ink-soft", hex: palette.inkSoft, role: "Secondary text on light surfaces" },
+  { name: "Bronze text", token: "--gold-ink", hex: palette.goldInk, role: "Links, eyebrows, small bronze text" },
+  { name: "Bronze display", token: "--bronze-display", hex: palette.bronzeDisplay, role: "Large heading accents on light" },
   { name: "Error", token: "--error", hex: palette.error, role: "Form errors only" },
 ];
 
-const contrastPairs: { label: string; fg: string; bg: string; ruleOnly?: boolean }[] = [
-  { label: "Ivory on carbon", fg: palette.ivory, bg: palette.carbon },
-  { label: "Ivory 80% on carbon (body)", fg: blend(palette.ivory, 0.8, palette.carbon), bg: palette.carbon },
-  { label: "Ivory 85% on carbon (eyebrow)", fg: blend(palette.ivory, 0.85, palette.carbon), bg: palette.carbon },
-  { label: "Stone on carbon", fg: palette.stone, bg: palette.carbon },
-  { label: "Stone on black", fg: palette.stone, bg: palette.black },
-  { label: "Gold on carbon", fg: palette.gold, bg: palette.carbon },
-  { label: "Gold on black", fg: palette.gold, bg: palette.black },
-  { label: "On-gold on gold (button)", fg: palette.onGold, bg: palette.gold },
-  { label: "On-gold on gold hover", fg: palette.onGold, bg: palette.goldHover },
-  { label: "Error on black", fg: palette.error, bg: palette.black },
-  { label: "Ink on paper", fg: palette.ink, bg: palette.paper },
-  { label: "Ink 75% on paper (eyebrow)", fg: blend(palette.ink, 0.75, palette.paper), bg: palette.paper },
-  { label: "Ink soft on paper", fg: palette.inkSoft, bg: palette.paper },
-  { label: "Gold ink on paper", fg: palette.goldInk, bg: palette.paper },
-  { label: "Ink on paper (secondary button)", fg: palette.ink, bg: palette.paper },
-  { label: "Gold on paper (rules only, not text)", fg: palette.gold, bg: palette.paper, ruleOnly: true },
+const contrastPairs: { label: string; fg: string; bg: string; ruleOnly?: boolean; largeOnly?: boolean }[] = [
+  { label: "Cream on forest", fg: palette.cream, bg: palette.forest },
+  { label: "Cream 86% on forest (body)", fg: blend(palette.cream, 0.86, palette.forest), bg: palette.forest },
+  { label: "Cream 66% on forest (muted)", fg: blend(palette.cream, 0.66, palette.forest), bg: palette.forest },
+  { label: "Lifted bronze on forest", fg: palette.softGold, bg: palette.forest },
+  { label: "Lifted bronze on deep forest", fg: palette.softGold, bg: palette.deepForest },
+  { label: "Deep forest on bronze (header CTA)", fg: palette.deepForest, bg: palette.bronze },
+  { label: "Deep forest on cream (button on forest)", fg: palette.deepForest, bg: palette.cream },
+  { label: "Cream on forest (button on light)", fg: palette.cream, bg: palette.forest },
+  { label: "Forest on soft ivory (headings)", fg: palette.forest, bg: palette.softIvory },
+  { label: "Charcoal on warm cream (body)", fg: palette.charcoal, bg: palette.cream },
+  { label: "Ink soft on warm cream", fg: palette.inkSoft, bg: palette.cream },
+  { label: "Ink soft on champagne", fg: palette.inkSoft, bg: palette.champagne },
+  { label: "Bronze text on warm cream", fg: palette.goldInk, bg: palette.cream },
+  { label: "Bronze text on champagne", fg: palette.goldInk, bg: palette.champagne },
+  { label: "Bronze display on champagne", fg: palette.bronzeDisplay, bg: palette.champagne, largeOnly: true },
+  { label: "Error on white", fg: palette.error, bg: palette.pureWhite },
+  { label: "Muted bronze on cream (rules only, not text)", fg: palette.bronze, bg: palette.cream, ruleOnly: true },
 ];
 
 const typeScale = [
@@ -137,7 +139,10 @@ export default function StyleguidePage() {
                       <span className="block h-0.5 w-10" style={{ background: p.fg }} />
                     </span>
                   ) : (
-                    <span className="inline-block rounded-control px-3 py-1" style={{ background: p.bg, color: p.fg }}>
+                    <span
+                      className={p.largeOnly ? "inline-block rounded-control px-3 py-1 text-2xl" : "inline-block rounded-control px-3 py-1"}
+                      style={{ background: p.bg, color: p.fg }}
+                    >
                       Timmins 48.48° N
                     </span>
                   ),
@@ -148,7 +153,11 @@ export default function StyleguidePage() {
                 header: "AA body",
                 numeric: true,
                 render: (p) =>
-                  p.ruleOnly ? "Not for text" : contrastRatio(p.fg, p.bg) >= 4.5 ? "Pass" : "Fail",
+                  p.ruleOnly
+                    ? "Not for text"
+                    : p.largeOnly
+                      ? contrastRatio(p.fg, p.bg) >= 3 ? "Large text only" : "Fail"
+                      : contrastRatio(p.fg, p.bg) >= 4.5 ? "Pass" : "Fail",
               },
             ]}
           />

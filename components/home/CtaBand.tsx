@@ -7,31 +7,6 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { company } from "@/content/company";
 import { NewsletterForm } from "./NewsletterForm";
 
-function TopographicPatternTopRight() {
-  return (
-    <svg
-      className="pointer-events-none absolute -top-12 -right-12 h-[450px] w-[500px] select-none opacity-[0.05]"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.2"
-      viewBox="0 0 500 450"
-      preserveAspectRatio="none"
-      aria-hidden
-    >
-      <g className="text-gold">
-        <path d="M 200 0 C 260 70, 340 120, 500 140" />
-        <path d="M 140 0 C 210 95, 305 165, 500 195" />
-        <path d="M 80 0 C 160 120, 270 210, 500 250" />
-        <path d="M 20 0 C 110 145, 230 255, 500 305" />
-        <path d="M 0 50 C 70 180, 190 300, 500 360" />
-        <path d="M 0 130 C 50 220, 150 345, 500 415" />
-        <ellipse cx="430" cy="70" rx="50" ry="25" />
-      </g>
-    </svg>
-  );
-}
-
 export function CtaBand() {
   return (
     <Section
@@ -40,8 +15,6 @@ export function CtaBand() {
       labelledBy="contact-title"
       className="relative overflow-hidden pb-28 sm:pb-36 lg:pb-40"
     >
-      <TopographicPatternTopRight />
-
       <div className="grid gap-10 lg:gap-12 lg:grid-cols-12 items-center relative z-10">
         {/* Left Column: Contact Information */}
         <div className="lg:col-span-6">
@@ -60,7 +33,7 @@ export function CtaBand() {
               <li>
                 <a
                   href={`mailto:${company.email}`}
-                  className="inline-flex items-center gap-3 text-sm sm:text-base text-ink hover:text-gold transition-colors font-medium"
+                  className="inline-flex items-center gap-3 text-sm sm:text-base text-fg hover:text-accent transition-colors font-medium"
                 >
                   <Mail className="w-5 h-5 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
                   <span>{company.email}</span>
@@ -69,7 +42,7 @@ export function CtaBand() {
               <li>
                 <a
                   href={company.phone.href}
-                  className="inline-flex items-center gap-3 text-sm sm:text-base text-ink hover:text-gold transition-colors font-medium"
+                  className="inline-flex items-center gap-3 text-sm sm:text-base text-fg hover:text-accent transition-colors font-medium"
                 >
                   <Phone className="w-5 h-5 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
                   <span>{company.phone.display}</span>
@@ -88,10 +61,8 @@ export function CtaBand() {
           </Reveal>
         </div>
 
-        {/* Center Vertical Divider (Desktop) */}
-        <div className="hidden lg:block lg:col-span-1 flex justify-center">
-          <div className="w-[1px] h-64 bg-black/10" aria-hidden="true" />
-        </div>
+        {/* Gutter column (desktop): whitespace separates the two halves. */}
+        <div aria-hidden className="hidden lg:block lg:col-span-1" />
 
         {/* Right Column: Newsletter Subscription Card */}
         <div className="lg:col-span-5">

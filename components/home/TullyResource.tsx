@@ -1,7 +1,6 @@
 import Image from "next/image";
-import { ArrowRight, Download, Layers, MapPin, Pickaxe } from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Counter } from "@/components/ui/Counter";
 import { Reveal } from "@/components/shared/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -22,26 +21,26 @@ export function resourceCaption() {
   return `Cut-off ${mre.cutOff}. Effective ${formatDate(mre.effectiveDate)}. ${mre.standard}, ${mre.author}`;
 }
 
+/**
+ * Presented as a report page, not a card: headline figures on a ruled band,
+ * the estimate table, the qualifying note, then the supporting facts.
+ */
 export function TullyResource() {
   const tully = projects.find((p) => p.slug === "tully")!;
 
   return (
     <Section tone="warm" id="resource" labelledBy="resource-title" className="relative overflow-hidden">
-      {/* Decorative left-edge mineral rock photography with angled cut and gold accent rule */}
-      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-0 hidden w-[220px] overflow-hidden lg:block xl:w-[260px]">
+      {/* Core-sample photograph along the left edge: a straight cut with a bronze hairline. */}
+      <div className="pointer-events-none absolute bottom-0 left-0 top-0 z-0 hidden w-[160px] overflow-hidden border-r border-gold/50 lg:block xl:w-[200px]">
         <Image
           src="/images/resource/tully-gold-rock.jpg"
           alt="Tully project mineralized gold rock"
           fill
-          sizes="260px"
+          sizes="200px"
           quality={90}
           className="object-cover object-left"
           priority
         />
-        <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100" aria-hidden>
-          <polygon points="84,0 100,0 100,100 58,100" fill="var(--warm-white)" />
-          <line x1="84" y1="0" x2="58" y2="100" stroke="var(--gold)" strokeWidth="0.8" />
-        </svg>
       </div>
 
       <div className="relative z-10 lg:pl-[170px] xl:pl-[210px]">
@@ -53,86 +52,66 @@ export function TullyResource() {
           accent="2026 Mineral Resource Estimate"
           lead="A cornerstone asset in the Timmins district, with a significant gold resource and continued growth potential."
           stacked
-          className="mb-8 lg:mb-10"
+          className="mb-10 lg:mb-12"
         />
 
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-          {/* Main Floating Resource Card */}
+        <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
           <Reveal className="min-w-0 lg:col-span-7 xl:col-span-8">
-            <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-[0_12px_40px_rgba(0,0,0,0.06)] sm:p-8">
-            {/* Top KPI Box Row */}
-            <div className="grid gap-4 sm:grid-cols-2">
-              {/* Indicated KPI Card */}
-              <div className="flex items-center justify-between rounded-xl bg-white border border-gold/40 p-4 sm:p-5 text-ink shadow-sm">
-                <div>
-                  <span className="block text-[0.7rem] font-semibold uppercase tracking-wider text-stone sm:text-[0.75rem]">
-                    INDICATED
-                  </span>
-                  <span className="mt-1 block text-[1.4rem] font-bold text-gold sm:text-[1.65rem]">
-                    <Counter value={164000} suffix=" oz Au" />
-                  </span>
-                </div>
-                <Image
-                  src="/images/resource/gold-cluster.png"
-                  alt="Gold nuggets"
-                  width={55}
-                  height={42}
-                  className="h-8 w-auto flex-none object-contain sm:h-9"
-                />
+            {/* Headline figures */}
+            {/* Headline figures on a soft panel: background contrast, not rules, sets them apart. */}
+            <div className="grid grid-cols-2 gap-4 rounded bg-soft-ivory px-5 py-6 sm:gap-10 sm:px-8 sm:py-8">
+              <div>
+                <span className="block text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-accent">
+                  INDICATED
+                </span>
+                <span className="mt-3 block whitespace-nowrap text-[1.35rem] font-medium leading-none tracking-[-0.02em] text-gold tabular-nums sm:text-[2.6rem]">
+                  {formatNumber(164000)} oz Au
+                </span>
               </div>
-
-              {/* Inferred KPI Card */}
-              <div className="rounded-xl bg-white border border-black/10 p-4 sm:p-5 text-ink shadow-sm">
-                <span className="block text-[0.7rem] font-semibold uppercase tracking-wider text-ink-soft sm:text-[0.75rem]">
+              <div>
+                <span className="block text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-fg-muted">
                   INFERRED
                 </span>
-                <span className="mt-1 block text-[1.4rem] font-bold text-ink sm:text-[1.65rem]">
-                  <Counter value={62000} suffix=" oz Au" />
+                <span className="mt-3 block whitespace-nowrap text-[1.35rem] font-medium leading-none tracking-[-0.02em] text-fg tabular-nums sm:text-[2.6rem]">
+                  {formatNumber(62000)} oz Au
                 </span>
               </div>
             </div>
 
-            {/* Table */}
-            <div className="mt-7 overflow-x-auto">
-              <table className="w-full text-left">
+            {/* Estimate table: one rule under the header; the Indicated tint carries the emphasis. */}
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full text-left tabular-nums">
                 <thead>
-                  <tr className="border-b border-black/10 text-[0.72rem] font-semibold uppercase tracking-wider text-ink-soft sm:text-[0.75rem]">
-                    <th className="pb-3 pr-4 font-semibold">CATEGORY</th>
-                    <th className="px-4 pb-3 text-right font-semibold">TONNES</th>
-                    <th className="px-4 pb-3 text-right font-semibold">GRADE</th>
-                    <th className="pb-3 pl-4 text-right font-semibold">CONTAINED GOLD</th>
+                  <tr className="border-b border-stone-beige text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-fg-muted sm:text-[0.72rem] sm:tracking-[0.12em]">
+                    <th className="pb-3 pr-2 font-semibold sm:pr-4">CATEGORY</th>
+                    <th className="px-2 pb-3 text-right font-semibold sm:px-4">TONNES</th>
+                    <th className="px-2 pb-3 text-right font-semibold sm:px-4">GRADE</th>
+                    <th className="pb-3 pl-2 text-right font-semibold sm:pl-4">CONTAINED GOLD</th>
                   </tr>
                 </thead>
-                <tbody className="text-[0.9rem] sm:text-[0.9375rem]">
-                  {/* Indicated Row - Highlighted warm gold/cream pill */}
-                  <tr className="bg-gold/15 font-bold text-ink border-y border-gold/25">
-                    <td className="py-3 pl-4 pr-4 rounded-l-lg sm:py-3.5">Indicated</td>
-                    <td className="px-4 py-3 text-right sm:py-3.5">1.62 Mt</td>
-                    <td className="px-4 py-3 text-right sm:py-3.5">3.16 g/t Au</td>
-                    <td className="py-3 pl-4 pr-4 text-right rounded-r-lg sm:py-3.5">164,000 oz</td>
+                <tbody className="text-[0.85rem] sm:text-[0.9375rem]">
+                  <tr className="bg-gold/10 font-semibold text-fg">
+                    <td className="py-3.5 pl-3 pr-2 sm:pr-4">Indicated</td>
+                    <td className="px-2 py-3.5 text-right sm:px-4">1.62 Mt</td>
+                    <td className="px-2 py-3.5 text-right sm:px-4">3.16 g/t Au</td>
+                    <td className="py-3.5 pl-2 pr-3 text-right sm:pl-4">164,000 oz</td>
                   </tr>
-                  {/* Inferred Row */}
-                  <tr className="font-medium text-ink">
-                    <td className="py-3 pl-4 pr-4 sm:py-3.5">Inferred</td>
-                    <td className="px-4 py-3 text-right sm:py-3.5">0.95 Mt</td>
-                    <td className="px-4 py-3 text-right sm:py-3.5">2.03 g/t Au</td>
-                    <td className="py-3 pl-4 pr-4 text-right sm:py-3.5">62,000 oz</td>
+                  <tr className="font-medium text-fg">
+                    <td className="py-3.5 pl-3 pr-2 sm:pr-4">Inferred</td>
+                    <td className="px-2 py-3.5 text-right sm:px-4">0.95 Mt</td>
+                    <td className="px-2 py-3.5 text-right sm:px-4">2.03 g/t Au</td>
+                    <td className="py-3.5 pl-2 pr-3 text-right sm:pl-4">62,000 oz</td>
                   </tr>
                 </tbody>
               </table>
             </div>
 
-            {/* Footnote */}
             <p className="mt-4 text-[0.8rem] text-ink-soft">
               Cut-off: 1.1 g/t Au. Effective June 15, 2026. NI 43-101, P&E Mining Consultants Inc.
             </p>
 
-            {/* Action Buttons */}
-            <div className="mt-7 flex flex-wrap gap-3 sm:gap-4">
-              <Button
-                href="/projects/tully#resource"
-                icon={<ArrowRight aria-hidden className="h-4 w-4" />}
-              >
+            <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
+              <Button href="/projects/tully#resource" icon={<ArrowRight aria-hidden className="h-4 w-4" />}>
                 View Full Resource Table
               </Button>
               <Button
@@ -145,56 +124,28 @@ export function TullyResource() {
                 <span className="sr-only"> (PDF, opens in a new tab)</span>
               </Button>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
 
-        {/* Right Column Facts & Caution Note */}
-        <Reveal delay={0.15} className="space-y-6 lg:col-span-5 xl:col-span-4 lg:pt-1">
-          <div className="space-y-4">
-              {/* Card 1: Ownership */}
-              <div className="flex items-center gap-4 py-1">
-                <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-black/10 bg-white text-gold shadow-sm">
-                  <Layers className="h-6 w-6 stroke-[1.5]" />
-                </div>
-                <div>
-                  <span className="block text-[0.8rem] font-medium text-inkSoft">Ownership</span>
-                  <span className="block text-[0.95rem] font-bold text-ink">{tully.ownership}</span>
-                </div>
+          {/* Supporting facts and the cautionary note */}
+          <Reveal delay={0.1} className="lg:col-span-5 xl:col-span-4">
+            <dl className="space-y-6 lg:pt-2">
+              <div>
+                <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-fg-muted">Ownership</dt>
+                <dd className="mt-1.5 text-[1.05rem] font-semibold text-fg">{tully.ownership}</dd>
               </div>
-
-              {/* Card 2: Area */}
-              <div className="flex items-center gap-4 border-t border-black/10 pt-4">
-                <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-black/10 bg-white text-gold shadow-sm">
-                  <MapPin className="h-6 w-6 stroke-[1.5]" />
-                </div>
-                <div>
-                  <span className="block text-[0.72rem] font-semibold uppercase tracking-wider text-inkSoft">
-                    AREA
-                  </span>
-                  <span className="block text-[0.92rem] font-bold leading-snug text-ink">
-                    {formatNumber(tully.areaHa)} ha mining lease, one leased mining claim and 11 claims
-                  </span>
-                </div>
+              <div>
+                <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-fg-muted">AREA</dt>
+                <dd className="mt-1.5 text-[1.05rem] font-semibold leading-snug text-fg">
+                  {formatNumber(tully.areaHa)} ha mining lease, one leased mining claim and 11 claims
+                </dd>
               </div>
-
-              {/* Card 3: Deposit */}
-              <div className="flex items-center gap-4 border-t border-black/10 pt-4">
-                <div className="flex h-12 w-12 flex-none items-center justify-center rounded-xl border border-black/10 bg-white text-gold shadow-sm">
-                  <Pickaxe className="h-6 w-6 stroke-[1.5]" />
-                </div>
-                <div>
-                  <span className="block text-[0.72rem] font-semibold uppercase tracking-wider text-inkSoft">
-                    DEPOSIT
-                  </span>
-                  <span className="block text-[0.92rem] font-bold text-ink">
-                    Open along strike and at depth
-                  </span>
-                </div>
+              <div>
+                <dt className="text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-fg-muted">DEPOSIT</dt>
+                <dd className="mt-1.5 text-[1.05rem] font-semibold text-fg">Open along strike and at depth</dd>
               </div>
-            </div>
+            </dl>
 
-            {/* Cautionary note */}
-            <div className="space-y-1 border-l-2 border-gold py-1 pl-4 text-[0.8rem] text-inkSoft">
+            <div className="mt-9 space-y-1 border-l-2 border-gold py-1 pl-4 text-[0.8rem] text-ink-soft">
               <p>Mineral Resources which are not Mineral Reserves do not have demonstrated economic viability.</p>
               <p>
                 Details in the news release of{" "}
@@ -202,7 +153,7 @@ export function TullyResource() {
                   href={mre.newsRelease.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-goldInk underline underline-offset-2 hover:text-ink"
+                  className="font-medium text-accent underline underline-offset-2 hover:text-fg"
                 >
                   July 7, 2026 (PDF)
                 </a>

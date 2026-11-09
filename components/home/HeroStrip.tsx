@@ -13,8 +13,8 @@ const icons: Record<HeroStripIcon, LucideIcon> = {
 
 export function HeroStrip({ items }: { items: HomeHero["strip"] }) {
   return (
-    <div className="hero-strip">
-      <ul className="hero-strip-grid">
+    <div className="hero-strip" data-tone="black">
+      <ul className="hero-strip-grid container-site">
         {items.map(({ icon, label, emphasis }) => {
           const Icon = icons[icon];
           return (

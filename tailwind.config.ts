@@ -3,6 +3,63 @@ import type { Config } from "tailwindcss";
 // Every value maps to a CSS variable in app/globals.css. The default palette,
 // font stacks, radii and shadows are replaced, not extended, so nothing outside
 // the design tokens can be used by accident.
+
+type ColorFn = (args: { opacityValue?: string }) => string;
+
+/**
+ * A token colour that also supports Tailwind opacity modifiers (`border-black/10`,
+ * `from-surface`, `bg-gold/15`). Plain `var()` strings cannot take an alpha value,
+ * so those classes were silently dropped; color-mix gives them a real colour.
+ */
+function token(name: string): ColorFn {
+  return ({ opacityValue }) =>
+    opacityValue === undefined || opacityValue === "1"
+      ? `var(--${name})`
+      : `color-mix(in srgb, var(--${name}) calc(${opacityValue} * 100%), transparent)`;
+}
+
+const colors = {
+  // Forest & Earth palette
+  forest: token("forest"),
+  "deep-forest": token("deep-forest"),
+  cream: token("cream"),
+  "soft-ivory": token("soft-ivory"),
+  bronze: token("bronze"),
+  "stone-beige": token("stone-beige"),
+  "earth-grey": token("earth-grey"),
+  white: token("pure-white"),
+  // Legacy names, re-pointed to the palette in globals.css
+  "primary-gold": token("primary-gold"),
+  "soft-gold": token("soft-gold"),
+  "warm-white": token("warm-white"),
+  champagne: token("champagne"),
+  "pure-white": token("pure-white"),
+  charcoal: token("charcoal"),
+  "muted-grey": token("muted-grey"),
+  carbon: token("carbon"),
+  black: token("black"),
+  ivory: token("ivory"),
+  "ivory-80": token("ivory-80"),
+  stone: token("stone"),
+  gold: token("gold"),
+  "gold-hover": token("gold-hover"),
+  "gold-press": token("gold-press"),
+  "on-gold": token("on-gold"),
+  graphite: token("graphite"),
+  paper: token("paper"),
+  ink: token("ink"),
+  "ink-soft": token("ink-soft"),
+  "gold-ink": token("gold-ink"),
+  error: token("error"),
+  // Tone-aware aliases: resolve differently inside each [data-tone].
+  surface: token("surface"),
+  fg: token("fg"),
+  "fg-body": token("fg-body"),
+  "fg-muted": token("fg-muted"),
+  accent: token("accent-text"),
+  rule: token("border"),
+};
+
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
@@ -10,59 +67,37 @@ const config: Config = {
       transparent: "transparent",
       current: "currentColor",
       inherit: "inherit",
-      // Exact design system tokens
-      "primary-gold": "var(--primary-gold)",
-      "soft-gold": "var(--soft-gold)",
-      "warm-white": "var(--warm-white)",
-      champagne: "var(--champagne)",
-      "pure-white": "var(--pure-white)",
-      charcoal: "var(--charcoal)",
-      "muted-grey": "var(--muted-grey)",
-      // Core palette & derived aliases
-      carbon: "var(--carbon)",
-      black: "var(--black)",
-      ivory: "var(--ivory)",
-      "ivory-80": "var(--ivory-80)",
-      stone: "var(--stone)",
-      gold: "var(--gold)",
-      "gold-hover": "var(--gold-hover)",
-      "gold-press": "var(--gold-press)",
-      "on-gold": "var(--on-gold)",
-      graphite: "var(--graphite)",
-      paper: "var(--paper)",
-      ink: "var(--ink)",
-      "ink-soft": "var(--ink-soft)",
-      "gold-ink": "var(--gold-ink)",
-      error: "var(--error)",
-      // Tone-aware aliases: resolve differently inside [data-tone="paper"].
-      surface: "var(--surface)",
-      fg: "var(--fg)",
-      "fg-body": "var(--fg-body)",
-      "fg-muted": "var(--fg-muted)",
-      accent: "var(--accent-text)",
-      rule: "var(--border)",
+      // Tailwind accepts colour functions at runtime; its types only list strings.
+      ...(colors as unknown as Record<string, string>),
     },
     fontFamily: {
       sans: ["var(--font-body)", "system-ui", "sans-serif"],
     },
+    // Restrained radii: controls and media are nearly square; only true pills
+    // (status dots, avatars) use `full`.
     borderRadius: {
       none: "0",
-      control: "10px",
-      panel: "20px",
-      lg: "12px",
-      xl: "16px",
-      "2xl": "20px",
-      "3xl": "24px",
+      sm: "2px",
+      DEFAULT: "4px",
+      control: "4px",
+      panel: "6px",
+      lg: "6px",
+      xl: "6px",
+      "2xl": "8px",
+      "3xl": "8px",
       full: "9999px",
     },
     boxShadow: {
       none: "none",
-      sm: "0 2px 8px rgba(0, 0, 0, 0.04)",
-      md: "0 6px 20px rgba(0, 0, 0, 0.05)",
-      lg: "0 12px 32px rgba(0, 0, 0, 0.07)",
-      xl: "0 20px 40px rgba(0, 0, 0, 0.09)",
+      xs: "0 1px 2px rgba(28, 44, 37, 0.05)",
+      sm: "0 2px 8px rgba(28, 44, 37, 0.05)",
+      md: "0 6px 20px rgba(28, 44, 37, 0.06)",
+      lg: "0 12px 32px rgba(28, 44, 37, 0.08)",
+      xl: "0 20px 40px rgba(28, 44, 37, 0.1)",
     },
     extend: {
+      // A bare `border` uses the tone's hairline instead of currentColor.
+      borderColor: { DEFAULT: "var(--border)" },
       maxWidth: {
         container: "1440px",
         prose: "64ch",

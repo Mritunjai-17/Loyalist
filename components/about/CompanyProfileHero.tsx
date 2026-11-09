@@ -150,14 +150,17 @@ export function CompanyProfileHero() {
           {/* Right Column: Visual Composition with Boreal Landscape & Gold Ore Specimen */}
           <div className="lg:col-span-6 xl:col-span-6 flex justify-center lg:justify-end">
             <Reveal delay={0.15} className="w-full max-w-[560px]">
-              <div className="relative w-full aspect-[1064/668] rounded-[24px] sm:rounded-[28px] overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.08)] border border-black/5">
+              {/* Real landscape photograph in a plain frame. The previous asset was a
+                  pre-composed mockup (skewed frames, inset specimen) baked into one PNG.
+                  The 2:1 crop is anchored to the bottom to drop the sky band. */}
+              <div className="relative w-full aspect-[2/1] overflow-hidden rounded bg-forest">
                 <Image
-                  src="/images/about/company-profile-hero.png"
-                  alt="Aerial view of the Timmins boreal forest and lakes at sunset with mineralized gold rock specimen"
+                  src="/images/about/landscape.jpg"
+                  alt="Panoramic view over the Timmins mining camp and boreal forest at sunset"
                   fill
                   priority
                   sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-cover object-bottom"
                 />
               </div>
             </Reveal>
@@ -198,18 +201,6 @@ export function CompanyProfileHero() {
         </Reveal>
       </div>
 
-      {/* Subtle bedrock horizon at bottom edge */}
-      <div
-        className="pointer-events-none absolute bottom-0 inset-x-0 h-16 sm:h-20 w-full overflow-hidden select-none z-0 opacity-20"
-        aria-hidden="true"
-      >
-        <Image
-          src="/images/team/bedrock-panorama.png"
-          alt=""
-          fill
-          className="object-cover object-bottom"
-        />
-      </div>
     </header>
   );
 }

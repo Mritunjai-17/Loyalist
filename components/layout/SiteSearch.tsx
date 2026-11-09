@@ -71,7 +71,7 @@ export function SiteSearch() {
             onFocus={() => setDropdownOpen(true)}
             placeholder="Search projects, news..."
             aria-label="Search projects, news"
-            className="w-36 xl:w-48 bg-transparent text-xs text-ivory placeholder:text-stone/70 focus:outline-none"
+            className="w-36 xl:w-48 bg-transparent text-xs text-ivory placeholder:text-ivory/50 focus:outline-none"
           />
           {query ? (
             <button
@@ -108,7 +108,7 @@ export function SiteSearch() {
                   </li>
                 ))
               ) : (
-                <li className="px-3 py-3 text-xs text-stone">No results for &ldquo;{query}&rdquo;.</li>
+                <li className="px-3 py-3 text-xs text-ivory/70">No results for &ldquo;{query}&rdquo;.</li>
               )}
             </ul>
           </div>
@@ -147,7 +147,7 @@ export function SiteSearch() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search projects, news..."
-            className="min-h-11 w-full bg-transparent text-ivory placeholder:text-stone focus-visible:outline-none"
+            className="min-h-11 w-full bg-transparent text-ivory placeholder:text-ivory/50 focus-visible:outline-none"
           />
           <button
             type="button"
@@ -173,7 +173,7 @@ export function SiteSearch() {
               </li>
             ))
           ) : (
-            <li className="px-3 py-4 text-stone">No results for &ldquo;{query}&rdquo;.</li>
+            <li className="px-3 py-4 text-ivory/70">No results for &ldquo;{query}&rdquo;.</li>
           )}
         </ul>
       </dialog>

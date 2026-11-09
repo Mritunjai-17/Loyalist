@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
-import { Reveal } from "@/components/shared/Reveal";
 import { homeHero as hero } from "@/content/company";
 import type { HeroFeatureIcon } from "@/types";
 import { HeroStrip } from "./HeroStrip";
@@ -41,7 +40,7 @@ const featureIcons: Record<HeroFeatureIcon, LucideIcon | typeof BullionIcon> = {
 
 export function Hero() {
   return (
-    <section className="hero" aria-labelledby="hero-title">
+    <section className="hero" data-tone="warm" aria-labelledby="hero-title">
       <div className="hero-photo" aria-hidden>
         <Image
           src={hero.photo.src}
@@ -60,7 +59,8 @@ export function Hero() {
       <div className="hero-overlay hero-overlay-bottom" aria-hidden />
       <div className="hero-overlay hero-overlay-uniform" aria-hidden />
 
-      <Reveal duration={0.6} y={20} className="flex-1 flex flex-col justify-center">
+      {/* Rendered immediately: the hero is the first thing read, so it is not animated in. */}
+      <div className="flex-1 flex flex-col justify-center">
         <Container className="hero-content">
           <div className="hero-copy">
             <Eyebrow>{hero.eyebrow}</Eyebrow>
@@ -94,7 +94,7 @@ export function Hero() {
             </ul>
           </div>
         </Container>
-      </Reveal>
+      </div>
 
       <HeroStrip items={hero.strip} />
     </section>

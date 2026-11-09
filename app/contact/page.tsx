@@ -135,7 +135,7 @@ export default function ContactPage() {
                       href={company.quoteUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm font-medium text-gold hover:underline inline-flex items-center gap-1.5"
+                      className="text-sm font-medium text-accent hover:underline inline-flex items-center gap-1.5"
                     >
                       <span>CSE: PNGC</span>
                       <ExternalLink className="h-3 w-3" aria-hidden="true" />

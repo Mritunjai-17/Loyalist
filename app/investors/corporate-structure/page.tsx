@@ -122,7 +122,7 @@ export default function CorporateStructurePage() {
                 lead={`${asOf}. Reported in millions (M). Reflects current issued and outstanding equity securities.`}
               />
             </div>
-            <div className="lg:col-span-7">
+            <div className="min-w-0 lg:col-span-7">
               <Table
                 label="Share capital"
                 columns={capitalColumns}
@@ -147,8 +147,8 @@ export default function CorporateStructurePage() {
             lead={`${asOf}. Breakdown of common shareholdings across insider, corporate, and public float holders.`}
           />
 
-          <div className="grid gap-12 lg:grid-cols-12 items-start">
-            <div className="lg:col-span-7">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
+            <div className="min-w-0 lg:col-span-7">
               <Table
                 label="Ownership"
                 columns={ownershipColumns}
@@ -167,17 +167,16 @@ export default function CorporateStructurePage() {
 
               <dl className="space-y-4">
                 {shareData.ownership.map((o) => (
-                  <div key={o.holder} className="space-y-1.5">
-                    <div className="flex items-center justify-between text-xs">
-                      <dt className="text-ink font-medium">{o.holder}</dt>
-                      <dd className="text-gold font-bold">{o.percentage}</dd>
-                    </div>
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-black/[0.08]">
+                  // dt/dd must be direct children of the group; the bar sits inside the dd.
+                  <div key={o.holder} className="grid grid-cols-[1fr_auto] items-center gap-y-1.5 text-xs">
+                    <dt className="text-ink font-medium">{o.holder}</dt>
+                    <dd className="text-gold font-bold">{o.percentage}</dd>
+                    <dd className="col-span-2 h-1.5 w-full overflow-hidden rounded-full bg-black/[0.08]" aria-hidden="true">
                       <div
                         className="h-full rounded-full bg-gold transition-all duration-500"
                         style={{ width: o.percentage }}
                       />
-                    </div>
+                    </dd>
                   </div>
                 ))}
               </dl>
@@ -217,7 +216,7 @@ export default function CorporateStructurePage() {
                   href={company.sedarUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gold font-medium hover:underline inline-flex items-center gap-1 mt-0.5"
+                  className="text-accent font-medium hover:underline inline-flex items-center gap-1 mt-0.5"
                 >
                   <span>Search Profile</span>
                   <ExternalLink className="h-3 w-3" aria-hidden="true" />

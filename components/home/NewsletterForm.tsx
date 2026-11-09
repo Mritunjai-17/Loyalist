@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Heading } from "@/components/ui/Heading";
 import type { FormResult } from "@/lib/forms";
 
@@ -31,18 +31,9 @@ export function NewsletterForm() {
 
   return (
     <div
-      className="contact-newsletter-card p-6 sm:p-8"
-      style={{ borderRadius: "20px" }}
+      className="contact-newsletter-card"
     >
-      {/* Card Header: Icon + Title & Description */}
-      <div className="flex items-start gap-4">
-        <div
-          className="flex h-11 w-11 shrink-0 items-center justify-center border border-gold/40 bg-white text-gold shadow-sm"
-          style={{ borderRadius: "10px" }}
-          aria-hidden="true"
-        >
-          <Mail className="h-5 w-5 stroke-[1.75]" />
-        </div>
+      <div>
         <div>
           <Heading level={3}>
             <span className="text-ink font-bold block">
@@ -58,7 +49,7 @@ export function NewsletterForm() {
       {/* Subscription Form */}
       <form onSubmit={onSubmit} noValidate aria-describedby="newsletter-note" className="mt-6">
         <label htmlFor="newsletter-email" className="block text-xs font-semibold text-ink-soft mb-1.5">
-          Email <span className="text-gold">*</span>
+          Email <span className="text-accent">*</span>
         </label>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
           <input
@@ -67,9 +58,9 @@ export function NewsletterForm() {
             type="email"
             autoComplete="email"
             required
+            aria-invalid={emailError ? true : undefined}
             placeholder="Enter your email address"
-            className="flex-1 min-w-0 h-11 bg-white border border-black/15 px-4 text-sm text-ink placeholder:text-stone/70 focus:border-gold focus:outline-none transition-colors"
-            style={{ borderRadius: "10px" }}
+            className="flex-1 min-w-0 h-11 rounded-none rounded-t border-0 border-b-2 border-forest/25 bg-white/70 px-4 text-sm text-fg placeholder:text-ink-soft/70 transition-[border-color,background-color] hover:border-forest/40 focus:border-gold focus:bg-white focus:outline-none aria-[invalid=true]:border-error"
           />
           <button
             type="submit"
@@ -87,9 +78,9 @@ export function NewsletterForm() {
           <input id="newsletter-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
         </div>
 
-        {emailError && <p className="text-xs text-error mt-2">{emailError}</p>}
+        {emailError && <p className="text-xs font-medium text-error mt-2">{emailError}</p>}
         {result && !emailError && (
-          <p role="status" className={result.ok ? "text-xs text-gold mt-2.5 font-medium" : "text-xs text-error mt-2.5"}>
+          <p role="status" className={result.ok ? "text-xs text-accent mt-2.5 font-medium" : "text-xs text-error mt-2.5"}>
             {result.message}
           </p>
         )}
