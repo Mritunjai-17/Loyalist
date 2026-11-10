@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { AnimatedNumber } from "@/components/shared/AnimatedNumber";
 import { FilteredDocuments } from "@/components/shared/FilteredDocuments";
 import { Reveal } from "@/components/shared/Reveal";
 import { documents } from "@/content/documents";
@@ -104,12 +105,16 @@ export default function TechnicalReportsPage() {
                 <div className="mt-6 grid grid-cols-2 gap-6 border-t border-black/10 pt-6 max-w-lg">
                   <div>
                     <div className="text-xs text-stone uppercase tracking-wider">Indicated Mineral Resource</div>
-                    <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-gold">164,000 oz Au</div>
+                    <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-gold">
+                      <AnimatedNumber value={164000} /> oz Au
+                    </div>
                     <div className="text-xs text-stone mt-0.5">1.62 Mt @ 3.16 g/t Au (1.1 g/t cut-off)</div>
                   </div>
                   <div>
                     <div className="text-xs text-stone uppercase tracking-wider">Inferred Mineral Resource</div>
-                    <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-ink">62,000 oz Au</div>
+                    <div className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-ink">
+                      <AnimatedNumber value={62000} /> oz Au
+                    </div>
                     <div className="text-xs text-stone mt-0.5">0.95 Mt @ 2.03 g/t Au (1.1 g/t cut-off)</div>
                   </div>
                 </div>

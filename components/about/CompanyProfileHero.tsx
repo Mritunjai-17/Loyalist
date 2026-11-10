@@ -4,6 +4,7 @@ import { ArrowRight, Download, Layers, MapPin, Mountain } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
 import { Reveal } from "@/components/shared/Reveal";
+import { AnimatedNumber } from "@/components/shared/AnimatedNumber";
 import { company } from "@/content/company";
 
 function BullionIcon({ className }: { className?: string }) {
@@ -57,6 +58,7 @@ const companyStats = [
   {
     icon: Layers,
     value: "4",
+    num: 4,
     label: "Projects in the Timmins district",
     isLargeNum: true,
   },
@@ -75,6 +77,9 @@ const companyStats = [
   {
     icon: Mountain,
     value: "~3,900 ha",
+    num: 3900,
+    prefix: "~",
+    suffix: " ha",
     label: "Total land position",
     isLargeNum: true,
   },
@@ -188,7 +193,15 @@ export function CompanyProfileHero() {
                         stat.isLargeNum ? "text-2xl sm:text-[26px]" : "text-base sm:text-lg"
                       }`}
                     >
-                      {stat.value}
+                      {stat.num ? (
+                        <>
+                          {stat.prefix}
+                          <AnimatedNumber value={stat.num} />
+                          {stat.suffix}
+                        </>
+                      ) : (
+                        stat.value
+                      )}
                     </div>
                     <div className="text-xs sm:text-[13px] text-stone mt-1 leading-snug">
                       {stat.label}
