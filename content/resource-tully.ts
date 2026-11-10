@@ -1,4 +1,6 @@
-import type { ResourceEstimate } from "@/types";
+import type { Column } from "@/components/ui/Table";
+import { formatDate, formatNumber } from "@/lib/format";
+import type { ResourceEstimate, ResourceRow } from "@/types";
 
 // Source B (prompt section 13). Not on Source A, which predates the 2026 estimate.
 // VERIFY against filed news release
@@ -18,3 +20,14 @@ export const tullyResource: ResourceEstimate = {
   // that announced the same estimate. TODO(content): restore the Aug 21 PDF.
   newsRelease: { date: "2026-07-07", href: "https://loyalistexploration.com/api/pdf/view/6a4cfbb4a79e5a6c69fefc67" },
 };
+
+export const resourceColumns: Column<ResourceRow>[] = [
+  { key: "category", header: "Category", render: (r) => r.category },
+  { key: "tonnes", header: "Tonnes", numeric: true, render: (r) => `${r.tonnesMt.toFixed(2)} Mt` },
+  { key: "grade", header: "Grade", numeric: true, render: (r) => `${r.gradeGpt.toFixed(2)} g/t Au` },
+  { key: "oz", header: "Contained gold", numeric: true, render: (r) => `${formatNumber(r.containedOz)} oz` },
+];
+
+export function resourceCaption() {
+  return `Cut-off ${tullyResource.cutOff}. Effective ${formatDate(tullyResource.effectiveDate)}. ${tullyResource.standard}, ${tullyResource.author}`;
+}

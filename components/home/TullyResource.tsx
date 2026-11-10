@@ -7,23 +7,16 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/shared/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { type Column } from "@/components/ui/Table";
 import { AnimatedNumber } from "@/components/shared/AnimatedNumber";
 import { projects } from "@/content/projects";
-import { tullyResource as mre } from "@/content/resource-tully";
-import { formatDate, formatNumber } from "@/lib/format";
-import type { ResourceRow } from "@/types";
+import {
+  resourceCaption,
+  resourceColumns,
+  tullyResource as mre,
+} from "@/content/resource-tully";
+import { formatNumber } from "@/lib/format";
 
-export const resourceColumns: Column<ResourceRow>[] = [
-  { key: "category", header: "Category", render: (r) => r.category },
-  { key: "tonnes", header: "Tonnes", numeric: true, render: (r) => `${r.tonnesMt.toFixed(2)} Mt` },
-  { key: "grade", header: "Grade", numeric: true, render: (r) => `${r.gradeGpt.toFixed(2)} g/t Au` },
-  { key: "oz", header: "Contained gold", numeric: true, render: (r) => `${formatNumber(r.containedOz)} oz` },
-];
-
-export function resourceCaption() {
-  return `Cut-off ${mre.cutOff}. Effective ${formatDate(mre.effectiveDate)}. ${mre.standard}, ${mre.author}`;
-}
+export { resourceCaption, resourceColumns };
 
 type MetricMode = "ounces" | "tonnes" | "grade";
 
