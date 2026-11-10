@@ -101,49 +101,71 @@ export default async function ProjectPage({ params }: Params) {
           </nav>
 
           <Reveal>
-            <div className="mt-8 sm:mt-10 max-w-4xl">
-              <div className="flex items-center gap-3 text-xs sm:text-[13px] font-semibold tracking-[0.18em] text-ink uppercase">
-                <span className="w-8 h-[2px] bg-gold" aria-hidden="true" />
-                <span>
-                  PROJECT {project.number} · {project.location}
-                </span>
+            <div className="mt-8 sm:mt-10 grid gap-8 lg:grid-cols-12 lg:items-center">
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-3 text-xs sm:text-[13px] font-semibold tracking-[0.18em] text-ink uppercase">
+                  <span className="w-8 h-[2px] bg-gold" aria-hidden="true" />
+                  <span>
+                    PROJECT {project.number} · {project.location}
+                  </span>
+                </div>
+
+                <Heading
+                  level={1}
+                  className="mt-4 sm:mt-5 text-ink"
+                >
+                  {project.name}{" "}
+                  <span className="block mt-1">
+                    Exploration <em className="heading-accent">Project.</em>
+                  </span>
+                </Heading>
+
+                <p className="mt-5 text-base sm:text-lg text-ink-soft leading-relaxed max-w-2xl">
+                  {project.summary}
+                </p>
+
+                {/* Key Technical Metadata Strip */}
+                <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs sm:text-sm text-ink-soft border-t border-black/10 pt-5">
+                  <div>
+                    <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Stage</span>
+                    <span className="font-semibold text-ink mt-0.5 block">{project.stage}</span>
+                  </div>
+                  <div className="h-7 w-[1px] bg-black/10 hidden sm:block" aria-hidden="true" />
+                  <div>
+                    <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Land Position</span>
+                    <span className="font-semibold text-ink mt-0.5 block">{formatNumber(project.areaHa)} ha ({project.claims})</span>
+                  </div>
+                  <div className="h-7 w-[1px] bg-black/10 hidden sm:block" aria-hidden="true" />
+                  <div>
+                    <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Location</span>
+                    <span className="font-semibold text-ink mt-0.5 block">{project.location}</span>
+                  </div>
+                  <div className="h-7 w-[1px] bg-black/10 hidden sm:block" aria-hidden="true" />
+                  <div>
+                    <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Ownership</span>
+                    <span className="font-semibold text-ink mt-0.5 block">{project.ownership}</span>
+                  </div>
+                </div>
               </div>
 
-              <Heading
-                level={1}
-                className="mt-4 sm:mt-5 text-ink"
-              >
-                {project.name}{" "}
-                <span className="block mt-1">
-                  Exploration <em className="heading-accent">Project.</em>
-                </span>
-              </Heading>
-
-              <p className="mt-5 text-base sm:text-lg text-ink-soft leading-relaxed max-w-2xl">
-                {project.summary}
-              </p>
-
-              {/* Key Technical Metadata Strip */}
-              <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs sm:text-sm text-ink-soft border-t border-black/10 pt-5">
-                <div>
-                  <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Stage</span>
-                  <span className="font-semibold text-ink mt-0.5 block">{project.stage}</span>
-                </div>
-                <div className="h-7 w-[1px] bg-black/10 hidden sm:block" aria-hidden="true" />
-                <div>
-                  <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Land Position</span>
-                  <span className="font-semibold text-ink mt-0.5 block">{formatNumber(project.areaHa)} ha ({project.claims})</span>
-                </div>
-                <div className="h-7 w-[1px] bg-black/10 hidden sm:block" aria-hidden="true" />
-                <div>
-                  <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Location</span>
-                  <span className="font-semibold text-ink mt-0.5 block">{project.location}</span>
-                </div>
-                <div className="h-7 w-[1px] bg-black/10 hidden sm:block" aria-hidden="true" />
-                <div>
-                  <span className="text-stone uppercase text-[11px] font-semibold tracking-wider block">Ownership</span>
-                  <span className="font-semibold text-ink mt-0.5 block">{project.ownership}</span>
-                </div>
+              {/* Right Column: Project Photography Showcase */}
+              <div className="lg:col-span-5">
+                <figure className="relative aspect-[4/3] w-full overflow-hidden rounded-xl border border-stone-beige/40 shadow-sm bg-forest">
+                  <Image
+                    src={`/images/projects/thumb-${project.slug === "gold-rush" ? "goldrush" : project.slug}.jpg`}
+                    alt={`${project.name} exploration project on-site photography`}
+                    fill
+                    sizes="(min-width: 1024px) 460px, 100vw"
+                    quality={90}
+                    className="object-cover"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-deep-forest/70 via-transparent to-transparent pointer-events-none" />
+                  <figcaption className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-ivory font-medium">
+                    <span>{project.name} Claims · Timmins Camp</span>
+                    <span className="text-soft-gold uppercase tracking-wider text-[10px] font-bold">{project.metalsLabel}</span>
+                  </figcaption>
+                </figure>
               </div>
             </div>
           </Reveal>

@@ -84,23 +84,44 @@ export function ProjectIndex({ figureNumber: _figureNumber }: { figureNumber?: s
                   <Link
                     key={p.slug}
                     href={`/projects/${p.slug}`}
-                    className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer p-4 z-10 flex items-center justify-center"
+                    className="group absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer p-2 z-10 flex flex-col items-center justify-center"
                     style={{ left: visual.pin.left, top: visual.pin.top }}
                     onMouseEnter={() => setActive(p.slug)}
                     onMouseLeave={() => setActive(null)}
                     onFocus={() => setActive(p.slug)}
                     onBlur={() => setActive(null)}
-                    aria-label={`View ${p.name} project`}
+                    aria-label={`View ${p.name} project: ${visual.subtitle}`}
                   >
-                    {/* Central Highlight Ring */}
+                    {/* Sonar Ping Ring when active */}
+                    {isActive ? (
+                      <span className="pointer-events-none absolute h-8 w-8 rounded-full border border-gold animate-ping opacity-75" aria-hidden="true" />
+                    ) : null}
+
+                    {/* Pin Marker with Project Number */}
                     <span
                       className={cn(
-                        "block h-5 w-5 rounded-full transition-opacity duration-200",
+                        "relative flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold transition-all duration-300 shadow-sm select-none",
                         isActive
-                          ? "ring-2 ring-gold bg-gold/30"
-                          : "opacity-0 group-hover:opacity-100 ring-2 ring-gold/80 bg-gold/25"
+                          ? "bg-gold text-deep-forest ring-4 ring-gold/40 scale-125 font-extrabold"
+                          : "bg-forest/90 text-ivory ring-1 ring-gold/70 group-hover:scale-110 group-hover:bg-gold group-hover:text-deep-forest"
                       )}
-                    />
+                      aria-hidden="true"
+                    >
+                      {p.number.replace(/^0+/, "")}
+                    </span>
+
+                    {/* Tooltip Label on Hover / Active */}
+                    <span
+                      className={cn(
+                        "pointer-events-none absolute top-full mt-1.5 whitespace-nowrap rounded px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider backdrop-blur-xs transition-all duration-200 shadow-xs",
+                        isActive
+                          ? "opacity-100 translate-y-0 bg-deep-forest/95 text-soft-gold border border-gold/40"
+                          : "opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 bg-deep-forest/90 text-ivory border border-white/20"
+                      )}
+                      aria-hidden="true"
+                    >
+                      {p.name}
+                    </span>
                   </Link>
                 );
               })}

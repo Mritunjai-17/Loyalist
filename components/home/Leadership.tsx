@@ -23,7 +23,7 @@ const teamCards = [
   },
   {
     id: "robert-bresee",
-    name: "Robert Brese",
+    name: "Robert Bresee",
     subtitle: "VP OPERATIONS & DIRECTOR – CET",
     bio: "45 years in mining, Timmins resident and former project manager on Tully.",
   },

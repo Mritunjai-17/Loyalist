@@ -1,8 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import { ArrowRight, Crosshair, Download, Layers, Mountain, Pickaxe, type LucideIcon } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Heading } from "@/components/ui/Heading";
 import { homeHero as hero } from "@/content/company";
 import type { HeroFeatureIcon } from "@/types";
@@ -39,9 +41,12 @@ const featureIcons: Record<HeroFeatureIcon, LucideIcon | typeof BullionIcon> = {
 };
 
 export function Hero() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 600], [0, 48]);
+
   return (
     <section className="hero" data-tone="warm" aria-labelledby="hero-title">
-      <div className="hero-photo" aria-hidden>
+      <motion.div className="hero-photo" style={{ y }} aria-hidden>
         <Image
           src={hero.photo.src}
           alt={hero.photo.alt}
@@ -53,7 +58,7 @@ export function Hero() {
           className="object-cover"
           style={{ objectPosition: hero.focalPoint }}
         />
-      </div>
+      </motion.div>
       <div className="hero-overlay hero-overlay-left" aria-hidden />
       <div className="hero-overlay hero-overlay-top" aria-hidden />
       <div className="hero-overlay hero-overlay-bottom" aria-hidden />
@@ -63,7 +68,15 @@ export function Hero() {
       <div className="flex-1 flex flex-col justify-center">
         <Container className="hero-content">
           <div className="hero-copy">
-            <Eyebrow>{hero.eyebrow}</Eyebrow>
+            {/* Location & Mining District Indicator */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest/80 border border-gold/40 text-soft-gold text-xs font-semibold uppercase tracking-[0.12em] backdrop-blur-xs mb-3 sm:mb-4">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
+              </span>
+              <span>Timmins, Ontario · Abitibi Greenstone Belt, Canada</span>
+            </div>
+
             <Heading level={1} variant="display" stacked accent={hero.accent} id="hero-title" className="hero-title">
               {hero.title}
             </Heading>

@@ -1,10 +1,14 @@
+"use client";
+
 import Image from "next/image";
-import { ArrowRight, Download } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, ChevronDown, Download, Info } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/shared/Reveal";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { type Column } from "@/components/ui/Table";
+import { AnimatedNumber } from "@/components/shared/AnimatedNumber";
 import { projects } from "@/content/projects";
 import { tullyResource as mre } from "@/content/resource-tully";
 import { formatDate, formatNumber } from "@/lib/format";
@@ -21,12 +25,17 @@ export function resourceCaption() {
   return `Cut-off ${mre.cutOff}. Effective ${formatDate(mre.effectiveDate)}. ${mre.standard}, ${mre.author}`;
 }
 
+type MetricMode = "ounces" | "tonnes" | "grade";
+
 /**
- * Presented as a report page, not a card: headline figures on a ruled band,
- * the estimate table, the qualifying note, then the supporting facts.
+ * Tully 2026 Mineral Resource Estimate presentation:
+ * Interactive metric modes, animated counters, Indicated vs Inferred ratio bar,
+ * NI 43-101 compliant estimate table, and expandable technical disclosures.
  */
 export function TullyResource() {
   const tully = projects.find((p) => p.slug === "tully")!;
+  const [metricMode, setMetricMode] = useState<MetricMode>("ounces");
+  const [techDetailsOpen, setTechDetailsOpen] = useState(false);
 
   return (
     <Section tone="warm" id="resource" labelledBy="resource-title" className="relative overflow-hidden">
@@ -52,33 +61,126 @@ export function TullyResource() {
           accent="2026 Mineral Resource Estimate"
           lead="A cornerstone asset in the Timmins district, with a significant gold resource and continued growth potential."
           stacked
-          className="mb-10 lg:mb-12"
+          className="mb-8 lg:mb-10"
         />
 
         <div className="grid gap-10 lg:grid-cols-12 lg:items-start lg:gap-12">
           <Reveal className="min-w-0 lg:col-span-7 xl:col-span-8">
-            {/* Headline figures */}
-            {/* Headline figures on a soft panel: background contrast, not rules, sets them apart. */}
-            <div className="grid grid-cols-2 gap-4 rounded bg-soft-ivory px-5 py-6 sm:gap-10 sm:px-8 sm:py-8">
-              <div>
-                <span className="block text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-accent">
-                  INDICATED
-                </span>
-                <span className="mt-3 block whitespace-nowrap text-[1.35rem] font-medium leading-none tracking-[-0.02em] text-gold tabular-nums sm:text-[2.6rem]">
-                  {formatNumber(164000)} oz Au
-                </span>
+            {/* Interactive Metric Switcher Tabs */}
+            <div className="flex flex-wrap items-center gap-2 mb-4" role="tablist" aria-label="Resource Metric Mode">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={metricMode === "ounces"}
+                onClick={() => setMetricMode("ounces")}
+                className={`px-3.5 py-1.5 rounded text-xs font-semibold tracking-wider uppercase transition-colors ${
+                  metricMode === "ounces"
+                    ? "bg-forest text-ivory shadow-xs"
+                    : "bg-forest/10 text-fg hover:bg-forest/15"
+                }`}
+              >
+                Contained Gold (oz)
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={metricMode === "tonnes"}
+                onClick={() => setMetricMode("tonnes")}
+                className={`px-3.5 py-1.5 rounded text-xs font-semibold tracking-wider uppercase transition-colors ${
+                  metricMode === "tonnes"
+                    ? "bg-forest text-ivory shadow-xs"
+                    : "bg-forest/10 text-fg hover:bg-forest/15"
+                }`}
+              >
+                Tonnage (Mt)
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={metricMode === "grade"}
+                onClick={() => setMetricMode("grade")}
+                className={`px-3.5 py-1.5 rounded text-xs font-semibold tracking-wider uppercase transition-colors ${
+                  metricMode === "grade"
+                    ? "bg-forest text-ivory shadow-xs"
+                    : "bg-forest/10 text-fg hover:bg-forest/15"
+                }`}
+              >
+                Grade (g/t Au)
+              </button>
+            </div>
+
+            {/* Headline figures on soft panel with Animated Numerical Counters */}
+            <div className="rounded bg-soft-ivory p-5 sm:p-7 border border-stone-beige/40">
+              <div className="grid grid-cols-2 gap-4 sm:gap-10">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-gold" aria-hidden="true" />
+                    <span className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-accent">
+                      INDICATED RESOURCE
+                    </span>
+                  </div>
+                  <div className="mt-2.5 text-[1.45rem] font-bold leading-none tracking-tight text-gold sm:text-[2.6rem]">
+                    {metricMode === "ounces" && (
+                      <>
+                        <AnimatedNumber value={164000} /> oz Au
+                      </>
+                    )}
+                    {metricMode === "tonnes" && <>1.62 Mt</>}
+                    {metricMode === "grade" && <>3.16 g/t Au</>}
+                  </div>
+                  <span className="block text-xs text-ink-soft mt-1.5">
+                    {metricMode === "ounces" ? "1.62 Mt @ 3.16 g/t Au (73% of total)" : "164,000 contained oz"}
+                  </span>
+                </div>
+
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-fg-muted" aria-hidden="true" />
+                    <span className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-fg-muted">
+                      INFERRED RESOURCE
+                    </span>
+                  </div>
+                  <div className="mt-2.5 text-[1.45rem] font-bold leading-none tracking-tight text-fg sm:text-[2.6rem]">
+                    {metricMode === "ounces" && (
+                      <>
+                        <AnimatedNumber value={62000} /> oz Au
+                      </>
+                    )}
+                    {metricMode === "tonnes" && <>0.95 Mt</>}
+                    {metricMode === "grade" && <>2.03 g/t Au</>}
+                  </div>
+                  <span className="block text-xs text-ink-soft mt-1.5">
+                    {metricMode === "ounces" ? "0.95 Mt @ 2.03 g/t Au (27% of total)" : "62,000 contained oz"}
+                  </span>
+                </div>
               </div>
-              <div>
-                <span className="block text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-fg-muted">
-                  INFERRED
-                </span>
-                <span className="mt-3 block whitespace-nowrap text-[1.35rem] font-medium leading-none tracking-[-0.02em] text-fg tabular-nums sm:text-[2.6rem]">
-                  {formatNumber(62000)} oz Au
-                </span>
+
+              {/* Indicated vs Inferred Visual Proportion Bar */}
+              <div className="mt-6 pt-5 border-t border-stone-beige/40">
+                <div className="flex justify-between items-center text-xs text-fg font-medium mb-2">
+                  <span>Resource Confidence Distribution</span>
+                  <span className="text-accent font-semibold">73% Indicated Quality</span>
+                </div>
+                <div className="h-2.5 w-full rounded-full bg-forest/10 overflow-hidden flex" aria-hidden="true">
+                  <div
+                    className="h-full bg-gold transition-all duration-700"
+                    style={{ width: "72.6%" }}
+                    title="Indicated: 72.6% (164,000 oz)"
+                  />
+                  <div
+                    className="h-full bg-earth-grey/60 transition-all duration-700"
+                    style={{ width: "27.4%" }}
+                    title="Inferred: 27.4% (62,000 oz)"
+                  />
+                </div>
+                <div className="flex justify-between text-[11px] text-fg-muted mt-1.5">
+                  <span>■ Indicated: 164,000 oz (73%)</span>
+                  <span>■ Inferred: 62,000 oz (27%)</span>
+                </div>
               </div>
             </div>
 
-            {/* Estimate table: one rule under the header; the Indicated tint carries the emphasis. */}
+            {/* Formal NI 43-101 Estimate Table */}
             <div className="mt-8 overflow-x-auto">
               <table className="w-full text-left tabular-nums">
                 <thead>
@@ -106,8 +208,37 @@ export function TullyResource() {
               </table>
             </div>
 
+            {/* Expandable Technical Resource Details Accordion */}
+            <div className="mt-5 border border-stone-beige/40 rounded bg-soft-ivory/60 overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setTechDetailsOpen(!techDetailsOpen)}
+                className="w-full flex items-center justify-between p-3.5 text-xs font-semibold uppercase tracking-wider text-fg hover:text-accent transition-colors"
+                aria-expanded={techDetailsOpen}
+              >
+                <span className="flex items-center gap-2">
+                  <Info className="h-3.5 w-3.5 text-gold" aria-hidden="true" />
+                  Technical Parameters & QP Disclosures
+                </span>
+                <ChevronDown
+                  className={`h-4 w-4 text-gold transition-transform duration-200 ${
+                    techDetailsOpen ? "rotate-180" : ""
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
+              {techDetailsOpen ? (
+                <div className="p-4 pt-1 text-xs text-ink-soft space-y-2 border-t border-stone-beige/30 leading-relaxed">
+                  <p>• <strong>Cut-Off Grade:</strong> 1.1 g/t Au, evaluated at gold price of US$1,950/oz with 85% metallurgical recovery.</p>
+                  <p>• <strong>Standard:</strong> Prepared in accordance with CIM Definition Standards by P&E Mining Consultants Inc., effective June 15, 2026.</p>
+                  <p>• <strong>Deposit Extent:</strong> Open along strike and at depth; narrow-vein high-grade geological model.</p>
+                  <p>• <strong>Development Milestone:</strong> Preliminary Economic Assessment (PEA) actively underway with target completion December 2026.</p>
+                </div>
+              ) : null}
+            </div>
+
             <p className="mt-4 text-[0.8rem] text-ink-soft">
-              Cut-off: 1.1 g/t Au. Effective June 15, 2026. NI 43-101, P&E Mining Consultants Inc.
+              Cut-off: 1.1 g/t Au. Effective June 15, 2026. NI 43-101 compliant, P&E Mining Consultants Inc.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
