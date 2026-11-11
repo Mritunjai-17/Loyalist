@@ -1,6 +1,7 @@
 import { Download } from "lucide-react";
 import { company } from "@/content/company";
 import { formatFileSize } from "@/lib/format";
+import { HeaderShell } from "./HeaderShell";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { NavMenu } from "./NavMenu";
@@ -8,7 +9,7 @@ import { SiteSearch } from "./SiteSearch";
 
 export function Header() {
   return (
-    <header className="site-header">
+    <HeaderShell>
       <div className="navbar-capsule">
         {/* Left: Logo */}
         <div className="flex items-center flex-none">
@@ -43,6 +44,6 @@ export function Header() {
           <MobileMenu />
         </div>
       </div>
-    </header>
+    </HeaderShell>
   );
 }

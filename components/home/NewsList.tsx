@@ -1,103 +1,113 @@
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Heading } from "@/components/ui/Heading";
+import { MaskReveal } from "@/components/shared/MaskReveal";
 import { Reveal } from "@/components/shared/Reveal";
-import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { pressReleases } from "@/content/press-releases";
-import { formatDate } from "@/lib/format";
+import { SectionIntro } from "./SectionIntro";
+import { formatDate, formatFileSize } from "@/lib/format";
+
+/** The releases shown on the homepage: newest first, only those whose PDF resolves. */
+export function latestReleases(count = 4) {
+  return pressReleases.filter((r) => r.available).slice(0, count);
+}
 
 /**
- * Editorial layout: the lead story with its photograph, then a dated headline list.
- * The list carries no thumbnails: the releases have no photographs of their own,
- * and borrowed stock images said nothing about the headlines.
+ * Publication layout: the lead announcement with a photograph and an oversized
+ * headline, then a dated, numbered list. Releases carry no photographs of their
+ * own, so only the lead story is illustrated.
  */
 export function NewsList() {
-  const [featured, ...rest] = pressReleases.slice(0, 5);
+  const [featured, ...rest] = latestReleases();
   if (!featured) return null;
 
   return (
-    <Section tone="paper" id="news" labelledBy="news-title" className="relative">
-      <SectionHeader
-        number="07"
-        label="News"
-        id="news-title"
-        title="Latest "
-        accent="News."
-        lead="Company updates, project milestones and key developments from across our portfolio."
-        action={
-          <Button href="/press-releases" variant="secondary" icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />}>
-            All Press Releases
-          </Button>
-        }
-      />
+    <section id="news" aria-labelledby="news-title" data-tone="deep" className="section-pad relative bg-surface">
+      <div className="container-site">
+        <SectionIntro
+          index="07"
+          label="News"
+          id="news-title"
+          title="Latest"
+          accent="announcements."
+          stacked={false}
+          action={
+            <Link href="/press-releases" className="link-ed">
+              <span>All press releases</span>
+              <ArrowRight aria-hidden />
+            </Link>
+          }
+        />
 
-      <div className="grid gap-12 lg:grid-cols-12 lg:gap-12">
-        {/* Lead story */}
-        <div className="lg:col-span-6">
-          <Reveal>
-            <article className="group">
-              <div className="media-zoom relative aspect-[16/10] w-full overflow-hidden rounded bg-forest">
-                <Image
-                  src="/images/news/featured-drill.jpg"
-                  alt="Tully gold drill rig operation at sunset"
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  quality={90}
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <time dateTime={featured.date} className="mt-6 block text-sm font-medium text-fg-muted">
-                {formatDate(featured.date)}
-              </time>
-              <Heading level={3} className="mt-2 max-w-[30ch]">
-                {featured.title}
-              </Heading>
-              <p className="mt-3 max-w-[60ch] text-[0.9375rem] leading-relaxed text-ink-soft">
-                Loyalist Exploration has released a grade-tonnage sensitivity analysis for the Tully Gold Project, providing additional insight into the 2026 Mineral Resource Estimate.
+        <div className="mt-block grid gap-y-block border-t border-fg/30 pt-group lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-x-col">
+          {/* Lead story */}
+          <article className="news-feature group relative">
+            <MaskReveal className="frame-ed relative aspect-[16/9] w-full">
+              <Image
+                src="/images/home/news-drill-core-boxes.jpg"
+                alt="Split drill core laid out in wooden core boxes on bedrock"
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                className="object-cover"
+              />
+            </MaskReveal>
+            <p className="caption-ed mt-3">Illustrative image.</p>
+            <Reveal delay={0.1}>
+              <p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-accent">
+                <span>Lead announcement</span>
+                <span className="h-px w-8 bg-ed-rule" aria-hidden="true" />
+                <time dateTime={featured.date} className="text-fg-muted">
+                  {formatDate(featured.date)}
+                </time>
               </p>
-              <div className="mt-6">
-                <Button href={featured.href} external icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />}>
-                  Read the Release
-                </Button>
-              </div>
-            </article>
-          </Reveal>
-        </div>
+              <Heading level={3} className="mt-4 max-w-[30ch]">
+                <a href={featured.href} target="_blank" rel="noopener noreferrer" className="after:absolute after:inset-0">
+                  {featured.title}
+                  <span className="sr-only"> (PDF, opens in a new tab)</span>
+                </a>
+              </Heading>
+              <span className="link-ed mt-6" aria-hidden="true">
+                <span>Read the release{featured.sizeBytes ? ` · PDF, ${formatFileSize(featured.sizeBytes)}` : ""}</span>
+                <ArrowUpRight />
+              </span>
+            </Reveal>
+          </article>
 
-        {/* Headline list */}
-        <div className="min-w-0 lg:col-span-6">
+          {/* Headline list */}
           <Reveal delay={0.1}>
-            <ul className="border-t-2 border-forest" aria-label="Recent press releases">
-              {rest.map((r) => (
-                <li key={r.href} className="border-b border-stone-beige">
+            <ol aria-label="Recent press releases">
+              {rest.map((r, i) => (
+                <li key={r.href} className="border-b border-rule first:pt-0">
                   <a
                     href={r.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start justify-between gap-4 py-5"
+                    className="group grid grid-cols-[2.5rem_1fr_auto] gap-x-4 py-7 first:pt-0"
                   >
-                    <div className="min-w-0">
-                      <time dateTime={r.date} className="block text-xs font-medium text-fg-muted">
+                    <span className="font-editorial text-[1.5rem] leading-none text-accent" aria-hidden="true">
+                      {String(i + 2).padStart(2, "0")}
+                    </span>
+                    <span>
+                      <time dateTime={r.date} className="block text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-fg-muted">
                         {formatDate(r.date)}
                       </time>
-                      <Heading level={4} className="mt-1.5">
-                        <span className="transition-colors group-hover:text-accent">{r.title}</span>
-                      </Heading>
-                    </div>
-                    <ArrowRight
-                      className="mt-6 h-4 w-4 shrink-0 text-gold transition-transform duration-200 group-hover:translate-x-1"
+                      <span className="mt-2 block text-[1.0625rem] font-medium leading-snug text-fg transition-colors group-hover:text-accent">
+                        {r.title}
+                      </span>
+                      <span className="sr-only"> (PDF, opens in a new tab)</span>
+                    </span>
+                    <ArrowUpRight
+                      className="mt-1 h-4 w-4 text-ed-accent-light transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                       aria-hidden="true"
                     />
                   </a>
                 </li>
               ))}
-            </ul>
+            </ol>
           </Reveal>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

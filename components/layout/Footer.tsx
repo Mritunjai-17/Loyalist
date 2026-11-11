@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { Mail, MapPin, Phone } from "lucide-react";
+import type { ComponentType } from "react";
 import { company } from "@/content/company";
+import { isGroup, primaryNav } from "@/content/navigation";
+import { projects } from "@/content/projects";
+import type { NavGroup, SocialNetwork } from "@/types";
 import { Logo } from "./Logo";
 
 function LinkedinIcon({ className }: { className?: string }) {
@@ -43,164 +46,155 @@ function InstagramIcon({ className }: { className?: string }) {
   );
 }
 
-const siteLinks = [
-  { label: "Company Profile", href: "/about/company-profile" },
-  { label: "Our Team", href: "/about/our-team" },
-  { label: "Projects", href: "/projects" },
-  { label: "Investors", href: "/investors" },
-  { label: "Press Releases", href: "/press-releases" },
+const socialIcons: Record<SocialNetwork, ComponentType<{ className?: string }>> = {
+  LinkedIn: LinkedinIcon,
+  X: XIcon,
+  Facebook: FacebookIcon,
+  YouTube: YoutubeIcon,
+  Instagram: InstagramIcon,
+};
+
+const companyLinks = [
+  { label: "Company profile", href: "/about/company-profile" },
+  { label: "Our team", href: "/about/our-team" },
+  { label: "News releases", href: "/press-releases" },
   { label: "Contact", href: "/contact" },
-  { label: "Disclaimer", href: "/disclaimer" },
 ];
 
+const investorGroup = primaryNav.find((e): e is NavGroup => isGroup(e) && e.label === "Investors");
+
+/** Midnight footer: statement, navigation groups, contact, social, legal. */
 export function Footer() {
   const { headOffice: office } = company;
+  const year = new Date().getFullYear();
 
   return (
-    <footer data-tone="black" className="bg-black text-fg-muted pt-20 pb-10">
+    <footer data-tone="deep" className="bg-ed-deep pb-10 pt-20 text-ed-ivory/75 sm:pt-28">
       <div className="container-site">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10 pb-16">
-          {/* Column 1: Brand & Description (4 cols) */}
-          <div className="lg:col-span-4">
+        {/* Statement */}
+        <div className="flex flex-col gap-10 border-b border-ed-ivory/12 pb-16 lg:flex-row lg:items-end lg:justify-between">
+          <p className="footer-ed-statement" aria-label={company.slogan}>
+            <span className="block">Buy Timmins.</span>
+            <span className="block italic text-ed-accent">Mine Timmins.</span>
+          </p>
+          <div className="max-w-sm">
             <Logo />
-            <p className="mt-5 text-xs sm:text-[13px] leading-relaxed text-fg-muted max-w-sm">
-              Loyalist Exploration Limited is a mineral exploration company focused on acquiring,
-              exploring and advancing quality mineral properties in the Timmins Mining District.
-            </p>
-            <div className="mt-5 flex items-center gap-2 text-xs sm:text-[13px] text-fg-muted">
-              <MapPin className="w-4 h-4 text-gold shrink-0" aria-hidden="true" />
-              <span>Timmins, Ontario – 48.48° N 81.33° W</span>
-            </div>
+            <p className="mt-5 text-[0.875rem] leading-relaxed text-ed-ivory/70">{company.summary}</p>
           </div>
+        </div>
 
-          {/* Column 2: SITE Links (2.5 cols) */}
-          <div className="lg:col-span-3 lg:col-start-5">
-            <div className="mb-5">
-              <span className="text-[11px] font-semibold text-accent tracking-[0.14em] uppercase">SITE</span>
-            </div>
-            <ul className="space-y-2 text-xs sm:text-[13px]">
-              {siteLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="hover:text-accent transition-colors">
-                    {link.label}
+        {/* Navigation groups */}
+        <div className="grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+          <nav aria-label="Company" className="lg:col-span-2">
+            <p className="footer-ed-head">Company</p>
+            <ul className="mt-5 space-y-1">
+              {companyLinks.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="footer-ed-link">
+                    {l.label}
                   </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Column 3: CONTACT Info (3 cols) */}
-          <div className="lg:col-span-3">
-            <div className="mb-5">
-              <span className="text-[11px] font-semibold text-accent tracking-[0.14em] uppercase">CONTACT</span>
-            </div>
-            <ul className="space-y-3.5 text-xs sm:text-[13px]">
+          <nav aria-label="Projects" className="lg:col-span-3">
+            <p className="footer-ed-head">Projects</p>
+            <ul className="mt-5 space-y-1">
+              {projects.map((p) => (
+                <li key={p.slug}>
+                  <Link href={`/projects/${p.slug}`} className="footer-ed-link gap-3">
+                    <span>{p.name}</span>
+                    <span className="text-[0.75rem] text-ed-ivory/60">{p.metalsLabel}</span>
+                  </Link>
+                </li>
+              ))}
               <li>
-                <a
-                  href={`mailto:${company.email}`}
-                  className="inline-flex items-center gap-2.5 hover:text-accent transition-colors"
-                >
-                  <Mail className="w-4 h-4 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
-                  <span>{company.email}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={company.phone.href}
-                  className="inline-flex items-center gap-2.5 hover:text-accent transition-colors"
-                >
-                  <Phone className="w-4 h-4 text-gold shrink-0 stroke-[1.75]" aria-hidden="true" />
-                  <span>{company.phone.display}</span>
-                </a>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-gold shrink-0 mt-0.5" aria-hidden="true" />
-                <address className="not-italic leading-relaxed">
-                  {office.street}
-                  <br />
-                  {office.city}, {office.region} {office.postalCode}
-                </address>
+                <Link href="/projects" className="footer-ed-link">
+                  All projects
+                </Link>
               </li>
             </ul>
-          </div>
+          </nav>
 
-          {/* Column 4: FOLLOW Social Links (2 cols) */}
-          <div className="lg:col-span-2">
-            <div className="mb-5">
-              <span className="text-[11px] font-semibold text-accent tracking-[0.14em] uppercase">FOLLOW</span>
-            </div>
-            <ul className="space-y-2.5 text-xs sm:text-[13px]">
+          <nav aria-label="Investors" className="lg:col-span-3">
+            <p className="footer-ed-head">Investors</p>
+            <ul className="mt-5 space-y-1">
+              {(investorGroup?.items ?? []).map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="footer-ed-link">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
               <li>
-                <a
-                  href="https://www.linkedin.com/company/loyalist-exploration-limited/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
-                >
-                  <LinkedinIcon className="w-4 h-4 text-ivory/80 shrink-0" />
-                  <span>LinkedIn</span>
+                <a href={company.presentation.href} target="_blank" rel="noopener noreferrer" className="footer-ed-link">
+                  Corporate presentation (PDF)
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="lg:col-span-4">
+            <p className="footer-ed-head">Head office</p>
+            <address className="mt-5 not-italic text-[0.875rem] leading-relaxed text-ed-ivory/75">
+              {office.street}
+              <br />
+              {office.city}, {office.region} {office.postalCode}
+              <br />
+              {office.country}
+            </address>
+            <ul className="mt-4 space-y-1">
+              <li>
+                <a href={`mailto:${company.email}`} className="footer-ed-link">
+                  {company.email}
                 </a>
               </li>
               <li>
-                <a
-                  href="https://x.com/LoyalistExp"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
-                >
-                  <XIcon className="w-4 h-4 text-ivory/80 shrink-0" />
-                  <span>X</span>
+                <a href={company.phone.href} className="footer-ed-link">
+                  {company.phone.display}
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/people/Loyalist-Exploration/61575711082978/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
-                >
-                  <FacebookIcon className="w-4 h-4 text-ivory/80 shrink-0" />
-                  <span>Facebook</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.youtube.com/@LoyalistExploration"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
-                >
-                  <YoutubeIcon className="w-4 h-4 text-ivory/80 shrink-0" />
-                  <span>YouTube</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.instagram.com/loyalistexploration/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 hover:text-accent transition-colors py-0.5"
-                >
-                  <InstagramIcon className="w-4 h-4 text-ivory/80 shrink-0" />
-                  <span>Instagram</span>
-                </a>
-              </li>
+            </ul>
+            <ul className="mt-6 flex flex-wrap gap-2" aria-label="Social media">
+              {company.social.map(({ network, href }) => {
+                const Icon = socialIcons[network];
+                return (
+                  <li key={network}>
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex h-11 w-11 items-center justify-center border border-ed-ivory/15 text-ed-ivory/75 transition-colors hover:border-ed-accent hover:text-ed-accent-light"
+                    >
+                      <Icon className="h-4 w-4" />
+                      <span className="sr-only">{network} (opens in a new tab)</span>
+                    </a>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
 
-        {/* Sub-footer Bottom Bar */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-fg-muted/80">
-          <div>© 2026 Loyalist Exploration Limited. All rights reserved.</div>
-          <div className="flex items-center gap-4">
-            <Link href="/disclaimer" className="hover:text-accent transition-colors">
-              Privacy Policy
-            </Link>
-            <span className="text-white/20 select-none">|</span>
-            <Link href="/disclaimer" className="hover:text-accent transition-colors">
-              Terms of Use
-            </Link>
-          </div>
+        {/* Legal */}
+        <div className="flex flex-col gap-4 border-t border-ed-ivory/12 pt-8 text-[0.75rem] text-ed-ivory/70 md:flex-row md:items-center md:justify-between">
+          <p>
+            © {year} {company.legalName}. {company.exchange}: {company.ticker}. All rights reserved.
+          </p>
+          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <li>
+              <Link href="/disclaimer" className="transition-colors hover:text-ed-ivory">
+                Disclaimer &amp; forward-looking statements
+              </Link>
+            </li>
+            <li>
+              <a href={company.sedarUrl} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-ed-ivory">
+                Filings on SEDAR+
+              </a>
+            </li>
+            <li className="text-ed-ivory/60">{company.coordinates.label}</li>
+          </ul>
         </div>
       </div>
     </footer>

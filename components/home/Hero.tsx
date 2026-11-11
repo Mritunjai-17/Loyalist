@@ -1,115 +1,96 @@
 "use client";
 
-import Image from "next/image";
-import { ArrowRight, Crosshair, Download, Layers, Mountain, Pickaxe, type LucideIcon } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { getImageProps } from "next/image";
+import { ArrowRight } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
-import { homeHero as hero } from "@/content/company";
-import type { HeroFeatureIcon } from "@/types";
-import { HeroStrip } from "./HeroStrip";
+import { company, homeHero as hero } from "@/content/company";
 
-function BullionIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <polygon points="7 5 17 5 19 9 5 9" />
-      <line x1="6.5" y1="7" x2="17.5" y2="7" />
-      <polygon points="2 13 10.5 13 12 17 0.5 17" />
-      <line x1="1.5" y1="15" x2="11" y2="15" />
-      <polygon points="13.5 13 22 13 23.5 17 12 17" />
-      <line x1="13" y1="15" x2="22.5" y2="15" />
-    </svg>
-  );
-}
+const alt = "Aerial view over boreal forest, lakes and exposed bedrock in Northern Ontario";
 
-const featureIcons: Record<HeroFeatureIcon, LucideIcon | typeof BullionIcon> = {
-  layers: Layers,
-  mountain: Mountain,
-  pickaxe: Pickaxe,
-  crosshair: Crosshair,
-  metals: BullionIcon,
-};
+// Art-directed sources: a 16:9 frame for tablet and desktop, a 4:5 crop for phones.
+const common = { alt, sizes: "100vw", quality: 80, priority: true } as const;
+const {
+  props: { srcSet: desktopSrcSet },
+} = getImageProps({ ...common, src: "/images/home/hero-boreal-aerial.jpg", width: 1920, height: 1080 });
+const {
+  props: { srcSet: mobileSrcSet, ...imgProps },
+} = getImageProps({ ...common, src: "/images/home/hero-boreal-aerial-mobile.jpg", width: 864, height: 1080 });
 
+/**
+ * Full-bleed photograph, headline set low and left on an asymmetric grid, a single
+ * call to action on the right, and a ruled base line with the scroll cue. Text
+ * reveals are CSS keyframes so the headline paints without waiting for hydration.
+ */
 export function Hero() {
+  const reduce = useReducedMotion();
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 600], [0, 48]);
+  const y = useTransform(scrollY, [0, 900], [0, reduce ? 0 : 140]);
 
   return (
-    <section className="hero" data-tone="warm" aria-labelledby="hero-title">
-      <motion.div className="hero-photo" style={{ y }} aria-hidden>
-        <Image
-          src={hero.photo.src}
-          alt={hero.photo.alt}
-          fill
-          priority
-          sizes="100vw"
-          quality={92}
-          placeholder="empty"
-          className="object-cover"
-          style={{ objectPosition: hero.focalPoint }}
-        />
+    <section className="hero-ed" data-tone="deep" aria-labelledby="hero-title">
+      <motion.div className="hero-ed-media" style={{ y }} aria-hidden="true">
+        <picture>
+          <source media="(min-width: 768px)" srcSet={desktopSrcSet} />
+          <source media="(max-width: 767.98px)" srcSet={mobileSrcSet} />
+          {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+          <img {...imgProps} />
+        </picture>
       </motion.div>
-      <div className="hero-overlay hero-overlay-left" aria-hidden />
-      <div className="hero-overlay hero-overlay-top" aria-hidden />
-      <div className="hero-overlay hero-overlay-bottom" aria-hidden />
-      <div className="hero-overlay hero-overlay-uniform" aria-hidden />
+      <div className="hero-ed-shade" aria-hidden="true" />
 
-      {/* Rendered immediately: the hero is the first thing read, so it is not animated in. */}
-      <div className="flex-1 flex flex-col justify-center">
-        <Container className="hero-content">
-          <div className="hero-copy">
-            {/* Location & Mining District Indicator */}
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-forest/80 border border-gold/40 text-soft-gold text-xs font-semibold uppercase tracking-[0.12em] backdrop-blur-xs mb-3 sm:mb-4">
-              <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-gold" />
+      <div className="container-site flex flex-1 flex-col pt-[calc(var(--header-h)+clamp(28px,6vh,72px))]">
+        {/* Location label */}
+        <div className="hero-ed-fade flex items-center gap-4 text-[0.6875rem] font-semibold uppercase tracking-[0.24em] text-ed-ivory/85">
+          <span className="h-px w-10 bg-ed-rule" aria-hidden="true" />
+          <span>Timmins, Ontario, Canada</span>
+          <span className="hidden text-ed-ivory/55 sm:inline" aria-hidden="true">
+            /
+          </span>
+          <span className="hidden tracking-[0.16em] text-ed-ivory/60 sm:inline">{company.coordinates.label}</span>
+        </div>
+
+        <div className="mt-auto grid gap-y-copy pb-10 pt-16 md:pb-14 lg:grid-cols-12 lg:items-end lg:gap-x-grid">
+          <div className="lg:col-span-8">
+            <Heading level={1} variant="display" id="hero-title">
+              <span className="hero-ed-line">
+                <span>{hero.title}</span>
               </span>
-              <span>Timmins, Ontario · Abitibi Greenstone Belt, Canada</span>
-            </div>
-
-            <Heading level={1} variant="display" stacked accent={hero.accent} id="hero-title" className="hero-title">
-              {hero.title}
+              <span className="hero-ed-line">
+                <em className="heading-accent">{hero.accent}</em>
+              </span>
             </Heading>
-            <p className="hero-lead">{hero.lead}</p>
-            <div className="hero-actions">
+          </div>
+
+          <div className="hero-ed-fade-late lg:col-span-4 lg:col-start-9 lg:pb-4 lg:pl-10 xl:pl-14">
+            <span className="rule-brass" aria-hidden="true" />
+            <p className="mt-6 max-w-[36ch] text-[1.0625rem] leading-[1.7] text-ed-ivory/88">{hero.lead}</p>
+            <div className="mt-8">
               <Button size="lg" href={hero.primaryCta.href} icon={<ArrowRight aria-hidden />}>
                 {hero.primaryCta.label}
               </Button>
-              <Button size="lg" variant="secondary" href={hero.secondaryCta.href} external icon={<Download aria-hidden />}>
-                {hero.secondaryCta.label}
-                <span className="sr-only"> (PDF, opens in a new tab)</span>
-              </Button>
             </div>
-            <ul className="hero-features">
-              {hero.features.map(({ icon, lines }) => {
-                const Icon = featureIcons[icon];
-                return (
-                  <li key={icon} className="hero-feature">
-                    <Icon aria-hidden />
-                    <span>
-                      {lines[0]}
-                      <br />
-                      {lines[1]}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
           </div>
-        </Container>
-      </div>
+        </div>
 
-      <HeroStrip items={hero.strip} />
+        {/* Base line: scroll cue and listing */}
+        <div className="hero-ed-fade-late flex items-center justify-between gap-6 border-t border-ed-ivory/15 py-5 md:py-6">
+          <a href="#about" className="scroll-cue">
+            <span className="scroll-cue-track" aria-hidden="true" />
+            <span>Scroll to discover</span>
+          </a>
+          <a
+            href={company.quoteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-ed-ivory/80 transition-colors hover:text-ed-accent-light"
+          >
+            {company.exchange}: {company.ticker}
+            <span className="sr-only"> (share price on TradingView, opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
     </section>
   );
 }

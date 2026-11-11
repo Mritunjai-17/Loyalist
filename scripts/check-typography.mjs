@@ -55,13 +55,16 @@ for (const file of sources) {
   });
 }
 
-// Only Fraunces and Inter.
+// Interior pages: Fraunces + Inter. Homepage editorial system: DM Serif Display + Manrope
+// (re-pointed onto --font-heading / --font-body in globals.css; DM Serif also serves
+// display numerals through --font-editorial).
 const fontsSrc = readFileSync(fontsFile, "utf8");
 const imported = [...fontsSrc.matchAll(/import\s*\{([^}]+)\}\s*from\s*["']next\/font\/google["']/g)]
   .flatMap((m) => m[1].split(",").map((s) => s.trim()))
   .filter(Boolean);
 for (const family of imported) {
-  if (!["Fraunces", "Inter"].includes(family)) report(fontsFile, 1, `font "${family}" is not allowed`);
+  if (!["Fraunces", "Inter", "DM_Serif_Display", "Manrope"].includes(family))
+    report(fontsFile, 1, `font "${family}" is not allowed`);
 }
 
 // CSS: headings may only get the heading family; no other rule may target h1-h6 font properties.

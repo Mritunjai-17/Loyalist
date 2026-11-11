@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { fraunces, inter } from "./fonts";
+import { dmSerif, fraunces, inter, manrope } from "./fonts";
 import { company } from "@/content/company";
 import { organizationJsonLd, siteName, siteUrl } from "@/lib/seo";
 import { palette } from "@/lib/tokens";
@@ -28,7 +28,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-CA" className={`${fraunces.variable} ${inter.variable}`}>
+    <html
+      lang="en-CA"
+      className={`${fraunces.variable} ${inter.variable} ${dmSerif.variable} ${manrope.variable}`}
+    >
       <body>
         <a
           href="#main"

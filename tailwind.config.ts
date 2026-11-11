@@ -28,6 +28,20 @@ const colors = {
   "stone-beige": token("stone-beige"),
   "earth-grey": token("earth-grey"),
   white: token("pure-white"),
+  // Editorial roles. Charcoal / gold / ivory on the homepage; the forest values
+  // everywhere else (see the --ed-* tokens in globals.css).
+  "ed-deep": token("ed-deep"),
+  "ed-deep-2": token("ed-deep-2"),
+  "ed-accent": token("ed-accent"),
+  "ed-accent-light": token("ed-accent-light"),
+  "ed-rule": token("ed-rule"),
+  "ed-label": token("ed-label"),
+  "ed-label-dark": token("ed-label-dark"),
+  "ed-ivory": token("ed-ivory"),
+  "ed-stone": token("ed-stone"),
+  "ed-sand": token("ed-sand"),
+  "ed-ink": token("ed-ink"),
+  "ed-steel": token("ed-steel"),
   // Legacy names, re-pointed to the palette in globals.css
   "primary-gold": token("primary-gold"),
   "soft-gold": token("soft-gold"),
@@ -96,6 +110,16 @@ const config: Config = {
       xl: "0 20px 40px rgba(28, 44, 37, 0.1)",
     },
     extend: {
+      // Homepage layout tokens (values in globals.css): mt-block, gap-x-col, p-card…
+      spacing: {
+        col: "var(--col-gap)",
+        grid: "var(--grid-gap)",
+        label: "var(--space-label)",
+        copy: "var(--space-copy)",
+        group: "var(--space-group)",
+        block: "var(--space-block)",
+        card: "var(--space-card)",
+      },
       // A bare `border` uses the tone's hairline instead of currentColor.
       borderColor: { DEFAULT: "var(--border)" },
       maxWidth: {

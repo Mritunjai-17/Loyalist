@@ -13,6 +13,30 @@
   --stone-beige: #d9d2c3;
   --earth-grey: #77776d;
 
+  /* Homepage editorial palette */
+  --midnight-forest: #142820;
+  --deep-pine: #243b30;
+  --antique-brass: #ad8a55;        /* rules, icons, large figures only */
+  --warm-ivory: #f5f2e9;
+  --stone-sand: #dcd6c8;
+  --graphite-ink: #292c29;
+  --brass-ink: #6f5429;            /* small brass text on ivory / sand (AA) */
+  --brass-light: #c9a76f;          /* small brass text on forest (AA) */
+  --font-editorial: var(--font-dm-serif);
+
+  /* Homepage palette: warm charcoal, logo gold, warm ivory.
+     The gold is taken from the Loyalist logo mark (sampled at about #d0b048). */
+  --warm-charcoal: #292722;
+  --dark-graphite: #393630;
+  --logo-gold: #c5a64a;            /* brand accents that echo the logo; 6.3:1 on charcoal */
+  --muted-champagne: #b99a67;      /* section numbers, labels, separators, icons; 5.6:1 on charcoal */
+  --ivory-warm: #f4efe5;
+  --sandstone: #d8c9b5;
+  --soft-beige: #e8dfd2;
+  --champagne-ink: #6f5a2d;        /* small gold text on ivory (5.8:1) and beige (5.0:1) */
+  --warm-grey: #bdb3a4;            /* muted text on charcoal (7.2:1) */
+  --umber-muted: #5e574d;          /* muted text on ivory (6.2:1) */
+
   /* Legacy names, re-pointed to the palette so every existing class follows it */
   --primary-gold: #b08a50;
   --soft-gold: #c9a970;            /* bronze lifted for text on forest */
@@ -69,7 +93,9 @@
    Dark tones (forest / deep forest): header, hero strip, investors, footer. */
 :root,
 [data-tone="carbon"],
-[data-tone="black"] {
+[data-tone="black"],
+[data-tone="deep"],
+[data-tone="deep-2"] {
   --fg: var(--ivory);
   --fg-body: rgba(244, 240, 230, 0.86);
   --fg-muted: rgba(244, 240, 230, 0.66);
@@ -94,23 +120,29 @@
 /* Re-apply the text colour so it resolves against the tone's own variables. */
 [data-tone] { color: var(--fg-body); }
 [data-tone="carbon"],
-[data-tone="black"] {
+[data-tone="black"],
+[data-tone="deep"],
+[data-tone="deep-2"] {
   --stone: rgba(244, 240, 230, 0.64);
   --error: #e8968c;                /* error text lifted for AA on forest */
 }
 /* Small bronze text on forest uses the lifted bronze; icons keep the true bronze. */
-:is([data-tone="carbon"], [data-tone="black"]) .text-gold:not(svg):not(:has(> svg)) {
+:is([data-tone="carbon"], [data-tone="black"], [data-tone="deep"], [data-tone="deep-2"]) .text-gold:not(svg):not(:has(> svg)) {
   color: var(--soft-gold);
 }
 [data-tone="carbon"] { --surface: var(--carbon); }
 [data-tone="black"] { --surface: var(--black); }
+[data-tone="deep"] { --surface: var(--ed-deep); --fg: var(--ed-ivory); --fg-body: color-mix(in srgb, var(--ed-ivory) 88%, transparent); --fg-muted: var(--ed-steel); --stone: var(--ed-steel); --accent-text: var(--ed-label-dark); --accent-display: var(--ed-accent); --accent-rule: var(--ed-rule); --eyebrow-fg: color-mix(in srgb, var(--ed-ivory) 82%, transparent); --border: color-mix(in srgb, var(--ed-ivory) 14%, transparent); --btn-primary-bg: var(--ed-ivory); --btn-primary-fg: var(--ed-deep); --btn-primary-hover: var(--ed-sand); --btn-primary-press: var(--ed-sand); --focus: var(--ed-accent-light); }
+[data-tone="deep-2"] { --surface: var(--ed-deep-2); --fg: var(--ed-ivory); --fg-muted: var(--ed-steel); --accent-text: var(--ed-label-dark); --accent-display: var(--ed-accent); --accent-rule: var(--ed-rule); --btn-primary-bg: var(--ed-ivory); --btn-primary-fg: var(--ed-deep); }
 
 /* Light tones share one rule set; only the surface differs.
    paper = soft ivory, warm = warm cream, champagne = cream toward stone beige. */
 [data-tone="paper"],
 [data-tone="warm"],
 [data-tone="warm-white"],
-[data-tone="champagne"] {
+[data-tone="champagne"],
+[data-tone="ivory"],
+[data-tone="stone"] {
   --fg: var(--forest);
   --fg-body: var(--charcoal);
   --fg-muted: var(--ink-soft);
@@ -138,14 +170,18 @@
 [data-tone="paper"],
 [data-tone="warm"],
 [data-tone="warm-white"],
-[data-tone="champagne"] { --stone: var(--ink-soft); }
-:is([data-tone="paper"], [data-tone="warm"], [data-tone="warm-white"], [data-tone="champagne"]) .text-gold:not(svg):not(:has(> svg)) {
+[data-tone="champagne"],
+[data-tone="ivory"],
+[data-tone="stone"] { --stone: var(--ink-soft); }
+:is([data-tone="paper"], [data-tone="warm"], [data-tone="warm-white"], [data-tone="champagne"], [data-tone="ivory"], [data-tone="stone"]) .text-gold:not(svg):not(:has(> svg)) {
   color: var(--gold-ink);
 }
 [data-tone="paper"] { --surface: var(--paper); }
 [data-tone="warm"],
 [data-tone="warm-white"] { --surface: var(--warm-white); }
 [data-tone="champagne"] { --surface: var(--champagne); }
+[data-tone="ivory"] { --surface: var(--ed-ivory); --fg: var(--ed-ink); --fg-body: var(--ed-ink); --fg-muted: var(--ed-muted); --stone: var(--ed-muted); --accent-text: var(--ed-label); --accent-display: var(--ed-accent); --accent-rule: var(--ed-rule); --eyebrow-fg: var(--ed-label); --border: color-mix(in srgb, var(--ed-ink) 14%, transparent); --focus: var(--ed-ink); --btn-primary-bg: var(--ed-deep); --btn-primary-fg: var(--ed-ivory); --btn-primary-hover: var(--ed-deep-2); --btn-primary-press: var(--ed-deep-2); }
+[data-tone="stone"] { --surface: var(--ed-stone); --fg: var(--ed-ink); --fg-body: var(--ed-ink); --fg-muted: var(--ed-muted); --stone: var(--ed-muted); --accent-text: var(--ed-label); --accent-display: var(--ed-accent); --accent-rule: var(--ed-rule); --eyebrow-fg: var(--ed-label); --border: color-mix(in srgb, var(--ed-ink) 16%, transparent); --focus: var(--ed-ink); --btn-primary-bg: var(--ed-deep); --btn-primary-fg: var(--ed-ivory); --btn-primary-hover: var(--ed-deep-2); --btn-primary-press: var(--ed-deep-2); }
 
 /* ─── Base ──────────────────────────────────────────────────────────────── */
 @layer base {
@@ -873,6 +909,8 @@
   .document-title { font-weight: 500; color: var(--fg); }
   .document-meta { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: var(--fs-small); color: var(--fg-muted); }
 
+  .ledger-head { --fs-h3: 1.375rem; }
+
   /* News */
   .news-featured { display: grid; gap: 16px; padding-block: 32px; border-top: 1px solid var(--fg); border-bottom: 1px solid var(--border); }
   .news-list > li { display: grid; gap: 6px; padding-block: 20px; border-bottom: 1px solid var(--border); }
@@ -1204,4 +1242,286 @@
 @media (prefers-reduced-motion: reduce) {
   [data-reveal], [data-section-header] { opacity: 1 !important; transform: none !important; }
   .animate-ping { animation: none !important; }
+}
+
+/* ═══ Homepage editorial system ═══════════════════════════════════════════
+   Scoped to the homepage through html:has(main.home). Interior pages keep
+   their own fonts and the forest palette; the homepage runs on warm charcoal,
+   logo gold and warm ivory.
+
+   Role tokens (--ed-*) are what homepage components, the shared header and the
+   shared footer use. Their :root defaults are the interior forest values, so the
+   chrome on interior pages is unchanged; on the homepage they re-point to
+   charcoal, gold and ivory. */
+html:has(main.home) {
+  --font-heading: var(--font-dm-serif);
+  --font-body: var(--font-manrope);
+  /* Layout system. Desktop: 1440px max, ~7.5% gutters, 110-130px section padding,
+     64-90px column gaps; everything scales down fluidly for tablet and mobile. */
+  --container-max: 1440px;
+  --gutter: clamp(20px, 7.5vw, 112px);
+  --section-pad: clamp(72px, 8.6vw, 128px);
+  --header-h: 92px;
+  --col-gap: clamp(32px, 5.8vw, 88px);      /* between the two halves of a split layout */
+  --grid-gap: clamp(20px, 2.8vw, 40px);     /* inside 12-column offset grids */
+  --space-label: 24px;                      /* eyebrow label to heading */
+  --space-copy: clamp(24px, 2.4vw, 36px);   /* heading to lead or body copy */
+  --space-group: clamp(36px, 4vw, 56px);    /* between groups inside a column */
+  --space-block: clamp(56px, 6.4vw, 96px);  /* section introduction to content, and between major blocks */
+  --space-card: clamp(24px, 2.8vw, 40px);   /* internal padding of panels */
+  --fs-display: clamp(3.35rem, min(9.4vw, 15.5vh), 9.75rem);
+  --fs-h2: clamp(2.25rem, 5.2vw, 4.875rem);
+  --fs-h3: clamp(1.625rem, 2.3vw, 2.125rem);
+  --fs-h4: 1.1875rem;
+  --fs-body: 1.0625rem;
+  --fs-lead: clamp(1.0625rem, 1.3vw, 1.3125rem);
+
+  /* Editorial roles: warm charcoal, logo gold and champagne, warm ivory */
+  --ed-deep: var(--warm-charcoal);
+  --ed-deep-2: var(--dark-graphite);
+  --ed-deep-rgb: 41 39 34;
+  --ed-accent: var(--logo-gold);
+  --ed-accent-light: var(--logo-gold);
+  --ed-rule: var(--muted-champagne);
+  --ed-label-dark: var(--muted-champagne);
+  --ed-label: var(--champagne-ink);
+  --ed-ivory: var(--ivory-warm);
+  --ed-stone: var(--soft-beige);
+  --ed-sand: var(--sandstone);
+  --ed-ink: var(--warm-charcoal);
+  --ed-steel: var(--warm-grey);
+  --ed-muted: var(--umber-muted);
+
+  /* The original site tokens, re-pointed so shared pieces on the homepage (buttons,
+     newsletter form, mobile menu, search, map) carry no green or navy. */
+  --forest: var(--warm-charcoal);
+  --deep-forest: var(--warm-charcoal);
+  --carbon: var(--warm-charcoal);
+  --black: var(--warm-charcoal);
+  --graphite: var(--dark-graphite);
+  --gold: var(--logo-gold);
+  --primary-gold: var(--logo-gold);
+  --bronze: var(--muted-champagne);
+  --soft-gold: var(--logo-gold);
+  --gold-hover: #d1b665;
+  --gold-press: #ab8f3e;
+  --on-gold: var(--warm-charcoal);
+  --ink: var(--warm-charcoal);
+  --ink-soft: var(--umber-muted);
+  --charcoal: var(--warm-charcoal);
+  --gold-ink: var(--champagne-ink);
+  --bronze-display: var(--champagne-ink);
+  --ivory: var(--ivory-warm);
+  --cream: var(--ivory-warm);
+  --warm-white: var(--ivory-warm);
+  --paper: var(--ivory-warm);
+  --soft-ivory: var(--ivory-warm);
+  --champagne: var(--soft-beige);
+  --stone-beige: var(--sandstone);
+  --earth-grey: #8a8173;
+}
+
+/* :root defaults (interior pages): the forest palette, unchanged. */
+:root {
+  --ed-deep: var(--midnight-forest);
+  --ed-deep-2: var(--deep-pine);
+  --ed-deep-rgb: 20 40 32;
+  --ed-accent: var(--antique-brass);
+  --ed-accent-light: var(--brass-light);
+  --ed-rule: var(--antique-brass);
+  --ed-label-dark: var(--brass-light);
+  --ed-label: var(--brass-ink);
+  --ed-ivory: var(--warm-ivory);
+  --ed-stone: var(--stone-sand);
+  --ed-sand: var(--stone-sand);
+  --ed-ink: var(--graphite-ink);
+  --ed-steel: rgba(245, 242, 233, 0.7);
+  --ed-muted: #4a4f47;
+}
+
+html:has(main.home) body { background: var(--ed-deep); }
+@media (max-width: 1023.98px) {
+  html:has(main.home) { --header-h: 72px; }
+}
+/* Anchored sections land flush under the fixed header; the section's own padding
+   provides the breathing room, so the two offsets never stack. */
+html:has(main.home) { scroll-padding-top: 0; }
+.home > section[id] { scroll-margin-top: var(--header-h); }
+
+@layer components {
+  /* DM Serif Display ships one weight; never let utilities fake a bold cut. */
+  .home :is(h1, h2, h3, h4) { font-weight: 400; }
+
+  .font-editorial { font-family: var(--font-editorial), Georgia, serif; font-weight: 400; letter-spacing: -0.01em; }
+
+  /* Small uppercase editorial label: index, hairline, text */
+  .label-ed {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--eyebrow-fg);
+  }
+  .label-ed-index { color: var(--accent-text); font-variant-numeric: tabular-nums; letter-spacing: 0.08em; }
+  .label-ed-rule { width: 36px; height: 1px; background: var(--accent-rule); flex: none; }
+
+  .rule-brass { display: block; width: 72px; height: 1px; background: var(--ed-rule); }
+  .lead-ed { font-size: var(--fs-lead); line-height: 1.7; color: var(--fg-body); max-width: 54ch; }
+  .body-ed { font-size: 1rem; line-height: 1.75; color: var(--fg-body); max-width: 62ch; }
+  .caption-ed { font-size: 0.75rem; line-height: 1.5; letter-spacing: 0.02em; color: var(--fg-muted); }
+
+  /* Understated arrow link used across sections */
+  .link-ed {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 44px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--fg);
+  }
+  .link-ed > span:first-child {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+    padding-bottom: 4px;
+    transition: background-size 300ms ease;
+  }
+  .link-ed:hover > span:first-child { background-size: 0% 1px; background-position: 100% 100%; }
+  .link-ed svg { width: 16px; height: 16px; color: var(--accent-rule); transition: transform 300ms ease; }
+  .link-ed:hover svg { transform: translateX(4px); }
+
+  /* Counters: the final value reserves the width, so animating never shifts layout. */
+  .stat-stack { display: inline-grid; }
+  .stat-stack > * { grid-area: 1 / 1; }
+  .stat-stack > [data-ghost] { visibility: hidden; }
+
+  /* Hero */
+  .hero-ed {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    overflow: hidden;
+    background: var(--ed-deep);
+    color: var(--ed-ivory);
+  }
+  .hero-ed-media { position: absolute; inset: -4% 0 -8% 0; z-index: -2; }
+  .hero-ed-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+  /* Charcoal photographic overlay: deepest under the headline, clear across the landscape. */
+  .hero-ed-shade {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, rgb(var(--ed-deep-rgb) / 0.62) 0%, rgb(var(--ed-deep-rgb) / 0) 24%),
+      linear-gradient(0deg, rgb(var(--ed-deep-rgb) / 0.92) 0%, rgb(var(--ed-deep-rgb) / 0.55) 30%, rgb(var(--ed-deep-rgb) / 0.08) 62%, rgb(var(--ed-deep-rgb) / 0) 75%),
+      linear-gradient(90deg, rgb(var(--ed-deep-rgb) / 0.5) 0%, rgb(var(--ed-deep-rgb) / 0.12) 50%, rgb(var(--ed-deep-rgb) / 0) 70%);
+  }
+  /* Clip vertically only, so the rise is masked but italic overhangs are not cut. */
+  .hero-ed-line { display: block; overflow-x: visible; overflow-y: clip; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .hero-ed-line > * { display: block; animation: hero-rise 1.15s cubic-bezier(0.2, 0.75, 0.1, 1) both; }
+  .hero-ed-line + .hero-ed-line > * { animation-delay: 0.12s; }
+  .hero-ed-fade { animation: hero-fade 1s 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .hero-ed-fade-late { animation: hero-fade 1s 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .hero-ed .heading-accent { color: var(--ed-accent); }
+
+  .scroll-cue { display: inline-flex; align-items: center; gap: 14px; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: color-mix(in srgb, var(--ed-ivory) 78%, transparent); }
+  .scroll-cue-track { position: relative; width: 1px; height: 44px; overflow: hidden; background: color-mix(in srgb, var(--ed-ivory) 22%, transparent); }
+  .scroll-cue-track::after { content: ""; position: absolute; inset: 0; background: var(--ed-accent); animation: scroll-cue 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+
+  /* Masked image frame */
+  .frame-ed { position: relative; overflow: hidden; background: var(--ed-deep-2); }
+  .frame-ed img { transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+  .group:hover .frame-ed img { transform: scale(1.04); }
+
+  /* Resource */
+  .resource-bar { height: 6px; background: color-mix(in srgb, var(--ed-ivory) 9%, transparent); }
+  .resource-bar > span { display: block; height: 100%; transform-origin: left center; }
+  .resource-split { display: flex; height: 10px; gap: 3px; }
+  .resource-split > span { display: block; height: 100%; transform-origin: left center; }
+
+  /* Strategy */
+  .story-step { --fs-h3: clamp(2.5rem, 5.6vw, 5.25rem); }
+  .story-numeral {
+    font-family: var(--font-editorial), Georgia, serif;
+    font-size: clamp(4.5rem, 9vw, 8.5rem);
+    line-height: 0.85;
+    letter-spacing: -0.03em;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--ed-rule);
+  }
+  .story-node { width: 11px; height: 11px; border: 1px solid var(--ed-rule); background: var(--surface); transform: rotate(45deg); }
+
+  /* Projects */
+  .portfolio-feature { --fs-h3: clamp(3rem, 7vw, 6.5rem); }
+  .portfolio-row { --fs-h3: clamp(1.75rem, 2.6vw, 2.375rem); }
+  .home-map .map-frame { fill: var(--ed-deep); stroke: color-mix(in srgb, var(--ed-rule) 45%, transparent); }
+  .home-map .map-grid line { stroke: color-mix(in srgb, var(--ed-ivory) 8%, transparent); }
+  .home-map .map-spoke { stroke: color-mix(in srgb, var(--ed-ivory) 25%, transparent); }
+  .home-map .map-spoke.is-active { stroke: var(--ed-accent); stroke-dasharray: none; }
+  .home-map .map-pin.is-active .map-ring { stroke: var(--ed-accent); }
+  .home-map .map-ring { transition: stroke 200ms ease; }
+
+  /* Leadership */
+  .leader-name { --fs-h3: clamp(1.75rem, 2.4vw, 2.25rem); }
+
+  /* Investors */
+  .investor-figure { font-family: var(--font-editorial), Georgia, serif; font-size: clamp(2.75rem, 5vw, 4.5rem); line-height: 1; letter-spacing: -0.02em; color: var(--fg); }
+
+  /* News */
+  .news-feature { --fs-h3: clamp(1.75rem, 2.8vw, 2.625rem); }
+
+  /* Footer */
+  .footer-ed-head { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ed-label-dark); }
+  .footer-ed-link { display: inline-flex; align-items: center; min-height: 32px; font-size: 0.875rem; color: color-mix(in srgb, var(--ed-ivory) 76%, transparent); transition: color 200ms ease; }
+  .footer-ed-link:hover { color: var(--ed-ivory); }
+  .footer-ed-statement { font-family: var(--font-editorial), Georgia, serif; font-size: clamp(2.5rem, 6.4vw, 6rem); line-height: 1; letter-spacing: -0.02em; color: var(--ed-ivory); }
+}
+
+/* Header: the deep role colour everywhere; over the homepage hero it starts transparent. */
+.site-header {
+  background: var(--ed-deep);
+  border-bottom-color: color-mix(in srgb, var(--ed-rule) 40%, transparent);
+  transition: background-color 400ms ease, border-color 400ms ease;
+}
+.site-header[data-overlay="true"] {
+  background: transparent;
+  border-bottom-color: color-mix(in srgb, var(--ed-ivory) 14%, transparent);
+}
+/* Any open menu or dropdown gives the bar a solid ground. */
+.site-header[data-overlay="true"]:has([aria-expanded="true"]) {
+  background: var(--ed-deep);
+  border-bottom-color: color-mix(in srgb, var(--ed-rule) 40%, transparent);
+}
+.nav-panel { background: color-mix(in srgb, var(--ed-deep) 98%, transparent); }
+.nav-panel:not([hidden]) { animation: nav-panel-in 240ms cubic-bezier(0.22, 1, 0.36, 1); }
+html:has(main.home) .search-dropdown { background: color-mix(in srgb, var(--ed-deep) 98%, transparent); }
+html:has(main.home) :is(.nav-panel, .search-dropdown) { box-shadow: 0 18px 40px rgb(var(--ed-deep-rgb) / 0.35); }
+html:has(main.home) .site-search::backdrop { background: rgb(var(--ed-deep-rgb) / 0.6); }
+
+@keyframes nav-panel-in { from { opacity: 0; transform: translate(-50%, -6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@keyframes hero-rise { from { transform: translateY(108%); } to { transform: translateY(0); } }
+@keyframes hero-fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes scroll-cue { 0% { transform: translateY(-100%); } 55% { transform: translateY(0); } 100% { transform: translateY(100%); } }
+
+@media (max-width: 767.98px) {
+  .hero-ed-shade {
+    background:
+      linear-gradient(180deg, rgb(var(--ed-deep-rgb) / 0.6) 0%, rgb(var(--ed-deep-rgb) / 0) 22%),
+      linear-gradient(0deg, rgb(var(--ed-deep-rgb) / 0.95) 0%, rgb(var(--ed-deep-rgb) / 0.7) 40%, rgb(var(--ed-deep-rgb) / 0.15) 72%, rgb(var(--ed-deep-rgb) / 0) 85%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ed-line > *, .hero-ed-fade, .hero-ed-fade-late, .nav-panel:not([hidden]) { animation: none !important; }
+  .scroll-cue-track::after { animation: none !important; transform: none; }
+  [data-mask] { clip-path: none !important; opacity: 1 !important; }
+  [data-mask] > * { transform: none !important; }
+  .group:hover .frame-ed img { transform: none; }
 }

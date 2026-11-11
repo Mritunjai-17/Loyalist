@@ -1,4 +1,4 @@
-export type Tone = "carbon" | "black" | "paper" | "warm" | "champagne";
+export type Tone = "carbon" | "black" | "paper" | "warm" | "champagne" | "deep" | "deep-2" | "ivory" | "stone";
 
 export type NavLink = { label: string; href: string; description?: string };
 export type NavGroup = { label: string; items: NavLink[]; overview?: NavLink };

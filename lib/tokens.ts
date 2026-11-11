@@ -11,6 +11,28 @@ export const palette = {
   stoneBeige: "#D9D2C3",
   earthGrey: "#77776D",
 
+  // Forest editorial palette (shared header and footer on interior pages)
+  midnightForest: "#142820",
+  deepPine: "#243B30",
+  antiqueBrass: "#AD8A55",
+  warmIvory: "#F5F2E9",
+  stoneSand: "#DCD6C8",
+  graphiteInk: "#292C29",
+  brassInk: "#6F5429",
+  brassLight: "#C9A76F",
+
+  // Homepage palette: warm charcoal, logo gold, warm ivory
+  warmCharcoal: "#292722",
+  darkGraphite: "#393630",
+  logoGold: "#C5A64A",
+  mutedChampagne: "#B99A67",
+  ivoryWarm: "#F4EFE5",
+  sandstone: "#D8C9B5",
+  softBeige: "#E8DFD2",
+  champagneInk: "#6F5A2D",
+  warmGrey: "#BDB3A4",
+  umberMuted: "#5E574D",
+
   // Legacy names, re-pointed to the palette
   primaryGold: "#B08A50",
   softGold: "#C9A970",

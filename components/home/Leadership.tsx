@@ -1,126 +1,141 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
+import { MaskReveal } from "@/components/shared/MaskReveal";
 import { Reveal } from "@/components/shared/Reveal";
-import { Section } from "@/components/ui/Section";
-import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getMember } from "@/content/team";
+import { HeadingBlock } from "./SectionIntro";
 
-const teamCards = [
+// One-line summaries per Source B (see content/team.ts).
+const roster = [
   {
     id: "david-drinkwater",
     name: "David Drinkwater",
-    subtitle: "CHAIRMAN OF THE BOARD",
+    role: "Chairman of the Board",
     bio: "Extensive business and legal experience in corporate finance, M&A, and board governance.",
   },
   {
     id: "len-mackenzie",
     name: "Len Mackenzie",
-    subtitle: "VP EXPLORATION – M.Sc.",
+    role: "VP Exploration, M.Sc.",
     bio: "35+ years in exploration, 15 in the Timmins Camp, formerly Exploration & GIS Lead at Agnico Eagle.",
   },
   {
     id: "robert-bresee",
     name: "Robert Bresee",
-    subtitle: "VP OPERATIONS & DIRECTOR – CET",
+    role: "VP Operations & Director, CET",
     bio: "45 years in mining, Timmins resident and former project manager on Tully.",
   },
 ];
 
 const ceoFacts = [
-  { title: "35+ Years", detail: "Industry Experience" },
-  { title: "Mining Operations", detail: "& Development" },
-  { title: "Capital Markets", detail: "& Corporate Strategy" },
+  // Both from the CEO biography in content/team.ts.
+  { value: "35+", label: "Years in financial management, operations and strategy" },
+  { value: "3", label: "Former CFO and CEO roles at Anaconda, Adex and MagIndustries" },
 ];
 
-/** A roster, not a card grid: the CEO with portrait and biography, then three directors on ruled columns. */
+/**
+ * Paragraphs for display. The biography is stored as one block of text; it is
+ * broken before each sentence that starts "He " so it reads as a lead sentence
+ * and short paragraphs. The wording is unchanged.
+ */
+function paragraphs(bio: string[]): string[] {
+  return bio.flatMap((p) => p.split(/(?<=\.)\s+(?=He )/));
+}
+
+/**
+ * Two-column editorial profile. Desktop: portrait on the left, its top aligned
+ * with the eyebrow; heading and profile on the right. Mobile: heading, portrait,
+ * profile. Then the senior team as a typographic roster (no portraits on file
+ * for them, and none are generated).
+ */
 export function Leadership() {
-  const featured = getMember("errol-farr");
+  const ceo = getMember("errol-farr");
+  const [leadSentence, ...rest] = paragraphs(ceo.bio);
 
   return (
-    <Section tone="warm" id="leadership" labelledBy="leadership-title" className="relative">
-      <SectionHeader
-        number="05"
-        label="Leadership"
-        id="leadership-title"
-        title={
-          <>
-            Leadership with <em className="heading-accent">Timmins</em> experience.
-          </>
-        }
-        lead="A proven team with deep exploration, development and capital markets experience."
-        action={
-          <Button href="/about/our-team" variant="secondary" icon={<ArrowRight className="h-4 w-4" aria-hidden="true" />}>
-            Meet the Full Team
-          </Button>
-        }
-      />
+    <section id="leadership" aria-labelledby="leadership-title" data-tone="deep" className="section-pad relative bg-surface">
+      <div className="container-site">
+        <div className="grid gap-y-block lg:grid-cols-[minmax(0,9fr)_minmax(0,13fr)] lg:grid-rows-[auto_1fr] lg:gap-x-col lg:gap-y-0">
+          <Reveal className="lg:col-start-2 lg:row-start-1">
+            <HeadingBlock index="05" label="Leadership" id="leadership-title" title="Leadership with" accent="Timmins experience." />
+          </Reveal>
 
-      <Reveal>
-        <article className="grid gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-12 xl:grid-cols-[300px_minmax(0,1fr)]">
-          <div className="leadership-photo-card aspect-[4/5] w-full max-w-[260px] sm:max-w-[300px] lg:max-w-none">
-            <Image
-              src="/images/team/errol-farr.jpg"
-              alt="Errol Farr, CPA - President, CEO & Director"
-              fill
-              sizes="(min-width: 1024px) 300px, 340px"
-              quality={90}
-              className="object-cover object-top"
-              priority
-            />
+          <div className="lg:sticky lg:top-[calc(var(--header-h)+var(--space-group))] lg:col-start-1 lg:row-span-2 lg:row-start-1 lg:self-start">
+            <MaskReveal className="frame-ed relative mx-auto aspect-[4/5] w-full max-w-[480px] lg:mx-0 lg:max-w-none" from="bottom">
+              <Image
+                src="/images/team/errol-farr.jpg"
+                alt={`Portrait of ${ceo.name}, ${ceo.title}`}
+                fill
+                sizes="(min-width: 1440px) 540px, (min-width: 1024px) 40vw, 480px"
+                className="origin-bottom scale-[1.015] object-cover object-[50%_22%]"
+              />
+            </MaskReveal>
           </div>
 
-          <div className="flex min-w-0 flex-col lg:pt-1">
-            <Heading level={3}>
-              {featured.name}
-              {featured.credentials ? `, ${featured.credentials}` : null}
-            </Heading>
-            <div className="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-accent">
-              PRESIDENT, CEO & DIRECTOR
-            </div>
+          <Reveal delay={0.1} className="lg:col-start-2 lg:row-start-2 lg:pt-group">
+            <div className="border-t border-rule pt-group">
+              <div className="leader-name">
+                <Heading level={3}>
+                  {ceo.name}
+                  {ceo.credentials ? `, ${ceo.credentials}` : null}
+                </Heading>
+              </div>
+              <p className="mt-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-accent">{ceo.title}</p>
 
-            <p className="mt-5 max-w-[68ch] text-[0.9375rem] leading-relaxed text-ink-soft">{featured.bio[0]}</p>
+              <div className="mt-copy max-w-[60ch] space-y-4">
+                {leadSentence ? <p className="lead-ed text-fg">{leadSentence}</p> : null}
+                {rest.map((p) => (
+                  <p key={p.slice(0, 32)} className="body-ed">
+                    {p}
+                  </p>
+                ))}
+              </div>
 
-            <dl className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-6 lg:mt-auto lg:pt-8">
-              {ceoFacts.map((f) => (
-                <div key={f.title} className="py-2 sm:py-0">
-                  <dt className="text-sm font-semibold text-fg">{f.title}</dt>
-                  <dd className="text-xs text-fg-muted">{f.detail}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-        </article>
-      </Reveal>
-
-      <ul className="mt-14 grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-8 lg:gap-12">
-        {teamCards.map((m, idx) => (
-          <li key={m.id}>
-            <Reveal delay={idx * 0.08} className="h-full">
-              <Link
-                href="/about/our-team"
-                className="group block h-full border-t border-stone-beige pt-5 transition-colors duration-200 hover:border-gold"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <Heading level={3}>{m.name}</Heading>
-                    <div className="mt-1.5 text-[11px] font-semibold uppercase leading-tight tracking-[0.1em] text-accent">
-                      {m.subtitle}
-                    </div>
+              <dl className="mt-group grid grid-cols-2 gap-x-grid border-t border-rule pt-8">
+                {ceoFacts.map((f) => (
+                  <div key={f.label} className="flex flex-col">
+                    <dt className="order-2 mt-2 max-w-[28ch] text-[0.8125rem] leading-snug text-fg-muted">{f.label}</dt>
+                    <dd className="font-editorial order-1 text-[clamp(2.5rem,4vw,3.5rem)] leading-none text-fg">{f.value}</dd>
                   </div>
-                  <ArrowRight
-                    className="mt-2 h-4 w-4 shrink-0 text-gold transition-transform duration-200 group-hover:translate-x-1"
-                    aria-hidden="true"
-                  />
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{m.bio}</p>
-              </Link>
-            </Reveal>
-          </li>
-        ))}
-      </ul>
-    </Section>
+                ))}
+              </dl>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Roster */}
+        <ul className="mt-block grid gap-y-10 md:grid-cols-3 md:gap-x-grid">
+          {roster.map((m, idx) => (
+            <li key={m.id}>
+              <Reveal delay={idx * 0.08} className="h-full">
+                <Link
+                  href="/about/our-team"
+                  className="group block h-full border-t border-fg/25 pt-7 transition-colors duration-300 hover:border-ed-accent"
+                >
+                  <div className="leader-name">
+                    <Heading level={3}>
+                      <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
+                        {m.name}
+                      </span>
+                    </Heading>
+                  </div>
+                  <p className="mt-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-accent">{m.role}</p>
+                  <p className="mt-5 max-w-[40ch] text-[0.9375rem] leading-relaxed text-fg-body">{m.bio}</p>
+                </Link>
+              </Reveal>
+            </li>
+          ))}
+        </ul>
+
+        <Reveal>
+          <Link href="/about/our-team" className="link-ed mt-10">
+            <span>Meet the full team</span>
+            <ArrowRight aria-hidden />
+          </Link>
+        </Reveal>
+      </div>
+    </section>
   );
 }
